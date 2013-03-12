@@ -11,6 +11,11 @@ main
 *.dylib
 
 # Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# LaTeX
 *.acn
 *.acr
 *.alg
