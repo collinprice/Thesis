@@ -1,0 +1,65 @@
+ Feff 6L.02
+ My Molecule
+ Calculating potentials and phases...
+     free atom potential and density for atom type    0
+     free atom potential and density for atom type    1
+     free atom potential and density for atom type    2
+     free atom potential and density for atom type    3
+     overlapped potential and density for unique potential    0
+     overlapped potential and density for unique potential    1
+     overlapped potential and density for unique potential    2
+     overlapped potential and density for unique potential    3
+     muffin tin radii and interstitial parameters
+     phase shifts for unique potential    0
+     phase shifts for unique potential    1
+     phase shifts for unique potential    2
+     phase shifts for unique potential    3
+ Preparing plane wave scattering amplitudes...
+   nncrit in prcrit       9
+ Searching for paths...
+     Rmax  3.5719  keep and heap limits   0.0000000   0.0000000
+    Preparing neighbor table
+     nfound  nheap  nheapx  nsc    r
+     Paths found       30   (nheapx, nbx      11   4)
+ Eliminating path degeneracies...
+     Plane wave chi amplitude filter   2.50%
+     Unique paths     20,  total paths      30
+ Calculating EXAFS parameters...
+     Curved wave chi amplitude ratio   4.00%
+     Discard feff.dat for paths with cw ratio <   2.67%
+     path  cw ratio     deg    nleg  reff
+       1   100.000     1.000     2   1.7850
+       2    71.397     1.000     2   1.9280
+       3    59.811     1.000     2   2.0059
+       4    43.983     1.000     2   2.1460
+       5    40.634     1.000     2   2.1831
+       6    39.924     1.000     2   2.1914
+       7     6.218     1.000     2   3.0157
+       8     4.375     2.000     3   3.1428
+       9     0.578     2.000     3   3.2129 neglected
+      10     1.156     1.000     4   3.2698 neglected
+      11     0.500     2.000     3   3.2908 neglected
+      12     0.444     2.000     3   3.3537 neglected
+      13     0.377     2.000     3   3.4217 neglected
+      14     0.248     2.000     3   3.4306 neglected
+      15     4.273     1.000     2   3.4395
+      16     0.346     2.000     3   3.4472 neglected
+      17     0.218     2.000     3   3.4830 neglected
+      18     0.188     2.000     3   3.5323 neglected
+      19     0.608     1.000     4   3.5701 neglected
+      20     0.494     2.000     3   3.5715 neglected
+     9 paths kept,   20 examined.
+ Calculating chi...
+     Use all paths with cw amplitude ratio   4.00%
+     Use Debye-Waller factors from files.dat.  S02  1.000
+     feff0001.dat     100.0000
+     feff0002.dat      71.3970
+     feff0003.dat      59.8110
+     feff0004.dat      43.9830
+     feff0005.dat      40.6340
+     feff0006.dat      39.9240
+     feff0007.dat       6.2180
+     feff0008.dat       4.3750
+     feff0015.dat       4.2730
+  ff2chi done,    9/   9 paths used.
+ Feff done.  Have a nice day.
