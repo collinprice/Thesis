@@ -1,0 +1,69 @@
+%Thesis Tempate for Brock University
+%Joseph A. Brown
+%Permission is Granted to the Department of Computer Science to use this for their own purposes
+%No Waranty is Given, Implied or Explicit
+%READ THE MANUAL that Graduate Studies Provides and don't blame me
+
+\documentclass[12pt,oneside,openany]{book}
+
+\usepackage{setspace}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{verbatim, appendix}
+\usepackage{graphicx, subfigure}
+\usepackage{ulem}
+%feel free to add here
+
+\usepackage[top=1.0in, bottom=1.0in, left=1.5in, right=1.0in]{geometry} %set page margins
+
+\onehalfspacing
+
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+
+\begin{document}
+\normalem 
+
+%these are added at the end
+%libary Release Form
+%Examining Committee Sig pages
+
+%Title Page
+%\input{quotepage} %this is the quote page. comment out if you don't have one
+
+\input{title}
+
+%these are not to be numbered
+\frontmatter
+\pagestyle{empty}
+
+%comment out what you don't need
+
+\include{dedication}
+\include{abstract}
+\include{preface}
+\include{ack} 
+\include{lists}
+%%list of Plates
+%list of symbols, nonmenclature, or Abbrevations
+
+
+\mainmatter 
+\pagestyle{headings}
+\input{introduction}
+%body files go here using \input{file} where file is file.tex
+\input{conclusion}
+%\theendnotes
+
+%this is the area for the .bib file
+\bibliographystyle{plain}
+\bibliography{thesis}
+\addcontentsline{toc}{chapter}{Bibliography} 
+%this adds the Bibliography to the Table of Contents *Note it will be off my one page...this has to be edited manually in the file printing by going into the toc file and changing the numbers.  This might be done some other way but I don't know the process...feel free to edit if you find a fix*
+\appendix %this is the appendix
+\addappheadtotoc %add the appendix to the table of contents
+\input{appendA}
+
+
+\end{document}
