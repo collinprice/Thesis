@@ -16,42 +16,43 @@
 #include <dirent.h>
 #include <errno.h>
 #include <sys/stat.h>
+#include <sstream>
 
 double unifRand() {
-        return rand() / double(RAND_MAX);
+		return rand() / double(RAND_MAX);
 }
 
 PDBAtom random_move(PDBAtom atom, double max_radius) {
 
-        double theta = 180 * unifRand();
-        double phi = 360 * unifRand();
-        double r = max_radius * unifRand();
+		double theta = 180 * unifRand();
+		double phi = 360 * unifRand();
+		double r = max_radius * unifRand();
 
-        atom.x = r * sin(theta) * cos(phi);
-        atom.y = r * sin(theta) * sin(phi);
-        atom.z = r * cos(theta);
+		atom.x = r * sin(theta) * cos(phi);
+		atom.y = r * sin(theta) * sin(phi);
+		atom.z = r * cos(theta);
 
-        return atom;
+		return atom;
 }
 
 std::vector< std::vector<PDBAtom> > random_population(std::vector<PDBAtom> seed, int size, double max_radius) {
 
-        std::cout << "Size = " << size << std::endl;
+		std::cout << "Size = " << size << std::endl;
 
-        std::vector< std::vector<PDBAtom> > population;
+		std::vector< std::vector<PDBAtom> > population;
 
-        for (int i = 0; i < size; ++i) {
-                
-                std::vector<PDBAtom> individual = seed;
+		for (int i = 0; i < size; ++i) {
+				
+				std::vector<PDBAtom> individual = seed;
 
-                for (int i = 0; i < (int)individual.size(); ++i) {
-                        individual[i] = random_move(individual[i], max_radius);
-                }
+				for (int i = 0; i < (int)individual.size(); ++i) {
+						individual[i] = random_move(individual[i], max_radius);
+				}
 
-                population.push_back(individual);
-        }
+				population.push_back(individual);
+		}
 
-        return population;
+		return population;
 }
 
 std::vector<PDBAtom> extractAtomsFromXYZ(std::string filename) {
@@ -100,18 +101,18 @@ std::vector<int> dcdGetIndexLessThan(std::string filename, double limit) {
 /*function... might want it in some class?*/
 int getdir (std::string dir, std::vector<std::string> &files)
 {
-    DIR *dp;
-    struct dirent *dirp;
-    if((dp  = opendir(dir.c_str())) == NULL) {
-        std::cout << "Error(" << errno << ") opening " << dir << std::endl;
-        return errno;
-    }
+	DIR *dp;
+	struct dirent *dirp;
+	if((dp  = opendir(dir.c_str())) == NULL) {
+		std::cout << "Error(" << errno << ") opening " << dir << std::endl;
+		return errno;
+	}
 
-    while ((dirp = readdir(dp)) != NULL) {
-        files.push_back(std::string(dirp->d_name));
-    }
-    closedir(dp);
-    return 0;
+	while ((dirp = readdir(dp)) != NULL) {
+		files.push_back(std::string(dirp->d_name));
+	}
+	closedir(dp);
+	return 0;
 }
 
 int main(int argc, char **argv) {
@@ -152,19 +153,35 @@ int main(int argc, char **argv) {
 	Genfig ga_config(ga_file);
 
 	if (ga_config.hasKey("seed")) {
-            srand(ga_config.getInt("seed"));
-            std::cout << "Seed: " << ga_config.getInt("seed") << std::endl;
-    } else if (seed.size() != 0) {
-    		srand(atoi(seed.c_str()));
-    		std::cout << "Seed: " << atoi(seed.c_str()) << std::endl;
-    } else {
-            time_t inital_seed = time(NULL);
-            srand(inital_seed);
-            std::cout << "Seed: " << inital_seed << std::endl;
-    }
+		
+		seed = ga_config.getString("seed");
+		srand(ga_config.getInt("seed"));
+		std::cout << "Seed: " << ga_config.getInt("seed") << std::endl;
+	} else if (seed.size() != 0) {
 
-    // Create directory for scratch stuff.
-    std::string temp_folder = fitness_config.getString("folder-name") + "/" + seed;
+		srand(atoi(seed.c_str()));
+		std::cout << "Seed: " << atoi(seed.c_str()) << std::endl;
+	} else {
+
+		time_t initial_seed = time(NULL);
+		srand(initial_seed);
+
+		std::stringstream ss;
+		ss << initial_seed;
+		seed = ss.str();
+		
+		std::cout << "Seed: " << initial_seed << std::endl;
+	}
+
+	// Check if scratch directory exists
+	struct stat sb;
+	if (stat(fitness_config.getString("folder-name").c_str(), &sb) != 0 || !S_ISDIR(sb.st_mode)) {
+		std::cout << "Scratch directory is missing." << std::endl;
+		return 0;
+	}
+
+	// Create directory for scratch stuff.
+	std::string temp_folder = fitness_config.getString("folder-name") + "/" + seed;
 
 	if (mkdir(temp_folder.c_str(), 0755) != 0){
 		do {
@@ -172,21 +189,25 @@ int main(int argc, char **argv) {
 		} while(mkdir(temp_folder.c_str(), 0755) != 0);
 	}
 
-	PDBHelper* pdb_helper = new PDBHelper(fitness_config.getString("pdb-file"), fitness_config.getString("amber-topology-file"), temp_folder + "/temp_pdb.pdb", fitness_config.getStringList("exafs-atoms"));
+	std::string temp_pdb = "temp_pdb.pdb";
+	PDBHelper* pdb_helper = new PDBHelper(fitness_config.getString("pdb-file"), fitness_config.getString("amber-topology-file"), temp_folder + "/" + temp_pdb, fitness_config.getStringList("exafs-atoms"));
 
 	IFEFFITHelper* ifeffit_helper = new IFEFFITHelper(temp_folder, pdb_helper->getAllEXAFSAtoms(), fitness_config.getString("target-atom"), fitness_config.getString("experimental-exafs"), fitness_config.getDouble("x-min"), fitness_config.getDouble("x-max"), fitness_config.getString("feff"), fitness_config.getString("ifeffit"));
 	// IFEFFITHelper* ifeffit_helper = new IFEFFITHelper(fitness_config.getString("folder-name"), pdb_helper->getAllEXAFSAtoms(), fitness_config.getString("target-atom"), fitness_config.getString("experimental-exafs"), fitness_config.getDouble("x-min"), fitness_config.getDouble("x-max"), fitness_config.getString("feff"), fitness_config.getString("ifeffit"));
 
-	VMDHelper* vmd_helper = new VMDHelper(temp_folder, pdb_helper->output_pdb_file, fitness_config.getString("amber-topology-file"), fitness_config.getString("namd2-path"), fitness_config.getString("vmd-path"));
+	VMDHelper* vmd_helper = new VMDHelper(temp_folder, temp_pdb, fitness_config.getString("amber-topology-file"), fitness_config.getString("namd2-path"), fitness_config.getString("vmd-path"));
 	EXAFSEvaluator* exafs_evaluator = new EXAFSEvaluator(ifeffit_helper, pdb_helper, vmd_helper);
 
 	if (ga_config.getString("eval-type").compare("solo") == 0) {
 		std::cout << "Solo" << std::endl;
 		std::cout << "Initial pdb file" << std::endl;
-	 	double initial_rmsd = ifeffit_helper->run(pdb_helper->getEXAFSAtoms(), true);
-	 	std::cout << "RMSD = " << initial_rmsd << std::endl;
+		double initial_rmsd = ifeffit_helper->run(pdb_helper->getEXAFSAtoms(), true);
+		std::cout << "RMSD = " << initial_rmsd << std::endl;
 
-	 	pdb_helper->writePDBFile();
+		DCDHelper dcd_helper = DCDHelper(ga_config.getString("dcd-file"));
+		pdb_helper->updateAllAtomsFromXYZ(dcd_helper.getXYZAtFrame(0));
+		pdb_helper->writePDBFile();
+		
 		std::cout << "Energy: " << vmd_helper->calculateEnergy() << std::endl;
 
 	} else if (ga_config.getString("eval-type").compare("dir_potential") == 0) {
@@ -520,7 +541,7 @@ int main(int argc, char **argv) {
 		dcd_results.close();
 	}
 
-	system(("rm -rf " + temp_folder).c_str());
+	// system(("rm -rf " + temp_folder).c_str());
 
 	return 0;
 }
