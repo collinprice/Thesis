@@ -3,5 +3,6 @@ main
 output.dcd.full
 run*
 *.pdb
+!relaxed-H.pdb
 experiments
 exafs
