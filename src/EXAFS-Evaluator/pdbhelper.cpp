@@ -110,6 +110,22 @@ void PDBHelper::updateAllAtomsFromXYZ(std::vector<PDBAtom> atoms) {
 	}
 }
 
+void PDBHelper::updateAllNonEXAFSAtomsFromXYZ(std::vector<PDBAtom> atoms) {
+
+	if ((int)atoms.size() != N) {
+		throw "PDB File does not contain the same amount of atoms as input XYZ file.";
+	}
+
+	for (int i = 0; i < N; ++i) {
+		
+		if (!this->validEXAFSIndex(i)) {
+			X[i] = atoms[i].x;
+			Y[i] = atoms[i].y;
+			Z[i] = atoms[i].z;
+		}
+	}
+}
+
 void PDBHelper::writePDBFile(std::string filename) {
 	write_one_pdb(C_TEXT(filename));
 }

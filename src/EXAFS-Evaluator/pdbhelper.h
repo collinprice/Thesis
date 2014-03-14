@@ -43,6 +43,7 @@ public:
 	void updateEXAFSAtomsFromXYZ(std::vector<PDBAtom> atoms);
 
 	void updateAllAtomsFromXYZ(std::vector<PDBAtom> atoms);
+	void updateAllNonEXAFSAtomsFromXYZ(std::vector<PDBAtom> atoms);
 
 	// void updateAtomsFromList(std::vector<PDBAtom> atoms);
 	void writePDBFile(std::string filename);

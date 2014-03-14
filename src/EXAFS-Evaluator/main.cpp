@@ -204,8 +204,8 @@ int main(int argc, char **argv) {
 		double initial_rmsd = ifeffit_helper->run(pdb_helper->getEXAFSAtoms(), true);
 		std::cout << "RMSD = " << initial_rmsd << std::endl;
 
-		DCDHelper dcd_helper = DCDHelper(ga_config.getString("dcd-file"));
-		pdb_helper->updateAllAtomsFromXYZ(dcd_helper.getXYZAtFrame(0));
+		// DCDHelper dcd_helper = DCDHelper(ga_config.getString("dcd-file"));
+		// pdb_helper->updateAllNonEXAFSAtomsFromXYZ(dcd_helper.getXYZAtFrame(0));
 		pdb_helper->writePDBFile();
 		
 		std::cout << "Energy: " << vmd_helper->calculateEnergy() << std::endl;
@@ -217,12 +217,15 @@ int main(int argc, char **argv) {
 		std::vector<std::string> files;
 		getdir(ga_config.getString("pot-dir"),files);
 
+		DCDHelper dcd_helper = DCDHelper(ga_config.getString("dcd-file"));
+
 		for (std::vector<std::string>::iterator file = files.begin(); file != files.end(); ++file) {
 			
 			std::string pdb_file = ga_config.getString("pot-dir") + "/" + *file;
 			std::cout << "Analyzing :" << pdb_file << std::endl;
 
-			PDBHelper temp_pdb_helper = PDBHelper(pdb_file, fitness_config.getString("amber-topology-file"), "temp_pdb.pdb", fitness_config.getStringList("exafs-atoms"));
+			PDBHelper temp_pdb_helper = PDBHelper(pdb_file, fitness_config.getString("amber-topology-file"), temp_folder + "/" + temp_pdb, fitness_config.getStringList("exafs-atoms"));
+			temp_pdb_helper.updateAllNonEXAFSAtomsFromXYZ(dcd_helper.getXYZAtFrame(0));
 			temp_pdb_helper.writePDBFile();
 			std::cout << "Energy: " << vmd_helper->calculateEnergy() << std::endl;
 		}
