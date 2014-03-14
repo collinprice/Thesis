@@ -1,0 +1,26 @@
+Chromosome
+
+Our chromosome representation is a list of three-dimensional points. There points represent the position of each atom in a molecular structure. See figure X for an example.
+
+Crossover
+
+We have chosen to use the single point crossover method. A spliting point is random chosen from the list of our points and the chromosomes are swapped based on that point. The individual three-dimensional points are not alterted during this step.
+
+Mutation
+
+
+Implementation as a genetic algorithm
+
+Genetic Operators
+
+Recenter
+
+In an effort to prevent our population from reaching an early convergence we have decided to try a technique known as "recentering". After a specified convergence percentage is reached new individuals are added to the population. To recenter the population we replaced the duplicate individuals with new individuals are that have not yet entered the population.
+
+Crossover
+
+Two individuals are selected from the population and one-point crossover is performed. A random integer value is chosen based on the number of atoms the individual is made up of and the two individuals will trade their atomic positions based on the pivot point. An example is shown in figure X.
+
+Mutation
+
+A random atomic coordinate is selected from an indiviual and its position is moved randomly by 0.05A. The value of 0.05A was selected based on analysis of the EXAFS output. It was determined that for the atoms used in our experiments a move of at least 0.05A was needed to make any significant change to the EXAFS output.

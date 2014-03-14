@@ -1,0 +1,961 @@
+
+%% bare_conf.tex
+%% V1.3
+%% 2007/01/11
+%% by Michael Shell
+%% See:
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.7 or later) with an IEEE conference paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%
+%% File list of work: IEEEtran.cls, IEEEtran_HOWTO.pdf, bare_adv.tex,
+%%                    bare_conf.tex, bare_jrnl.tex, bare_jrnl_compsoc.tex
+%%*************************************************************************
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. IEEE's font choices can trigger bugs that do  ***
+% *** not appear when using other class files.                            ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+
+% Note that the a4paper option is mainly intended so that authors in
+% countries using A4 can easily print to A4 and see how their papers will
+% look in print - the typesetting of the document will not typically be
+% affected with changes in paper size (but the bottom and side margins will).
+% Use the testflow package mentioned above to verify correct handling of
+% both paper sizes by the user's LaTeX system.
+%
+% Also note that the "draftcls" or "draftclsnofoot", not "draft", option
+% should be used if it is desired that the figures are to be displayed in
+% draft mode.
+%
+\documentclass[conference]{IEEEtran}
+% Add the compsoc option for Computer Society conferences.
+%
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[conference]{../sty/IEEEtran}
+
+
+\usepackage{pgfplots}
+\usepackage{algorithm}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/oberdiek/
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+\usepackage{cite}
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 4.0 (2003-05-27) and later if using hyperref.sty. cite.sty does
+% not currently provide for hyperlinked citations.
+% The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/cite/
+% The documentation is contained in the cite.sty file itself.
+
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at: 
+% http://www.ctan.org/tex-archive/macros/latex/required/graphics/
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found as epslatex.ps or
+% epslatex.pdf at: http://www.ctan.org/tex-archive/info/
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage[cmex10]{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics. If using
+% it, be sure to load this package with the cmex10 option to ensure that
+% only type 1 fonts will utilized at all point sizes. Without this option,
+% it is possible that some math symbols, particularly those within
+% footnotes, will be rendered in bitmap form which will result in a
+% document that can not be IEEE Xplore compliant!
+%
+% Also, note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/amslatex/math/
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithms/
+% There is also a support site at:
+% http://algorithms.berlios.de/index.html
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithmicx/
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/tools/
+
+
+%\usepackage{mdwmath}
+%\usepackage{mdwtab}
+% Also highly recommended is Mark Wooding's extremely powerful MDW tools,
+% especially mdwmath.sty and mdwtab.sty which are used to format equations
+% and tables, respectively. The MDWtools set is already installed on most
+% LaTeX systems. The lastest version and documentation is available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/mdwtools/
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+%\usepackage{eqparbox}
+% Also of notable interest is Scott Pakin's eqparbox package for creating
+% (automatically sized) equal width boxes - aka "natural width parboxes".
+% Available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/eqparbox/
+
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\usepackage[tight,footnotesize]{subfigure}
+% subfigure.sty was written by Steven Douglas Cochran. This package makes it
+% easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
+% work, it is a good idea to load it with the tight package option to reduce
+% the amount of white space around the subfigures. subfigure.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at:
+% http://www.ctan.org/tex-archive/obsolete/macros/latex/contrib/subfigure/
+% subfigure.sty has been superceeded by subfig.sty.
+
+
+
+% \usepackage[caption=false]{caption}
+% \usepackage[font=footnotesize]{subfig}
+% subfig.sty, also written by Steven Douglas Cochran, is the modern
+% replacement for subfigure.sty. However, subfig.sty requires and
+% automatically loads Axel Sommerfeldt's caption.sty which will override
+% IEEEtran.cls handling of captions and this will result in nonIEEE style
+% figure/table captions. To prevent this problem, be sure and preload
+% caption.sty with its "caption=false" package option. This is will preserve
+% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later 
+% (recommended due to many improvements over 1.2) of subfig.sty supports
+% the caption=false option directly:
+%\usepackage[caption=false,font=footnotesize]{subfig}
+%
+% The latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/subfig/
+% The latest version and documentation of caption.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/caption/
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+% \usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure. The latest version and documentation can be found at:
+% http://www.ctan.org/tex-archive/macros/latex/base/
+
+
+
+\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/sttools/
+% Documentation is contained in the stfloats.sty comments as well as in the
+% presfull.pdf file. Do not use the stfloats baselinefloat ability as IEEE
+% does not allow \baselineskip to stretch. Authors submitting work to the
+% IEEE should note that IEEE rarely uses double column equations and
+% that authors should try to avoid such use. Do not be tempted to use the
+% cuted.sty or midfloat.sty packages (also by Sigitas Tolusis) as IEEE does
+% not format its papers in such ways.
+
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/misc/
+% Read the url.sty source comments for usage information. Basically,
+% \url{my_url_here}.
+
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Modeling Metal Protein Complexes from Experimental Extended X-ray Absorption Fine Structure using Evolutionary Algorithms}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{
+  \IEEEauthorblockN{Collin Price}
+  \IEEEauthorblockA{Brock University\\
+  St. Catharines, Ontario\\
+  Email: cp06vz@brocku.ca}
+  \and
+  \IEEEauthorblockN{Sheridan Houghten}
+  \IEEEauthorblockA{Brock University\\
+  St. Catharines, Ontario\\
+  Email: houghten@brocku.ca}
+  \and
+  \IEEEauthorblockN{Sergey Vassiliev}
+  \IEEEauthorblockA{Brock University\\
+  St. Catharines, Ontario\\
+  Email: svassiliev@brocku.ca}
+  \and
+  \IEEEauthorblockN{Doug Bruce}
+  \IEEEauthorblockA{Brock University\\
+  St. Catharines, Ontario\\
+  Email: dbruce@brocku.ca}
+}
+% conference papers do not typically use \thanks and this command
+% is locked out in conference mode. If really needed, such as for
+% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+% after \documentclass
+
+% for over three affiliations, or if they all won't fit within the width
+% of the page, use this alternative format:
+% 
+% \author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+% Homer Simpson\IEEEauthorrefmark{2},
+% James Kirk\IEEEauthorrefmark{3}, 
+% Montgomery Scott\IEEEauthorrefmark{3} and
+% Eldon Tyrell\IEEEauthorrefmark{4}}
+% \IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+% Georgia Institute of Technology,
+% Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+% \IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+% Email: homer@thesimpsons.com}
+% \IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+% Telephone: (800) 555--1212, Fax: (888) 555--1212}
+% \IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+
+
+
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+
+
+% make the title area
+\maketitle
+
+
+\begin{abstract}
+%\boldmath
+
+Experimental \textit{extended x-ray absorption fine structure} (EXAFS) spectra carry information about the chemical structure of metal protein complexes. However, predicting the structure of such complexes from EXAFS spectra is not a simple task. Currently methods such as Monte Carlo Optimization or simulated annealing are used in structure refinement of EXAFS. These methods have proved somewhat successful in structure refinement, but have not been successful in finding the global minima. Based on the success of using evolutionary algorithms to overcome local minima issues in other domains, we propose an approach using a genetic algorithm (GA) to better predict the  structure of metal protein complexes.
+
+\end{abstract}
+% IEEEtran.cls defaults to using nonbold math in the Abstract.
+% This preserves the distinction between vectors and scalars. However,
+% if the conference you are submitting to favors bold math in the abstract,
+% then you can use LaTeX's standard command \boldmath at the very start
+% of the abstract to achieve this. Many IEEE journals/conferences frown on
+% math in the abstract anyway.
+
+% no keywords
+
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+\section{Introduction}
+
+The goal of this work is to explore different types of evolutionary algorithms, in an effort to find the exact molecular structure of a molecule when given an experimental \textit{extended X-ray absorption fine structure} (EXAFS) spectra. EXAFS experiments are an effective way of determining a molecule's molecular structure. EXAFS experiments are unique in that they can be used on a variety of materials, including gas and liquids. 
+
+For our experiments we will be using a non-protein chemical compound that is found within a protein. The oxygen-evolving complex(OEC) is required to catalyze the oxidation of water to produce dioxygen. There is a high quality experimental EXAFS spectra of OEC in S$_1$-state that we will be using to create a comparative measure against our results. The goal is to create a calculated molecular structure that closely resembles the experimental EXAFS spectra. Finding a good molecular structure for the OEC is important in understanding the catalytic cycle and the development of biomimetics~\cite{luber2011s1}.
+
+Currently such methods as computation chemistry~\cite{hsiao2006exafs}, quantum mechanics~\cite{hsiao2006exafs}~\cite{sproviero2008model}, and conjugate gradient optimization~\cite{luber2011s1} are being used to determine the molecular structure of compounds. The problem with these methods is that they are converging into local minima. The problem with molecular structure refinement is that there are too many degrees of freedom involved. With respect to the OEC there are 79 degrees of freedom. With the assistance of a genetic algorithm (GA)~\cite{banzhaf1997genetic} we hope to find a better method of exploring the search space.
+
+\section{Overview of the method}
+
+\subsection{EXAFS}
+
+The following overview is based on information contained in Matthew Newville’s Fundamentals of XAFS (2004). X-Ray absorption fine structure (XAFS) is a method used to measure the absorption coefficient of a material as a function of energy. X-rays are light with wavelengths ranging from ~25Å to 0.25Å. All atoms resonate at a specific wavelength. The x-ray is tuned to have the same wavelength as the target atom. The photon from an x-ray is absorbed by an electron in a tightly bound quantum core level of an atom. Absorption only takes place if the binding energy of the core level is less than the energy of the x-ray photon. At the time of absorption, a core electron moves to an empty outer shell and another electron moves in to take its place. Eventually the affected electrons decay to their original state. During this time fluorescence energies are emitted that characterize a specific atom.
+
+The absorption coefficients measured after the initial absorption are referred to as the EXAFS. During the decay of the electrons to their original state, oscillations occur in the measure of the absorption coefficient. The different frequencies found within the oscillations correspond to different near-neighbour coordination shells, which can be described and modeled according to the EXAFS equation. From the oscillations we can determine the number of neighbouring atoms, the distances to the neighbouring atoms, and the disorder in the neighbour distances.~\cite{Newville2004Fundamentals}
+
+EXAFS can be used to identify properties of a molecule, but they do not provide enough detail to determine the atomic structure of a molecule in 3-dimensional space. We can identify how far apart atoms are from each other, but we do not know their dihedral angles. Fortunately, EXAFS can be used to assist in determining the atomic structure of a molecule. The energy spectra given off by the molecule is unique for its structure, meaning that we can create our own atomic structure and obtain an EXAFS spectra and compare the results. The idea is that if we create an atomic structure that matches the spectra of an actual model, then we have found what it should look like.
+
+In order to perform our EXAFS simulations we used a program called IFEFFIT. IFEFFIT is an application that simulates an EXAFS experiment. During our atomic structure refinement we will be running our generated atomic structure through this application to obtain an EXAFS spectra.
+
+\section{The evolutionary algorithm}
+
+\subsection{Population}
+
+We first started with an existing OEC atomic structure. To ensure that our atomic structure was as stable as possible, we put the structure into a simulation and let the atoms move freely in space until the overall temperature of the system was reasonably low. This acted as our baseline atomic structure for all tests.
+
+In order to generate the initial population we thought of using two different approaches. At first we tried to randomly shift the individual atom coordinates but during the EXAFS analysis we were getting too many invalid atomic structures. The second approach we took was to let the simulation generate an initial population for us. the approach we ended up choosing was to run the atomic structure through the simulation again but this time we would increase the temperature of the system in order to make the atoms vibrate. While this was occurring we took snapshots of the atomic structure over time and used this to seed our genetic algorithm's population. For our purposes we recorded 10000 different atomic structures.
+
+The atomic structures that were generated all contained more atoms than were necessary to implement our EXAFS analysis, so only the atoms that were needed to run the IFEFFIT simulation were used. The generated atomic structures were run through IFEFFIT and were compared to our target EXAFS spectra. The top 3\% (roughly 300) were used to generate the initial populations in our genetic algorithm.
+
+\subsection{Representation}
+
+Our chromosome representation consists of a list of 3-dimensional positions, where each position is assigned to a specific atom in our atomic structure. The actual position of each atom is not relevant because we are only concerned with the position of each atom relative to each other. A subset of an individual can be seen in Table~\ref{tab:sampleChromosome}. 
+
+\begin{table}[htp]
+\caption{Sample Chromosome Representation}
+\label{tab:sampleChromosome}
+\centering
+\begin{tabular}{ | l | l | l |}
+  \hline
+    X & Y & Z \\ \hline
+    14.451 & -13.346 & 1.133 \\ \hline
+    15.336 & -13.488 & 2.014 \\ \hline
+    13.005 & -13.364 & 1.452 \\ \hline
+    0.019 & 0.011 & 0.045 \\ \hline
+    ... & ... & ... \\ \hline
+\end{tabular}
+\end{table}
+
+% \begin{table}[htp]
+% \caption{Sample Chromosome Representation}
+% \label{tab:sampleChromosome}
+% \centering
+% \begin{tabular}{ | l | l | l |}
+%   \hline
+%     X & Y & Z \\ \hline
+%     X$_0$ & Y$_0$ & Z$_0$ \\ \hline
+%     X$_1$ & Y$_1$ & Z$_1$ \\ \hline
+%     X$_2$ & Y$_2$ & Z$_2$ \\ \hline
+%     X$_3$ & Y$_3$ & Z$_3$ \\ \hline
+%     X$_4$ & Y$_4$ & Z$_4$ \\ \hline
+%     ... & ... & ... \\ \hline
+% \end{tabular}
+% \end{table}
+
+% \begin{table}[htp]
+% \caption{Sample Chromosome Representation}
+% \label{tab:sampleChromosome2}
+% \centering
+% \begin{tabular}{ | c |}
+%   \hline
+%     X$_0$ \\ \hline
+%     Y$_0$ \\ \hline
+%     Z$_0$ \\ \hline
+%     X$_1$ \\ \hline
+%     Y$_1$ \\ \hline
+%     Z$_1$ \\ \hline
+%     X$_2$ \\ \hline
+%     Y$_2$ \\ \hline
+%     Z$_2$ \\ \hline
+%     ... \\ \hline
+% \end{tabular}
+% \end{table}
+
+\subsection{Restarting}
+
+In an effort to prevent our population from reaching an early convergence, we have decided to try a technique known as \lq\lq restarting\rq\rq. This technique was inspired by the Recentering-Restarting GA(RRGA)\textbf{[missing reference]}. After a specified convergence percentage is reached, new individuals are added to the population. To recenter the population we replaced the duplicate individuals with new individuals that have not yet entered the population. Figure~\ref{fig:bestRunRestarting} demonstrates what a population looks like while restarting is occurring.
+
+\begin{algorithm}
+\caption{Restarting the population}
+\begin{algorithmic}
+
+\IF{population has converged to minimum diversity}
+  \STATE remove all duplicate individuals;
+  \WHILE{population not full}
+    \STATE insert random draw from generated individuals into population;
+  \ENDWHILE
+\ENDIF
+
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Crossover operator}
+
+Two individuals are selected from the population and one-point crossover is performed. A random integer value is chosen based on the number of atoms the individual is made up of, and the two individuals will trade their atomic positions based on the pivot point. An example is shown in figure X.
+
+\subsection{Mutation operator}
+
+For the mutation operator we chose to move a single atom coordinate. A random atomic coordinate is selected from the individual and its position is moved by 0.05 in a random direction. The resulting position will be 0.05 away from its original position. In order to determine how much distance the atomic position should be moved, we had to perform an analysis of the EXAFS spectra. To do this, we moved each atom individually to see what kind of affect it would have on the EXAFS spectra. It was determined that a move of 0.05 for all chemical elements was needed to see at least a 1\% change in the EXAFS spectra. In future experiments we could try giving each chemical element a different minimum change in position.
+
+\subsection{Selection operator}
+
+For our selection operator we used a 3-tournament selection.
+
+\subsection{Fitness}
+
+The goal of our experiment is to find an atomic structure that generates the same EXAFS spectra as our experimental EXAFS spectra(provide refs 16,17). If we can create an atomic structure that produces the same EXAFS spectra as the one found in experimentation then we can say that we know what the real atomic structure must be. 
+
+To calculate how close our calculated EXAFS spectra is to the experimental EXAFS spectra, we will be using the root-mean-square deviations between the two spectra. The two spectra can be seen in Figure.\ref{fig:bestRunEXAFS}.
+
+\subsection{GA Parameters}
+
+\begin{table}
+\caption{GA Parameters}
+\centering
+\begin{tabular}{ l r }
+  \hline
+    Population size & 50 \\
+    Crossover rate & 0.8 \\
+    Mutation rate & 0.2 \\
+    Elitism & True \\
+    Number of restart attempts & 5 \\
+    Max convergence percentage before restarting & 5\% \\
+  \hline
+\end{tabular}
+\end{table}
+
+\section{Results}
+
+\subsection{Subset Testing}
+
+In an attempt to reduce the search space of our problem, we tried keeping different chemical elements rigid during the evolutionary process. Figure \ref{fig:elementBreakdown} gives a breakdown of the atoms contained within OEC. With 79 atoms allowed to move continuously through space, we wanted to find a way of eliminating some degrees of freedom. We ran experiments where we kept certain chemical elements rigid to see how this affected our results. Figure \ref{fig:subsetResults} demonstrates the results of our testing. Certain rows in Figure \ref{fig:subsetResults} contain \textbf{N/A} because their values were too large. The atoms listed in each row were allowed to be flexible during the experiment. The parameters were kept consistent for each experiment and can be seen in Figure \ref{fig:subsetParameters}.
+
+\begin{table}
+\caption{Chemical Element Breakdown}
+\label{fig:elementBreakdown}
+\centering
+\begin{tabular}{ | l | l | }
+  \hline
+    Element & Count \\ \hline
+    Mn & 4 \\ \hline
+    Ca & 1 \\ \hline
+    O & 26 \\ \hline
+    C & 14 \\ \hline
+    N & 6 \\ \hline
+    H & 28 \\ \hline
+    Total & 79 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}
+  \caption{Experiments with different subsets}
+  \label{fig:subsetResults}
+  \centering
+  \begin{tabular}{ | l | l | l | }
+    \hline
+    Atoms & Best & Average \\ \hline \hline
+    Mn, Ca, C, O, N, H & 260.56 & 286.48 \\ \hline
+    Mn, Ca, C, O, N & 247.67 & 288.32 \\ \hline
+    Mn, Ca, C & 1078.81 & N/A \\ \hline
+    Mn, Ca, O & 284.25 & N/A \\ \hline
+    Mn, Ca, N & 1120.59 & N/A \\ \hline
+    Mn, Ca, C, O & 245.60 & N/A \\ \hline
+    Mn, Ca, C, N & 1144.3125 & 1190.82 \\ \hline
+    Mn, Ca, O, N & N/A & N/A \\ \hline
+    Mn, Ca & 1123.748 & 1139.266 \\ \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}
+\caption{GA Subset Parameters}
+\label{fig:subsetParameters}
+\centering
+\begin{tabular}{ l r }
+  \hline
+    Runs & 10 \\
+    Population size & 50 \\
+    Crossover rate & 0.7 \\
+    Mutation rate & 0.3 \\
+    Elitism & True \\
+    Number of restart attempts & 5 \\
+    Max convergence percentage before restarting & 5\% \\
+  \hline
+\end{tabular}
+\end{table}
+
+The results of our experiments revealed some interesting characteristics. Immediately we can see that making the Hydrogen element rigid actually produces improved results. This is not surprising since early examination of the atoms revealed that moving a Hydrogen element had very little impact on the RMSD score. We suspect that the RMSD score has improved because our chromosome length has been reduced from 79 to 51. The reduced chromosome length would allow for more different combintation to be attempted.
+
+\subsection{Post-Optimization}
+
+We performed post optimization because the search space is too large to searche every possible configuration. 
+
+Algorithms based on continuous space problems were not very successful at developing good solutions to our problem. Particle swarm optimization(PSO)~\cite{kennedy2010particle} and differential evolution(DE)~\cite{storn1997differential} were originally tested against our GA performance but the results were not promising. Once we were able to get our GA to create good and close solutions it was decided to try PSO and DE as a post-optimization. 
+
+We used one of a candidate solution we found from our GA experiments to seed the initial population of the PSO and DE algorithms. The peer-reviewed computational intelligence library, CILIB~\cite{cilib}, was used to run our PSO and DE experiments. The population individual was modified to better suit our new algorithms. Figure \ref{fig:postOpExplain} demonstrates that we converted the list of 3-dimensional positions into a single list of floating points. For fitness evaluation the list was translated back to a list of 3-dimensional positions.
+
+\begin{figure}
+  \caption{Population Individual Modification}
+  \label{fig:postOpExplain}
+  \begin{center}
+    \includegraphics[bb=0 0 400 241,scale=0.5]{refs/ThisBecomesThat.png}
+  \end{center}
+\end{figure}
+
+ We then randomly adjusted each value by a small amount to generate the initial population.
+
+
+To generate initial population we randomly adjusted each floating point value by range of numbers. At first we tried adjusting each value by $\pm$1 but our results were far worse than what we started. We didn't begin to see improvements being made until we significantly reduced the amount we adjusted the initial positions. Ranges of $\pm$0.05 and $\pm$0.25 were used to generate good results. Figure \ref{fig:localResults} shows the results we had with our two post-optimization strategies. These scores are averaged over 30 runs.
+
+\begin{table}
+\caption{Local Search Results}
+\label{fig:localResults}
+\centering
+\begin{tabular}{ | l | l | l | l | l | }
+  \hline
+    Algorithm & Initial Movement Radius & Pop. Size & Gen. & Best \\ \hline
+    PSO & $\pm$0.05 & 50 & 30 & 145.86 \\ \hline
+    PSO & $\pm$0.25 & 50 & 30 & 278.82 \\ \hline
+    DE & $\pm$0.05 & 50 & 30 & 233.37 \\ \hline
+    DE & $\pm$0.25 & 50 & 30 & 536.72 \\ \hline
+\end{tabular}
+\end{table}
+
+The results of our DE experiments were not promising. We had results that were improving but their RMSD score never got better than our initial candiate score. Alternatively, the results of our PSO experiments were extremely successful. Figure \ref{fig:psoResults} shows the results of our PSO runs. We were able to significantly reduce the RMSD score which shows that PSO works very well as a post-optimization strategy. 
+
+\begin{figure}
+\caption{PSO Post-Optimization Results}
+\label{fig:psoResults}
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    % width=15cm,
+    % height=8cm,
+    grid=both,
+    title={Average Best PSO Fitness Averaged Over 30 Runs},
+    legend entries={$\pm$0.05, $\pm$0.25},
+    xlabel={Generations},
+    ylabel={RMSD}
+  ]
+
+  \addplot[mark=*] table [col sep=comma,y index=1, x index=0] {results/cilib/pso/0.1/exafs-pso-sum.csv};
+  \addplot[mark=-] table [col sep=comma,y index=1, x index=0] {results/cilib/pso/0.5/exafs-pso-sum.csv};
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+\end{figure}
+
+\subsection{Overall Results}
+
+\begin{table*}[t]
+  \caption{Sample Runs}
+  \label{fig:sampleRuns}
+  \centering
+  \begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | }
+    \hline
+    Name & Runs & Pop. & Gen. & Crossover & Mutation & Elitism & Conv. Rate & restarting &  Avg. Best \\ \hline \hline
+    Test1 & 10 & 50 & 30 & 80\% & 20\% & False & - & - & 325.55 \\ \hline
+    Test4 & 10 & 50 & 30 & 80\% & 10\% & False & - & - & 342.04 \\ \hline
+    Test5 & 10 & 50 & 30 & 70\% & 30\% & False & - & - & 294.56 \\ \hline
+    Test2 & 10 & 50 & 30 & 80\% & 10\% & True & - & - & 319.14 \\ \hline
+    Test3 & 10 & 50 & 30 & 70\% & 30\% & True & - & - & 286.98 \\ \hline
+    Test6 & 10 & 50 & 30 & 80\% & 20\% & True & - & - & 320.17 \\ \hline
+    Test7 & 10 & 50 & 67 & 80\% & 20\% & True & 10\% & 3 & 271.49 \\ \hline
+    Test8 & 10 & 50 & 81 & 80\% & 20\% & True & 5\% & 3 & 265.76 \\ \hline
+    Test9 & 10 & 50 & 107 & 80\% & 20\% & True & 10\% & 5 & 263.36 \\ \hline
+    Test10 & 10 & 50 & 124 & 80\% & 20\% & True & 5\% & 5 & 267.47 \\ \hline
+    Test11 & 10 & 50 & 67 & 70\% & 30\% & True & 5\% & 5 & \textbf{260.56} \\ \hline
+    Test12 & 10 & 50 & 81 & 70\% & 30\% & True & 10\% & 5 & 266.68 \\ \hline
+  \end{tabular}
+\end{table*}
+
+\begin{table}
+\caption{Comparison of Results}
+\label{fig:resultsComparison}
+\centering
+\begin{tabular}{ | l | l | l | l | l | }
+  \hline
+    Algorithm & Best Results \\ \hline
+    DFT-QM/MM~\cite{luber2011s1} & 289.361 \\ \hline
+    R-QM/MM~\cite{luber2011s1} & 278.454 \\ \hline
+    GA & 214.147 \\ \hline
+    PSO & 145.86 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}
+\caption{Results of best run using restarting technique}
+\label{fig:bestRunRestarting}
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    % width=15cm,
+    % height=8cm,
+    grid=both,
+    title={Best Run},
+    legend entries={Best,Average},
+    xlabel={Generations},
+    ylabel={RMSD}
+  ]
+
+  \addplot[mark=x] table [col sep=comma,y index=1, x index=0] {results/best_run/results.csv};
+  \addplot[mark=*] table [col sep=comma,y index=2, x index=0] {results/best_run/results.csv};
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\caption{OEC EXAFS Spectra Comparison}
+\label{fig:bestRunEXAFS}
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    grid=both,
+    title={EXAFS Spectra in k space},
+    legend entries={Experimental,Calculated},
+    legend pos=south east,
+    xlabel={Wave Number A\textsuperscript{-1}},
+    ylabel={k\textsuperscript{2} * X(k) (A\textsuperscript{-2})}
+  ]
+
+  \addplot[mark=x] table [col sep=comma,y index=1, x index=0] {results/best_run/for_chart.csv};
+  \addplot[mark=*,mark size=1] table [col sep=comma,y index=2, x index=0] {results/best_run/for_chart.csv};
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\caption{OEC EXAFS Spectra Comparison for PSO}
+\label{fig:bestRunEXAFS}
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+    grid=both,
+    title={EXAFS Spectra in k space},
+    legend entries={Experimental,Calculated},
+    legend pos=south east,
+    xlabel={Wave Number A\textsuperscript{-1}},
+    ylabel={k\textsuperscript{2} * X(k) (A\textsuperscript{-2})}
+  ]
+
+  \addplot[mark=x] table [col sep=comma,y index=1, x index=0] {results/cilib/best_pso_exafs.csv};
+  \addplot[mark=*,mark size=1] table [col sep=comma,y index=2, x index=0] {results/cilib/best_pso_exafs.csv};
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+\end{figure}
+
+\subsection{Analysis}
+
+% An example of a floating figure using the graphicx package.
+% Note that \label must occur AFTER (or within) \caption.
+% For figures, \caption should occur after the \includegraphics.
+% Note that IEEEtran v1.7 and later has special internal code that
+% is designed to preserve the operation of \label within \caption
+% even when the captionsoff option is in effect. However, because
+% of issues like this, it may be the safest practice to put all your
+% \label just after \caption rather than within \caption{}.
+%
+% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
+% option should be used if it is desired that the figures are to be
+% displayed while in draft mode.
+%
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation Results}
+%\label{fig_sim}
+%\end{figure}
+
+% Note that IEEE typically puts floats only at the top, even when this
+% results in a large percentage of a column being occupied by floats.
+
+
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command, the
+% \label for the overall figure must come after \caption.
+% \hfil must be used as a separator to get equal spacing.
+% The subfigure.sty package works much the same way, except \subfigure is
+% used instead of \subfloat.
+%
+%\begin{figure*}[!t]
+%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
+%\label{fig_second_case}}}
+%\caption{Simulation results}
+%\label{fig_sim}
+%\end{figure*}
+%
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
+
+
+% An example of a floating table. Note that, for IEEE style tables, the 
+% \caption command should come BEFORE the table. Table text will default to
+% \footnotesize as IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+
+
+% Note that IEEE does not put floats in the very first column - or typically
+% anywhere on the first page for that matter. Also, in-text middle ("here")
+% positioning is not used. Most IEEE journals/conferences use top floats
+% exclusively. Note that, LaTeX2e, unlike IEEE journals/conferences, places
+% footnotes above bottom floats. This can be corrected via the \fnbelowfloat
+% command of the stfloats package.
+
+
+
+\section{Conclusion}
+The conclusion goes here.
+
+
+
+
+% conference papers do not normally have an appendix
+
+
+% use section* for acknowledgement
+\section*{Acknowledgment}
+
+
+The authors would like to thank...
+
+
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+\bibliography{mybib}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+% \begin{thebibliography}{1}
+
+% \bibitem{IEEEhowto:kopka}
+% H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+%   0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+
+% \bibitem{victor}
+% Sandra Luber, Ivan Rivalta, Yasufumi Umena, Keisuke Kawakami, Jian-Ren Shen, Nobuo Kamiya, Gary W. Brudvig, and Victor S. Batista, \emph{S$_{1}$-State Model of the O$_{2}$-Evolving Complex of Photosystem II.} 2011 American Chemical Society
+
+% \bibitem{victor2}
+% Eduardo M. Sproviero , José A. Gascón †, James P. McEvoy ‡, Gary W. Brudvig and Victor S. Batista, \emph{A Model of the Oxygen-Evolving Center of Photosystem II Predicted by Structural Refinement Based on EXAFS Simulations.}
+
+% \bibitem{a}
+% G. Charles Dismukes, and Rogier T. van Willigen, \lq\lq Manganese: The Oxygen-evolving Comlpex & Models,\rq\rq 
+
+
+% \end{thebibliography}
+
+
+
+
+% that's all folks
+\end{document}
+
+
