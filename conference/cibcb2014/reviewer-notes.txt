@@ -1,0 +1,81 @@
+Reviewer 1
+
+Abstract
+
+
+    Section I.
+
+    In introduction part, there is need for background information to understand
+    the need for the research, research problem, research questions or hypotheses,
+    Explanation of a gap or lack of research in the field that makes this paper
+    necessary, purpose of the paper or proposal contained in the paper are not well
+    defined.
+
+    All the reference style and figure description in introduction section is not
+    following by IEEE standard. For better presentation, author need to incorporate
+    Latex.
+    
+     Preferably, the initial stage of article, author should describe the
+    background knowledge rather than goal and target of paper.
+
+    Section II.
+
+    Reference style for this section is not followed by IEEE standard. For better
+    presentation, author need to incorporate Latex. Symbols need to be well defined
+    whenever it used.
+    There is no need of separating the heading of known models. Just mentioning the
+    name of model is not enough please notify the gap within the models.
+
+    Section III.
+
+    How much convergence percentage is reached for adding the new individuals to
+    the population?
+    The goal of your article should be in introduction section rather defining in
+    every section.
+    The description of figures is not followed by the IEEE Transaction standard.
+
+    For figure 1. Please use the proper format in word or Latex as mentioned in
+    IEEE guidelines.
+    Some paragraph have missing information regarding the application of GA or RGA
+    or RRGA technique, Which one is highly effective, author should elaborate it
+    further.
+    "The goal is RMSD is low as possible". Comment: how much it has to be to deal
+    it effectively.
+    In this section, author used only symbols. Please also provide the abbreviation
+    for all symbols.
+    During the EXAFS analysis too many invalid atomic structures were being
+    generated. How invalid atomic structures were being generated.
+    Please provide the justification: Why population size of 50 was selected as a
+    result of empirical testing? Need to elaborate it more in your article.
+    "Sensible result and reasonable amount of time". Comment: Explanation should be
+    based on the comparisons results using proper justification of references.
+    "Best result". Comment: how much we can say about it? Need to describe it in
+    terms of figure.
+    Use figure value and compare it with figure value rather than describing
+    the "outperforming".
+    To justify your claim and statement, author should use more references.
+    Currently, references for supporting the author claim and statement is weak.
+    Paragraph spacing should be followed by IEEE transaction standard.
+
+Reviewer 2
+
+The paper presents an approach using evolutionary algorithms to better predict
+the structure of metal protein complexes from EXAFS. The work used a variation
+of genetic algorithm called RGA and used PSO in post optimization.
+The work is presented very well.
+An observed deficiency is that the work doesn't present a processing time
+evaluation.In the last paragraph it says that it is significantly high.
+The work should contain such evaluation using different test cases. It would be
+better to compare different approaches.
+Minor points:
+1.The abstract says that the approach is based on GA only while it uses more
+than one evolutionary algorithm.
+2.The figures' numbers are sometimes Roman.
+3.Section III.A would better include a paragraph introducing PSO and DE.
+4.Figure 1 is unclear.
+5.Section III.A, paragraph 1, line 4: "additional" instead of "addition".
+6.Equation 1, "RMSD =" should be written on the left hand side.
+7.Section IV, paragraph 2, line 2: "move" instead of "moved".
+8.Section V, paragraph 5, line 6: "placed" instead of "place".
+9.Last sentence in the paper (Multi-objective experiments...etc.) should be
+revised.

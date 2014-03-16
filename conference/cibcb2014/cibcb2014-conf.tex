@@ -419,7 +419,7 @@
 \begin{abstract}
 %\boldmath
 
-Experimental \textit{extended x-ray absorption fine structure} (EXAFS) spectra carry information about the chemical structure of metal protein complexes. However, predicting the structure of such complexes from EXAFS spectra is not a simple task. Currently methods such as Monte Carlo Optimization or simulated annealing are used in structure refinement of EXAFS. These methods have proved somewhat successful in structure refinement but have not been successful in finding the global minima. Based on the success of using evolutionary algorithms to overcome local minima issues in other domains, we propose an approach using a genetic algorithm (GA) to better predict the structure of metal protein complexes.
+Experimental \textit{extended x-ray absorption fine structure} (EXAFS) spectra carry information about the chemical structure of metal protein complexes. However, predicting the structure of such complexes from EXAFS spectra is not a simple task. Currently methods such as Monte Carlo Optimization or simulated annealing are used in structure refinement of EXAFS. These methods have proved somewhat successful in structure refinement but have not been successful in finding the global minima. Based on the success of using evolutionary algorithms to overcome local minima issues in other domains, we propose multiple approachs to better predict the structure of metal protein complexes; genetic algorithm (GA), particle swarm optimization (PSO), and differential evolution (DE).
 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
@@ -448,13 +448,16 @@ Molecular Structure, Evolutionary Algorithms, Representation, Recentering-Restar
 
 \section{Introduction}
 
-The goal of this work is to explore different types of evolutionary algorithms in an effort to find the exact molecular structure of a molecule given experimental \textit{extended X-ray absorption fine structure} (EXAFS) spectra. EXAFS experiments are an effective way of determining a molecule's molecular structure. EXAFS experiments are unique in that they can be used on a variety of materials, including gas and liquids. 
+The goal of this work is to explore different types of evolutionary algorithms in an effort to find the exact molecular structure of a molecule given experimental extended X-ray absorption fine structure (EXAFS) spectra. EXAFS experiments are an effective way of determining a molecule's molecular structure. EXAFS experiments are unique in that they can be used on a variety of materials, including gas and liquids. 
 
 For the experiments a non-protein chemical compound found within proteins is used. The oxygen-evolving complex (OEC) is required to catalyze the oxidation of water to produce dioxygen. There is a high quality experimental EXAFS spectra of OEC in S$_1$-state that will be used to create a comparative measure against the results. The goal is to create a calculated molecular structure that closely resembles the experimental EXAFS spectra. Finding a good molecular structure for the OEC is important in understanding the catalytic cycle and the development of biomimetics~\cite{luber2011s1}.
 
 Currently such methods as computational chemistry~\cite{hsiao2006exafs}, quantum mechanics~\cite{hsiao2006exafs}~\cite{sproviero2008model}, and conjugate gradient optimization~\cite{luber2011s1} are being used to determine the molecular structure of compounds. The problem with these approaches is that they are converging on local minima. A major difficulty with molecular structure refinement is that there are too many degrees of freedom involved. With respect to the OEC there are 79 degrees of freedom, corresponding to the 79 atoms in the OEC. See Figure ~\ref{table:elementBreakdown} for a breakdown of the different atoms in the OEC. A genetic algorithm (GA)~\cite{banzhaf1997genetic} will be used in an attempt to better explore the search space.
 
+The remainder of this paper is  organized as follows. Section~\ref{sec:refinementProblem} describes the structure refinement problem as well as the model used in the experiments. Section~\ref{sec:evolutionaryAlgorithm} outlines the evolutionary algorithms used along with their implementation details relating to the problem along with the experimental design. Section~\ref{sec:subsetTesting} describes subset testing of the original model, and Section~\ref{sec:conclusion} discusses conclusions and future work.
+
 \section{Structure Refinement Problem}
+\label{sec:refinementProblem}
 
 \subsection{EXAFS}
 
@@ -486,6 +489,7 @@ Existing molecular structures that were generated using refined molecular quantu
 %\end{table}
 
 \section{The evolutionary algorithm}
+\label{sec:evolutionaryAlgorithm}
 
 \subsection{Algorithms}
 
@@ -783,6 +787,7 @@ The results from the PSO and DE experiments using different initial movement rad
 \end{figure*}
 
 \section{Subset Testing}
+\label{sec:subsetTesting}
 
 In an attempt to reduce the search space of the problem, different chemical elements were left rigid during the evolutionary process. Table \ref{table:elementBreakdown} gives a breakdown of the atoms contained within OEC.
 
