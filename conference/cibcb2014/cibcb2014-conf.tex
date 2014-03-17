@@ -335,9 +335,8 @@
 % Read the url.sty source comments for usage information. Basically,
 % \url{my_url_here}.
 
-
-
-
+% REMOVE ME LATER
+\usepackage{soul}
 
 % *** Do not adjust lengths that control margins, column widths, etc. ***
 % *** Do not use packages that alter fonts (such as pslatex).         ***
@@ -419,7 +418,7 @@
 \begin{abstract}
 %\boldmath
 
-Experimental \textit{extended x-ray absorption fine structure} (EXAFS) spectra carry information about the chemical structure of metal protein complexes. However, predicting the structure of such complexes from EXAFS spectra is not a simple task. Currently methods such as Monte Carlo Optimization or simulated annealing are used in structure refinement of EXAFS. These methods have proved somewhat successful in structure refinement but have not been successful in finding the global minima. Based on the success of using evolutionary algorithms to overcome local minima issues in other domains, we propose multiple approachs to better predict the structure of metal protein complexes; genetic algorithm (GA), particle swarm optimization (PSO), and differential evolution (DE).
+Experimental \textit{extended x-ray absorption fine structure} (EXAFS) spectra carry information about the chemical structure of metal protein complexes. However, predicting the structure of such complexes from EXAFS spectra is not a simple task. Currently methods such as Monte Carlo Optimization or simulated annealing are used in structure refinement of EXAFS. These methods have proved somewhat successful in structure refinement but have not been successful in finding the global minima. \hl{Based on the success of using evolutionary algorithms to overcome local minima issues in other domains, we propose multiple approachs to better predict the structure of metal protein complexes; genetic algorithm (GA), particle swarm optimization (PSO), and differential evolution (DE)}.
 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
@@ -452,7 +451,7 @@ The goal of this work is to explore different types of evolutionary algorithms i
 
 For the experiments a non-protein chemical compound found within proteins is used. The oxygen-evolving complex (OEC) is required to catalyze the oxidation of water to produce dioxygen. There is a high quality experimental EXAFS spectra of OEC in S$_1$-state that will be used to create a comparative measure against the results. The goal is to create a calculated molecular structure that closely resembles the experimental EXAFS spectra. Finding a good molecular structure for the OEC is important in understanding the catalytic cycle and the development of biomimetics~\cite{luber2011s1}.
 
-Currently such methods as computational chemistry~\cite{hsiao2006exafs}, quantum mechanics~\cite{hsiao2006exafs}~\cite{sproviero2008model}, and conjugate gradient optimization~\cite{luber2011s1} are being used to determine the molecular structure of compounds. The problem with these approaches is that they are converging on local minima. A major difficulty with molecular structure refinement is that there are too many degrees of freedom involved. With respect to the OEC there are 79 degrees of freedom, corresponding to the 79 atoms in the OEC. See Figure ~\ref{table:elementBreakdown} for a breakdown of the different atoms in the OEC. A genetic algorithm (GA)~\cite{banzhaf1997genetic} will be used in an attempt to better explore the search space.
+Currently such methods as computational chemistry~\cite{hsiao2006exafs}, quantum mechanics~\cite{hsiao2006exafs}~\cite{sproviero2008model}, and conjugate gradient optimization~\cite{luber2011s1} are being used to determine the molecular structure of compounds. The problem with these approaches is that they are converging on local minima. A major difficulty with molecular structure refinement is that there are too many degrees of freedom involved. With respect to the OEC there are 79 degrees of freedom, corresponding to the 79 atoms in the OEC. See Figure~\ref{table:elementBreakdown} for a breakdown of the different atoms in the OEC. A genetic algorithm (GA)~\cite{banzhaf1997genetic} will be used in an attempt to better explore the search space.
 
 The remainder of this paper is  organized as follows. Section~\ref{sec:refinementProblem} describes the structure refinement problem as well as the model used in the experiments. Section~\ref{sec:evolutionaryAlgorithm} outlines the evolutionary algorithms used along with their implementation details relating to the problem along with the experimental design. Section~\ref{sec:subsetTesting} describes subset testing of the original model, and Section~\ref{sec:conclusion} discusses conclusions and future work.
 
@@ -471,9 +470,7 @@ EXAFS can be used to identify properties of a molecule, but they do not provide 
 
 The IFEFFIT XAFS data analysis suite~\cite{ifeffit} is used to simulate the EXAFS experiments. FEFF6 is used to simulate an XAFS experiment and IFEFFIT does post processing of the simulated EXAFS spectra. During the atomic structure refinement, the generated atomic structures will be run through these applications to obtain an EXAFS spectra.
 
-\subsection{Known Models}
-
-Existing molecular structures that were generated using refined molecular quantum mechanics/mechanics chemistry (R-QM/MM)~\cite{luber2011s1}, and molecular quantum mechanics/mechanics chemistry and density functional theory (DFT-QM/MM)~\cite{luber2011s1}, will be used as a benchmark for comparison in this work. These are summarized in Section~\ref{sec:conclusion}.
+\hl{Currently, there are several methods for structure refinement:} refined molecular quantum mechanics/mechanics chemistry (R-QM/MM)~\cite{luber2011s1}, and molecular quantum mechanics/mechanics chemistry and density functional theory (DFT-QM/MM)~\cite{luber2011s1}. These methods will be used as a benchmark for comparison in this work. The comparison is summarized in Section~\ref{sec:conclusion}.
 
 %\begin{table}[H]
 %\caption{RMSD Scores of Previously Found Models}
@@ -493,7 +490,7 @@ Existing molecular structures that were generated using refined molecular quantu
 
 \subsection{Algorithms}
 
-A collection of different evolutionary algorithms have been used in this work. The main focus of this study is the use of a Genetic Algorithm (GA) and a variation of Genetic Algorithm known as a Restarting GA (RGA). Two addition evolutionary algorithms, Particle Swarm Optimization (PSO)~\cite{kennedy2010particle} and Differential Evolution (DE)~\cite{storn1997differential} have been used as a post-optimization.
+A collection of different evolutionary algorithms have been used in this work. The main focus of this study is the use of a Genetic Algorithm (GA) and a variation of Genetic Algorithm known as a Restarting GA (RGA). Two additional evolutionary algorithms, Particle Swarm Optimization (PSO)~\cite{kennedy2010particle} and Differential Evolution (DE)~\cite{storn1997differential} have been used as a post-optimization.
 
 \subsubsection{Genetic Algorithm}
 
@@ -519,6 +516,10 @@ The RGA works similarly to the RRGA but there is no center for the population. I
 
 \end{algorithmic}
 \end{algorithm}
+
+\subsubsection{Particle Swarm Optimization and Differential Evolution}
+
+\hl{PSO and DE are population based algorithms similar to a GA, in that they are population based, but they are better suited for use in continuous space problems.}
 
 \subsection{Representation}
 
@@ -547,11 +548,11 @@ The chromosome representation consists of a list of 3-dimensional coordinates in
 The individuals for the PSO and DE had to be modified to better suit these algorithms. Figure \ref{fig:postOpExplain} demonstrates how the individuals were converted from a list of 3-dimensional positions to a single list of floating point values. In order to evaluate the fitness the list was translated back to a list of 3-dimensional positions.
 
 \begin{figure}
-  \caption{Population Individual Modification}
-  \label{fig:postOpExplain}
   \begin{center}
     \includegraphics[bb=0 0 400 241,scale=0.5]{refs/ThisBecomesThat.png}
   \end{center}
+  \caption{Population Individual Modification}
+  \label{fig:postOpExplain}
 \end{figure}
 
 \subsection{Fitness}
@@ -562,7 +563,7 @@ To calculate how close the calculated EXAFS spectra is to the experimental EXAFS
 
 \begin{equation}
   \label{eq:rmsdFormula}
-  \sqrt{\frac{\sum_{t=1}^{n} \left ( x_{1,t}-x_{2,t} \right )^{2}}{n}}
+  RMSD = \sqrt{\frac{\sum_{t=1}^{n} \left ( x_{1,t}-x_{2,t} \right )^{2}}{n}}
 \end{equation}
 
 \subsection{Population}
@@ -570,7 +571,7 @@ To calculate how close the calculated EXAFS spectra is to the experimental EXAFS
 
 The initial OEC atomic structure came from the crystallographic PSII structure~\cite{umena2011crystal}. It is available in the Protein Data Bank (PDB)~\cite{databank} as PDB ID 3ARC. It was used as a starting point for the experiments. To ensure that the atomic structure was as stable as possible, the structure was put into a molecular dynamics simulation and the atoms were allowed to move freely in space until the overall temperature of the system was reasonably low. This acted as the baseline atomic structure for all tests. NAMD~\cite{namd} was used for the molecular dynamics simulations.
 
-In order to generate the initial population, two different approaches were used. At first, the individual atom coordinates were randomly shifted to generate a population but during the EXAFS analysis too many invalid atomic structures were being generated. The second approach taken was to let a molecular dynamics simulation generate an initial population. In this approach, the atomic structure was run through the molecular dynamics simulation again but instead the temperature of the system would be increased in order to make the atoms oscillate. The molecular dynamics simulation was allowed to run for 10000 steps. Each of these steps represents a unique atomic structure of the OEC and these were used to seed the genetic algorithm's population.
+In order to generate the initial population, two different approaches were used. At first, the individual atom coordinates were randomly shifted to generate a population but during the EXAFS analysis too many invalid atomic structures were being generated. An invalid atomic structure could be attributed to multiple reasons but the most common reason are that atoms are overlapping or are too close together. The second approach taken was to let a molecular dynamics simulation generate an initial population. In this approach, the atomic structure was run through the molecular dynamics simulation again but instead the temperature of the system would be increased in order to make the atoms oscillate. The molecular dynamics simulation was allowed to run for 10000 steps. Each of these steps represents a unique atomic structure of the OEC and these were used to seed the genetic algorithm's population.
 
 The atomic structures that were generated contained 1269 chemical elements. For the purposes of OEC structure refinement only 79 specific atoms were required for EXAFS analysis. The genetic algorithm only used the 79 atoms that required refinement. The generated atomic structures were run through IFEFFIT and compared to the target EXAFS spectra. The top 3\% (roughly 300) were used to generate the initial populations in the genetic algorithm.
 
@@ -614,8 +615,6 @@ For the selection operator a 3-tournament selection was used.
 For the implementation of RGA, each run was seeded with 300 unique individuals. The initial population only used the specific amount of individuals it needed at generation 0 and during each population restart duplicates in the population re replaced with new individuals from the original 300. Figure~\ref{fig:bestRunRestarting} demonstrates how a population looks while restarting is occurring. Restarting has occurred at generations 19, 35, 46, and 71. The periodic decreases in fitness are destructive to the population but overall a consistent improvement in the fitness is seen throughout the run. The new individuals that are injected into the population allow for continued improvement to the fitness.
 
 \begin{figure}
-\caption{Results from a sample run using the population restarting technique}
-\label{fig:bestRunRestarting}
 \begin{center}
 \begin{tikzpicture}
   \begin{axis}[
@@ -634,11 +633,13 @@ For the implementation of RGA, each run was seeded with 300 unique individuals. 
   \end{axis}
 \end{tikzpicture}
 \end{center}
+\caption{Example of a Restarting Genetic Algorithm}
+\label{fig:bestRunRestarting}
 \end{figure}
 
 \subsection{Experiments}
 
-The GA and RGA will be performed as direct comparisons with each other. The variety of system parameters tested can be seen in Table~\ref{table:gaParameters}. A population size of 50 was selected as a result of empirical testing. The number of runs was decided to be 10 in order to obtain sensible results in a reasonable amount of time.
+The GA and RGA will be performed as direct comparisons with each other. The variety of system parameters tested can be seen in Table~\ref{table:gaParameters}. A population size of 50 was selected as a result of empirical testing. \hl{It was found that using a population size of less than 50 did not provide enough diversity within the population and using a population size of greater than 50 has no impact of the results.} The number of runs was decided to be 10 in order to obtain sensible results in a reasonable amount of time.
 
 \begin{table}
 \caption{System Parameters used in GA and RGA}
@@ -660,7 +661,7 @@ The GA and RGA will be performed as direct comparisons with each other. The vari
 
 \subsection{Results and Discussion}
 
-Table~\ref{table:sampleRuns} contains the best results of the GA and RGA experiments. Immediately it was clear that the RGA was outperforming the GA. A closer look revealed that the basic GA experiments were converging early on local optima. The RGA experiments initially converged on similar optima but were able to find new optima after each restarting phase. The RGA performed better than the GA but required more than double the amount of generations. Figure~\ref{fig:bestRunRestarting} provides an example of the generational data for the best run of RGA.
+Table~\ref{table:sampleRuns} contains a summary of the GA and RGA experiments. Immediately it is clear that the RGA outperforms the GA. A closer look revealed that the basic GA experiments were converging early on local optima. The RGA experiments initially converged on similar optima but were able to find new optima after each restarting phase. The RGA performed better than the GA but required more than double the amount of generations. Figure~\ref{fig:bestRunRestarting} provides an example of the generational data for the best run of RGA.
 
 The average RMSD score from the RGA was able to outperform both benchmark RMSD scores but only by a small margin. Fortunately, because the goal is to find a single individual, the best candidate solution from the RGA was able to far exceed the benchmark scores with RMSD of 1.0877. Figure~\ref{fig:bestRunEXAFS} shows the comparison of the EXAFS spectra.
 
@@ -689,8 +690,6 @@ After examining the calculated EXAFS spectra and the experimental EXAFS spectra 
 \end{table}
 
 \begin{figure*}
-\caption{OEC EXAFS Spectra Comparison}
-\label{fig:bestRunEXAFS}
 \begin{center}
 \begin{tikzpicture}
   \begin{axis}[
@@ -710,6 +709,8 @@ After examining the calculated EXAFS spectra and the experimental EXAFS spectra 
   \end{axis}
 \end{tikzpicture}
 \end{center}
+\caption{OEC EXAFS Spectra Comparison}
+\label{fig:bestRunEXAFS}
 \end{figure*}
 
 \subsection{Post-Optimization}
@@ -738,8 +739,6 @@ To generate the initial population, for both PSO and DE, each floating point val
 The results of the DE experiments were not promising. Results were improving but their RMSD scores never improved past the candidate solutions. In contrast, the results of the PSO experiments were extremely successful. Figure \ref{fig:psoResults} shows the generational results of the PSO averaged over 30 runs. The RMSD score of the candidate solution was significantly reduced which shows that PSO works very well as a post-optimization strategy. 
 
 \begin{figure}[H]
-\caption{PSO Post-Optimization Results}
-\label{fig:psoResults}
 \begin{center}
 \begin{tikzpicture}
   \begin{axis}[
@@ -758,13 +757,13 @@ The results of the DE experiments were not promising. Results were improving but
   \end{axis}
 \end{tikzpicture}
 \end{center}
+\caption{PSO Post-Optimization Results}
+\label{fig:psoResults}
 \end{figure}
 
 The results from the PSO and DE experiments using different initial movement radii were very surprising. Using a smaller initial movement radius suggests that the initial candidate solution is already very close to the ideal solution. The PSO was able to improve the best candidate by almost 50\%. Figure~\ref{fig:psoBestRunEXAFS} shows the best EXAFS spectra after optimization from the PSO which has an RMSD score of 0.7287.
 
 \begin{figure*}
-\caption{OEC EXAFS Spectra Comparison for PSO Post-Optimization}
-\label{fig:psoBestRunEXAFS}
 \begin{center}
 \begin{tikzpicture}
   \begin{axis}[
@@ -784,6 +783,8 @@ The results from the PSO and DE experiments using different initial movement rad
   \end{axis}
 \end{tikzpicture}
 \end{center}
+\caption{OEC EXAFS Spectra Comparison for PSO Post-Optimization}
+\label{fig:psoBestRunEXAFS}
 \end{figure*}
 
 \section{Subset Testing}
@@ -791,7 +792,7 @@ The results from the PSO and DE experiments using different initial movement rad
 
 In an attempt to reduce the search space of the problem, different chemical elements were left rigid during the evolutionary process. Table \ref{table:elementBreakdown} gives a breakdown of the atoms contained within OEC.
 
-Experiments were run on different subsets of chemical elements. Each subset was allowed to moved freely while the chemical elements not listed were kept rigid. Table \ref{table:subsetResults} demonstrates the results over 10 runs. Certain rows in Table \ref{table:subsetResults} contain \textbf{N/A} as their values were too large. The atoms listed in each row were allowed to be flexible during the experiment. The parameters were kept consistent for each experiment and can be seen in Table \ref{table:subsetParameters}.
+Experiments were run on different subsets of chemical elements. Each subset was allowed to move freely while the chemical elements not listed were kept rigid. Table \ref{table:subsetResults} demonstrates the results over 10 runs. Certain rows in Table \ref{table:subsetResults} contain \textbf{N/A} as their values were too large. The atoms listed in each row were allowed to be flexible during the experiment. The parameters were kept consistent for each experiment and can be seen in Table \ref{table:subsetParameters}.
 
 \begin{table}
 \caption{Chemical Element Breakdown}
@@ -877,13 +878,13 @@ The study performed in Section~\ref{subsec:mutation} was done to determine how m
 
 The molecular dynamics simulation performed to create the initial population was useful in creating candidate solutions for the GA. Using the molecular dynamics simulation should be studied as a way of restarting the GA. Once the best candidate solution is found using the GA it should be placed back in the molecular dynamics simulation to generate new atomic structures that could be used to restart the GA.
 
-It should be noted that the results in this work have not been tested for chemical feasibility. In particular, subset testing was performed as a proof of concept for future work. The exploration of subset testing in this work may be producing results that are chemically infeasible. To solve this problem, the created atomic structure should be place in the molecular dynamics program,  discussed in Section~\ref{sec:population}, to optimize the positions of the rigid chemical elements.
+It should be noted that the results in this work have not been tested for chemical feasibility. In particular, subset testing was performed as a proof of concept for future work. The exploration of subset testing in this work may be producing results that are chemically infeasible. To solve this problem, the created atomic structure should be placed in the molecular dynamics program,  discussed in Section~\ref{sec:population}, to optimize the positions of the rigid chemical elements.
 
 A secondary goal, that is not explored in this work, of atomic structure refinement is to generate atomic structures that produce a low potential energy. Some configurations of the atomic structure produce chemically unreasonable structures meaning that their potential energy is too high or they cannot exist in nature. The atomic structures should be analyzed using force fields to measure their feasibility and potential energy.
 
 A benefit of using a population based algorithm is that at the end of a run there are several possible candidate solutions. For the purposes of atomic structure refinement using EXAFS Spectra analysis having a set of candidate solutions is actually beneficial because each candidate solution is going to have different chemical properties. Further analysis of these individuals, by an expert, could expose which candidates are most suitable.
 
-A multi-objective approach could be applied to molecular structure refinement since the ideal model would have both a low RMSD score and low potential energy. The cost of adding the force field calculations would double the time required to evaluate an individuals fitness, which is already significantly high. Multi-objective experiments may only require a models potential energy to be calculated at certain intervals to reduce the evaluation time but this still demands research.
+A multi-objective approach could be applied to molecular structure refinement since the ideal model would have both a low RMSD score and low potential energy. The cost of adding the force field calculations would double the time required to evaluate an individuals fitness, which is already significantly high. \hl{A possible solution to incorporating force field calculations without significantly increasing the evalution time would be to only calculate the individuals potential energy on a generational interval but this still demands research.}
 
 % \subsection{GA Parameters}
 
