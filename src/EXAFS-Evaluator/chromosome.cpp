@@ -22,4 +22,5 @@ void Chromosome::init() {
 	this->exafs_score = 0;
 	this->potential_energy = 0;
 	this->is_evaluated = false;
+	this->rank = -1;
 }

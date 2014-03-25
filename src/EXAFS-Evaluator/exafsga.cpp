@@ -131,6 +131,8 @@ void EXAFSGA::evaluatePopulation() {
 		}
 		std::cout << "\t Child: " << i << ", " << this->population[i].exafs_score << std::endl;
 	}
+
+	this->rankPopulation();
 }
 
 void EXAFSGA::evaluate( Chromosome& child ) {
@@ -345,4 +347,16 @@ bool EXAFSGA::convergence(double rate) {
 	std::vector<Chromosome>::iterator it = std::unique(population_copy.begin(), population_copy.end());
 
 	return std::distance(population_copy.begin(), it) <= (rate * this->population.size());
+}
+
+void EXAFSGA::rankPopulation() {
+
+	int currentRank = 1;
+
+	std::vector<Chromosome> current_population = this->population;
+
+	while(current_population.size() > 0) {
+
+		
+	}
 }

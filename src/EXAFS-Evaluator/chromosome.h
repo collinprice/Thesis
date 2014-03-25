@@ -10,6 +10,8 @@ class Chromosome {
 		double potential_energy;
 		bool is_evaluated;
 
+		int rank;
+
 		std::vector< std::pair<double, double> > exafs_data;
 		std::vector< PDBAtom > atoms;
 
