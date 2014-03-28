@@ -1,11 +1,18 @@
 <?php
 
+// $population = [
+// 	[2,4],
+// 	[2,10],
+// 	[3,4],
+// 	[4,3],
+// 	[2,4],
+// 	[5,10],
+// ];
+
 $population = [
-	[2,4],
-	[2,10],
-	[3,4],
-	[4,3],
-	[5,10],
+	[509,-9215],
+	[630,-9351],
+	[624,9350],
 ];
 
 function arrayContainsArray(array $container, array $element) {
@@ -33,28 +40,23 @@ function arraysAreEqual(array $a, array $b) {
 	return null = same rank
 
 */
-function A_dominates_B(array $A, array $B) {
+
+function A_dominates_B_2(array $A, array $B) {
 
 	$at_least_one_better = false;
-	$failed = false;
 
 	for ($i=0; $i < count($A); $i++) { 
 		
-		if ($A[$i] < $B[$i]) {
-			$at_least_one_better = true;
-			continue;
+		if ($A[$i] <= $B[$i]) {
+			if ($A[$i] < $B[$i]) {
+				$at_least_one_better = true;
+			}
 		} else {
-			$failed = true;
+			return false;
 		}
 	}
 
-	if (!$failed) {
-		return true;
-	} elseif ($failed && $at_least_one_better) {
-		return null;
-	} else {
-		return false;
-	}
+	return $at_least_one_better ? true : null;
 }
 
 $ranks = array();
@@ -72,16 +74,27 @@ while(count($population) > 0) {
 			if ($i == $j) continue;
 			// print_r($population[$i]);
 			// print_r($population[$j]);
-			$result = A_dominates_B($population[$i], $population[$j]);
+			$result = A_dominates_B_2($population[$i], $population[$j]);
 
-			if ($result === true) {
-				// echo "Dominates\n";
-			} elseif ($result === null) {
-				// echo "Equal\n";
-			} else {
-				$keep = false;
-				// echo "Dominated By\n";
+			if (!$result && A_dominates_B_2($population[$j], $population[$i])) {
+				// if () {
+					$keep = false;
+				// }
 			}
+
+			// if ($result === true) { // A dominates B
+			// 	// echo "Dominates\n";
+			// } elseif ($result === null) { // A equals B
+			// 	// echo "Equal\n";
+			// } else { // A does not dominate B
+
+			// 	// Check if B dominates A
+			// 	if (A_dominates_B_2($population[$j], $population[$i])) {
+			// 		$keep = false;
+			// 	} else {
+			// 		// They are the same rank.
+			// 	}
+			// }
 		}
 
 		// echo $keep ? "KEEP\n" : "NOPE\n";
@@ -105,7 +118,7 @@ while(count($population) > 0) {
 	$ranks[] = $current_rank;
 	$population = $new_population;
 
-	print_r($new_population);
+	// print_r($new_population);
 
 	// break;
 }

@@ -129,7 +129,7 @@ void EXAFSGA::evaluatePopulation() {
 			this->evaluate(this->population[i]);
 			this->population[i].is_evaluated = true;
 		}
-		std::cout << "\t Child: " << i << ", " << this->population[i].exafs_score << std::endl;
+		std::cout << "\t Child: " << i << ", " << this->population[i].exafs_score << ", " << this->population[i].potential_energy << std::endl;
 	}
 
 	this->rankPopulation();
@@ -142,7 +142,7 @@ void EXAFSGA::evaluate( Chromosome& child ) {
 	child.exafs_score = this->exafs_evaluator->calculateRMSD();
 	child.exafs_data = this->exafs_evaluator->getEXAFSData();
 
-	// child.potential_energy = this->exafs_evaluator->calculatePotentialEnergy();
+	child.potential_energy = this->exafs_evaluator->calculatePotentialEnergy();
 }
 
 void EXAFSGA::evolve() {
@@ -196,11 +196,11 @@ Chromosome EXAFSGA::selection() {
 	}
 
 	Chromosome winner;
-	double best_score = std::numeric_limits<double>::max();
+	double best_rank = std::numeric_limits<double>::max();
 	for (int i = 0; i < 3; ++i) {
-		if (tournament[i].exafs_score < best_score) {
+		if (tournament[i].rank < best_rank) {
 			winner = tournament[i];
-			best_score = winner.exafs_score;
+			best_rank = winner.rank;
 		}
 	}
 
@@ -354,9 +354,110 @@ void EXAFSGA::rankPopulation() {
 	int currentRank = 1;
 
 	std::vector<Chromosome> current_population = this->population;
-
-	while(current_population.size() > 0) {
-
-		
+	std::vector<Chromosome> new_population;
+	// Reset all ranks.
+	for (int i = 0; i < (int)current_population.size(); ++i) {
+		current_population[i].rank = -1;
 	}
+
+	while((int)current_population.size() > 0) {
+
+		int currentRankCount = 0;
+		// bool all_ranked = true;
+		for (int i = 0; i < (int)current_population.size(); ++i) {
+			
+			// Check is already ranked.
+			std::cout << "Rank = " << current_population[i].rank << std::endl;
+			// if (current_population[i].rank != -1) {
+			// 	continue;
+			// } else {
+			// 	all_ranked = false;
+			// }
+
+			bool should_keep = true;
+			for (int j = 0; j < (int)current_population.size(); ++j) {
+				
+				if (i == j) continue;
+
+				std::cout << "Comparing:" << std::endl;
+				std::cout << current_population[i].exafs_score << " -- " << current_population[j].exafs_score << std::endl;
+				std::cout << current_population[i].potential_energy << " -- " << current_population[j].potential_energy << std::endl;
+
+				int result = this->chromosomeDominates(current_population[i],current_population[j]);
+				std::cout << "Result: " << result << std::endl;
+
+				if (result == -1) {
+					std::cout << "Result 2: " << this->chromosomeDominates(current_population[j],current_population[i]) << std::endl;
+				
+					if (this->chromosomeDominates(current_population[j],current_population[i]) == 1) {
+						should_keep = false;
+					}
+				}
+
+				
+				
+				if (should_keep) {
+					std::cout << "Keeping" << std::endl;
+				} else {
+					std::cout << "Nope" << std::endl;
+				}
+			}
+
+			if (should_keep) {
+				current_population[i].rank = currentRank;
+				++currentRankCount;
+			}
+		}
+
+		std::cout << "Found all rank count " << currentRankCount << std::endl;
+		std::cout << "Found all rank " << currentRank << std::endl;
+		++currentRank;
+
+		std::vector<Chromosome> unranked_population;
+
+		for (int i = 0; i < (int)current_population.size(); ++i) {
+			if (current_population[i].rank != -1) {
+				new_population.push_back(current_population[i]);
+			} else {
+				unranked_population.push_back(current_population[i]);
+			}
+		}
+
+		current_population = unranked_population;
+
+		// if (all_ranked) break;
+	}
+	
+}
+
+/*
+	Checks is Chromosome a dominate Chromosome b
+
+	Returns:
+
+	-1: no
+	0: equal
+	1: yes
+*/
+int EXAFSGA::chromosomeDominates(Chromosome& a, Chromosome& b) {
+
+	bool at_least_one_better = false;
+
+	if (a.exafs_score <= b.exafs_score) {
+		if (a.exafs_score < b.exafs_score) {
+			at_least_one_better = true;
+		}
+	} else {
+		return -1;
+	}
+
+	if (a.potential_energy <= b.potential_energy) {
+		if (a.potential_energy < b.potential_energy) {
+			at_least_one_better = true;
+		}
+	} else {
+		return -1;
+	}
+
+	return at_least_one_better ? 1 : 0;
 }

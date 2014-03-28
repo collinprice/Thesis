@@ -363,6 +363,9 @@ int main(int argc, char **argv) {
 			initial_populations.push_back(subset_pop);
 		}
 
+		DCDHelper dcd_helper = DCDHelper(ga_config.getString("dcd-file"));
+		pdb_helper->updateAllNonEXAFSAtomsFromXYZ(dcd_helper.getXYZAtFrame(0));
+
 		std::cout << "GA: Begin" << std::endl;
 		ga.begin(initial_populations);
 
