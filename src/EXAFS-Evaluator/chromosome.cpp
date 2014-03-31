@@ -14,6 +14,7 @@ Chromosome::Chromosome( std::vector<PDBAtom> atoms ) {
 Chromosome::Chromosome( const Chromosome& other ) : exafs_score( other.exafs_score ),
 													potential_energy( other.potential_energy ),
 													is_evaluated( other.is_evaluated ),
+													rank( other.rank ),
 													exafs_data( other.exafs_data ),
 													atoms( other.atoms ) {}
 
