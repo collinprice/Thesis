@@ -5,6 +5,8 @@
 %READ THE MANUAL that Graduate Studies Provides and don't blame me
 
 \documentclass[12pt,oneside,openany]{book}
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}%
 
 \usepackage{setspace}
 \usepackage{amsmath, amsthm, amssymb}
@@ -55,13 +57,13 @@
 \input{introduction}
 
 %body files go here using \input{file} where file is file.tex
-% \input{previous-work}
+\input{previous-work}
 
 % \input{conclusion}
 %\theendnotes
 
 %this is the area for the .bib file
-\bibliographystyle{plain}
+\bibliographystyle{ieeetr}
 \bibliography{thesis}
 \addcontentsline{toc}{chapter}{Bibliography} 
 %this adds the Bibliography to the Table of Contents *Note it will be off my one page...this has to be edited manually in the file printing by going into the toc file and changing the numbers.  This might be done some other way but I don't know the process...feel free to edit if you find a fix*

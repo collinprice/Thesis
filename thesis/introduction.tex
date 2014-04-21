@@ -1,10 +1,12 @@
 \chapter{Introduction}
 
-The aim of this thesis is to find a better method for determing the atomic structure of a molecule using Extended X-Ray Absorption Fine Structure (EXAFS). The following thesis uses the oxygen-evolving complex (OEC) in state S$_{1}$ as an example for structure refinement but the developed process can be applied to any given structure that has an EXAFS specra. In this chapter, we introduce the biological background and terms, followed by the problem definition, and finally elaborate on the computer science theories applied to the problem.
+The aim of this thesis is to find a better method for determining the atomic structure of a molecule using Extended X-Ray Absorption Fine Structure (EXAFS). The following thesis uses the oxygen-evolving complex (OEC) in state S$_{1}$ as an example for structure refinement but the developed process can be applied to any given structure that has an EXAFS spectra. In this chapter, we introduce the biological background and terms, followed by the problem definition, and finally elaborate on the computer science theories applied to the problem.
 
 \section{Biological Background}
 
 The oxygen-evolving complex (OEC) is the water-oxidizing enzyme of photosystem II. The responsibility of the OEC is to accept water molecules as input and output the oxygen and hydrogen atoms to be used in the system ~\cite{oxygenicPhotosynthesis}. The incoming water molecules are put through four different states in order to perform the oxidization. The atomic structure of the OEC molecule is different in each state because each state has a unique role in the process.
+
+\textbf{(Work biomimetic chemistry into this. Define: mimicking the laws of nature to synthesize compounds.)}
 
 \section{X-ray Absorption Spectroscopy}
 
@@ -37,7 +39,7 @@ Here will explain what force fields are and how they calculate a molecules poten
 
 \section{Problem Definition}
 
-The goal of this thesis is to examine different search heuristics to determine the best method of finding the theoretical atomic structure of a molecule using the molecules EXAFS spectra for comparison. This problem contains two important but unrelated goals. Firstly, the algorithm must be able to find an atomic structure whos EXAFS spectra matches the experimental EXAFS spectra, and also create an atomic strcuture whos potential energy is a low as possible.
+The goal of this thesis is to examine different search heuristics to determine the best method of finding the theoretical atomic structure of a molecule using the molecules EXAFS spectra for comparison. This problem contains two important but unrelated goals. Firstly, the algorithm must be able to find an atomic structure who's EXAFS spectra matches the experimental EXAFS spectra, and also create an atomic structure who's potential energy is a low as possible.
 
 EXAFS can be used to identify properties of a molecule, but they do not provide enough detail to determine the atomic structure of a molecule in 3-dimensional space. An EXAFS spectra allows you to identify how far apart atoms are from each other, but does not give enough information to identify their dihedral angles. Fortunately, EXAFS can be used to assist in determining the atomic structure of a molecule. The energy spectra given off by the molecule is unique for its structure, meaning that you can create an atomic structure, obtain its EXAFS spectra, and compare the results. The hope is that if you create an atomic structure whose spectra closely matches the spectra of an actual model, then there is a high likelihood that the created structure will closely match the actual structure.
 
