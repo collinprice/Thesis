@@ -11,6 +11,7 @@
 \usepackage{verbatim, appendix}
 \usepackage{graphicx, subfigure}
 \usepackage{ulem}
+\usepackage{pgfplots}
 %feel free to add here
 
 \usepackage[top=1.0in, bottom=1.0in, left=1.5in, right=1.0in]{geometry} %set page margins
@@ -40,11 +41,11 @@
 
 %comment out what you don't need
 
-\include{dedication}
-\include{abstract}
-\include{preface}
-\include{ack} 
-\include{lists}
+% \include{dedication}
+% \include{abstract}
+% \include{preface}
+% \include{ack} 
+% \include{lists}
 %%list of Plates
 %list of symbols, nonmenclature, or Abbrevations
 
@@ -54,9 +55,9 @@
 \input{introduction}
 
 %body files go here using \input{file} where file is file.tex
-\input{previous-work}
+% \input{previous-work}
 
-\input{conclusion}
+% \input{conclusion}
 %\theendnotes
 
 %this is the area for the .bib file
@@ -66,7 +67,7 @@
 %this adds the Bibliography to the Table of Contents *Note it will be off my one page...this has to be edited manually in the file printing by going into the toc file and changing the numbers.  This might be done some other way but I don't know the process...feel free to edit if you find a fix*
 \appendix %this is the appendix
 \addappheadtotoc %add the appendix to the table of contents
-\input{appendA}
+% \input{appendA}
 
 
 \end{document}

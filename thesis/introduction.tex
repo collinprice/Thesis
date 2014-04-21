@@ -1,4 +1,46 @@
 \chapter{Introduction}
-Thirty million generations of philosophers have debated the definition of intelligence. The most popular definition appears in the Sirius Cybernetics Corporation android manuals:
 
-Intelligence is the ability to reconcile totally contradictory situations without going completely bonkers. For example, having a stomach ache and not having a stomach ache at the same time, holding a hole without the doughnut, having good luck and bad luck simultaneously, or seeing a real estate agent waive his fee.
+The aim of this thesis is to find a better method for determing the atomic structure of a molecule using Extended X-Ray Absorption Fine Structure (EXAFS). The following thesis uses the oxygen-evolving complex (OEC) in state S$_{1}$ as an example for structure refinement but the developed process can be applied to any given structure that has an EXAFS specra. In this chapter, we introduce the biological background and terms, followed by the problem definition, and finally elaborate on the computer science theories applied to the problem.
+
+\section{Biological Background}
+
+The oxygen-evolving complex (OEC) is the water-oxidizing enzyme of photosystem II. The responsibility of the OEC is to accept water molecules as input and output the oxygen and hydrogen atoms to be used in the system ~\cite{oxygenicPhotosynthesis}. The incoming water molecules are put through four different states in order to perform the oxidization. The atomic structure of the OEC molecule is different in each state because each state has a unique role in the process.
+
+\section{X-ray Absorption Spectroscopy}
+
+The following overview is based on information contained in Matthew Newville’s Fundamentals of XAFS (2004)~\cite{newville2004fundamentals}. X-Ray absorption fine structure (XAFS) is a method used to measure the absorption coefficient of a material as a function of energy. X-rays are part of the electromagnetic spectrum with wavelengths ranging from ~25\AA\ to 0.25\AA. All atoms resonate at a specific wavelength. The x-ray is tuned to have the same wavelength as the target atom. A photon from an x-ray is absorbed by an electron in a tightly bound quantum core level of an atom. Absorption only takes place if the binding energy of the core level is less than the energy of the x-ray photon. At the time of absorption a core electron moves to an empty outer shell and another electron moves in to take its place. Eventually the affected electrons decay to their original state. During this time fluorescence energies are emitted that characterize a specific atom.
+
+The absorption coefficients measured after the initial absorption are referred to as the EXAFS. During the decay of the electrons to their original state, oscillations occur in the measure of the absorption coefficient. The different frequencies found within the oscillations correspond to different near-neighbour coordination shells, which can be described and modeled according to the EXAFS equation. From the oscillations, the number of neighbouring atoms, the distances to the neighbouring atoms, and the disorder in the neighbour distances can be determined. The energy spectra for OEC in S$_{1}$ is shown in Figure~\ref{fig:oecS1}.
+
+\begin{figure*}
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=14cm,
+			height=6cm,
+			grid=both,
+			title={EXAFS Spectra in k space},
+			xlabel={$k \mathbin{/} A\textsuperscript{-1}$},
+			ylabel={$EXAFS \chi k\textsuperscript{3}$}
+		]
+
+		\addplot[mark=x] table [col sep=comma,y index=1, x index=0] {figures/oec-s1.csv};
+
+		\end{axis}
+	\end{tikzpicture}
+	\caption{EXAFS Spectra of OEC in S$_{1}$}
+	\label{fig:oecS1}
+\end{figure*}
+
+\section{Force Fields aka Potential Energy}
+
+Here will explain what force fields are and how they calculate a molecules potential energy.
+
+\section{Problem Definition}
+
+The goal of this thesis is to examine different search heuristics to determine the best method of finding the theoretical atomic structure of a molecule using the molecules EXAFS spectra for comparison. This problem contains two important but unrelated goals. Firstly, the algorithm must be able to find an atomic structure whos EXAFS spectra matches the experimental EXAFS spectra, and also create an atomic strcuture whos potential energy is a low as possible.
+
+EXAFS can be used to identify properties of a molecule, but they do not provide enough detail to determine the atomic structure of a molecule in 3-dimensional space. An EXAFS spectra allows you to identify how far apart atoms are from each other, but does not give enough information to identify their dihedral angles. Fortunately, EXAFS can be used to assist in determining the atomic structure of a molecule. The energy spectra given off by the molecule is unique for its structure, meaning that you can create an atomic structure, obtain its EXAFS spectra, and compare the results. The hope is that if you create an atomic structure whose spectra closely matches the spectra of an actual model, then there is a high likelihood that the created structure will closely match the actual structure.
+
+The IFEFFIT XAFS data analysis suite~\cite{ifeffit} is used to simulate the EXAFS experiments. FEFF6 is used to simulate an XAFS experiment and IFEFFIT does post processing of the simulated EXAFS spectra. During the atomic structure refinement, the generated atomic structures will be run through these applications to obtain an EXAFS spectra.
+
+NAMD~\cite{namd} will be used for the energy calculations. The NAMD Energy Plugin~\cite{namdEnergy}  will calculate the potential energy of the generated atomic structure.

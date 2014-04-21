@@ -49,4 +49,5 @@ main
 *.xdy
 *.tdo
 
-
+# Vagrant
+.vagrant
