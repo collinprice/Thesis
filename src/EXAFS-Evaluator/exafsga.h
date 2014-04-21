@@ -47,4 +47,7 @@ class EXAFSGA {
 
 		bool convergence();
 		bool convergence(double rate);
+
+		void rankPopulation();
+		int chromosomeDominates(Chromosome& a, Chromosome& b);
 };
