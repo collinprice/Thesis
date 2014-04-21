@@ -40,7 +40,7 @@ void EXAFSGA::begin(std::vector< std::vector< std::vector<PDBAtom> > > initial_p
 			std::cout << "Generation: " << (i+1) << std::endl;
 			this->evolve();
 
-			this->saveBestChromosome();
+			// this->saveBestChromosome();
 
 			if (this->convergence()) break;
 		}
@@ -79,7 +79,7 @@ void EXAFSGA::begin_recentering(std::vector< std::vector< std::vector<PDBAtom> >
 				std::cout << "Generation: " << (epoch+1) << std::endl;
 				this->evolve();
 
-				this->saveBestChromosome();
+				// this->saveBestChromosome();
 
 				if (j != (max_iterations-1) && this->convergence(convergence_rate)) {
 
@@ -120,7 +120,7 @@ void EXAFSGA::initPopulation(std::vector< std::vector<PDBAtom> > population) {
 	}
 
 	this->evaluatePopulation();
-	this->saveBestChromosome();
+	// this->saveBestChromosome();
 }
 
 void EXAFSGA::evaluatePopulation() {
@@ -129,8 +129,10 @@ void EXAFSGA::evaluatePopulation() {
 			this->evaluate(this->population[i]);
 			this->population[i].is_evaluated = true;
 		}
-		std::cout << "\t Child: " << i << ", " << this->population[i].exafs_score << std::endl;
+		std::cout << "\t Child: " << i << ", " << this->population[i].exafs_score << ", " << this->population[i].potential_energy << std::endl;
 	}
+
+	this->rankPopulation();
 }
 
 void EXAFSGA::evaluate( Chromosome& child ) {
@@ -140,7 +142,7 @@ void EXAFSGA::evaluate( Chromosome& child ) {
 	child.exafs_score = this->exafs_evaluator->calculateRMSD();
 	child.exafs_data = this->exafs_evaluator->getEXAFSData();
 
-	// child.potential_energy = this->exafs_evaluator->calculatePotentialEnergy();
+	child.potential_energy = this->exafs_evaluator->calculatePotentialEnergy();
 }
 
 void EXAFSGA::evolve() {
@@ -182,6 +184,10 @@ void EXAFSGA::evolve() {
 	this->recordStats();
 }
 
+/*
+	
+	For multi first rank 1 wins.
+*/
 Chromosome EXAFSGA::selection() {
 
 	
@@ -194,11 +200,11 @@ Chromosome EXAFSGA::selection() {
 	}
 
 	Chromosome winner;
-	double best_score = std::numeric_limits<double>::max();
+	double best_rank = std::numeric_limits<double>::max();
 	for (int i = 0; i < 3; ++i) {
-		if (tournament[i].exafs_score < best_score) {
+		if (tournament[i].rank < best_rank) {
 			winner = tournament[i];
-			best_score = winner.exafs_score;
+			best_rank = winner.rank;
 		}
 	}
 
@@ -258,13 +264,13 @@ Chromosome EXAFSGA::best_chromosome() {
 	return best_chromosome;
 }
 
-void EXAFSGA::saveBestChromosome() {
+// void EXAFSGA::saveBestChromosome() {
 
-	Chromosome best_individual = this->best_chromosome();
-	this->best_individuals.push_back(best_individual);
+// 	Chromosome best_individual = this->best_chromosome();
+// 	this->best_individuals.push_back(best_individual);
 
-	std::cout << "Best: " << best_individual.exafs_score << std::endl;
-}
+// 	std::cout << "Best: " << best_individual.exafs_score << std::endl;
+// }
 
 double EXAFSGA::unifRand() {
 	return rand() / double(RAND_MAX);
@@ -280,52 +286,75 @@ void EXAFSGA::initStats() {
 	}
 }
 
+/*
+	First row is rank 1 exafs
+	Second row is rank 1 potential
+*/
 void EXAFSGA::recordStats() {
 
-	double average_exafs_score = 0;
-	double average_potential_energy_score = 0;
-	double best_score = std::numeric_limits<double>::max();
-	Chromosome best_chromosome;
+	std::stringstream exafs_score_string;
+	std::stringstream potential_energy_string;
 
 	for (std::vector<Chromosome>::iterator child = this->population.begin(); child != this->population.end(); ++child) {
 		
-		average_exafs_score += child->exafs_score;
-		average_potential_energy_score += child->potential_energy;
-		if (child->exafs_score < best_score) {
-			best_score = child->exafs_score;
-			best_chromosome = *child;
+		if (child->rank == 1) {
+			
+			exafs_score_string << child->exafs_score << ",";
+			potential_energy_string << child->potential_energy << ",";
 		}
 	}
 
-	this->output_stream << best_score << "," << (average_exafs_score/(int)this->population.size()) << "," << best_chromosome.potential_energy << "," << (average_potential_energy_score/(int)this->population.size()) << std::endl;
+	this->output_stream << exafs_score_string.str() << std::endl;
+	this->output_stream << potential_energy_string.str() << std::endl;
 }
 
+/*
+	Save rank 1s
+*/
 void EXAFSGA::finalStats() {
+
+	std::cout << "Final Stats." << std::endl;
 
 	this->output_stream.close();
 
-	std::vector< std::pair<double, double> > target_exafs = this->exafs_evaluator->getTargetEXAFS();
-	std::ofstream output(this->stats_folder + "/generation_data.csv");
-	for (int i = 0; i < (int)this->best_individuals[0].exafs_data.size(); ++i) {
+	std::stringstream output_chromosome_filename;
+	int counter = 0;
+	for (std::vector<Chromosome>::iterator child = this->population.begin(); child != this->population.end(); ++child) {
 		
-		output << this->best_individuals[0].exafs_data[i].first;
-
-		if (this->best_individuals[0].exafs_data[i].first != 0) {
-			output << "," << target_exafs[i-1].second;
-		} else {
-			output << ",0";
-		}
-
-		for (int j = 0; j < (int)this->best_individuals.size(); ++j) {
+		std::cout << "Rank == " << child->rank << std::endl;
+		if (child->rank == 1) {
 			
-			output << "," << this->best_individuals[j].exafs_data[i].second;
+			output_chromosome_filename << "/best-chromosome-" << (counter++) << ".pdb";
+			std::cout << "Writing out: " << this->stats_folder << output_chromosome_filename.str() << std::endl;
+			
+			this->exafs_evaluator->updateAtoms(child->atoms);
+			this->exafs_evaluator->writePDB(this->stats_folder + output_chromosome_filename.str());
+			output_chromosome_filename.str("");
 		}
-		output << std::endl;
 	}
-	output.close();
 
-	this->exafs_evaluator->updateAtoms(this->best_individuals[this->best_individuals.size()-1].atoms);
-	this->exafs_evaluator->writePDB(this->stats_folder + "/best_chromosome.pdb");
+	// std::vector< std::pair<double, double> > target_exafs = this->exafs_evaluator->getTargetEXAFS();
+	// std::ofstream output(this->stats_folder + "/generation_data.csv");
+	// for (int i = 0; i < (int)this->best_individuals[0].exafs_data.size(); ++i) {
+		
+	// 	output << this->best_individuals[0].exafs_data[i].first;
+
+	// 	if (this->best_individuals[0].exafs_data[i].first != 0) {
+	// 		output << "," << target_exafs[i-1].second;
+	// 	} else {
+	// 		output << ",0";
+	// 	}
+
+	// 	for (int j = 0; j < (int)this->best_individuals.size(); ++j) {
+			
+	// 		output << "," << this->best_individuals[j].exafs_data[i].second;
+	// 	}
+	// 	output << std::endl;
+	// }
+	// output.close();
+
+	// this->exafs_evaluator->updateAtoms(this->best_individuals[this->best_individuals.size()-1].atoms);
+	// this->exafs_evaluator->writePDB(this->stats_folder + "/best_chromosome.pdb");
 	
 }
 
@@ -345,4 +374,112 @@ bool EXAFSGA::convergence(double rate) {
 	std::vector<Chromosome>::iterator it = std::unique(population_copy.begin(), population_copy.end());
 
 	return std::distance(population_copy.begin(), it) <= (rate * this->population.size());
+}
+
+void EXAFSGA::rankPopulation() {
+
+	int currentRank = 1;
+
+	std::vector<Chromosome> current_population = this->population;
+	std::vector<Chromosome> new_population;
+	// Reset all ranks.
+	for (int i = 0; i < (int)current_population.size(); ++i) {
+		current_population[i].rank = -1;
+	}
+
+	while((int)current_population.size() > 0) {
+
+		// std::cout << "Finding rank " << currentRank << "'s" << std::endl;
+
+		int currentRankCount = 0;
+		for (int i = 0; i < (int)current_population.size(); ++i) {
+			
+			// Check is already ranked.
+			// std::cout << "Finding Rank = " << current_population[i].rank << std::endl;
+
+			bool should_keep = true;
+			for (int j = 0; j < (int)current_population.size(); ++j) {
+				
+				if (i == j) continue;
+
+				// std::cout << "Comparing:" << std::endl;
+				// std::cout << current_population[i].exafs_score << " -- " << current_population[j].exafs_score << std::endl;
+				// std::cout << current_population[i].potential_energy << " -- " << current_population[j].potential_energy << std::endl;
+
+				int result = this->chromosomeDominates(current_population[i],current_population[j]);
+				// std::cout << "Result: " << result << std::endl;
+
+				if (result == -1) {
+					// std::cout << "Result 2: " << this->chromosomeDominates(current_population[j],current_population[i]) << std::endl;
+				
+					if (this->chromosomeDominates(current_population[j],current_population[i]) == 1) {
+						should_keep = false;
+					}
+				}
+				
+				if (should_keep) {
+					// std::cout << "Keeping" << std::endl;
+				} else {
+					// std::cout << "Nope" << std::endl;
+				}
+			}
+
+			if (should_keep) {
+				current_population[i].rank = currentRank;
+				++currentRankCount;
+			}
+		}
+
+		// std::cout << "Found all " << currentRankCount << " rank " << "'s" << std::endl;
+		// std::cout << "Found all rank " << currentRank << std::endl;
+		++currentRank;
+
+		std::vector<Chromosome> unranked_population;
+
+		for (int i = 0; i < (int)current_population.size(); ++i) {
+			if (current_population[i].rank != -1) {
+				new_population.push_back(current_population[i]);
+			} else {
+				unranked_population.push_back(current_population[i]);
+			}
+		}
+
+		current_population = unranked_population;
+	}
+
+	std::cout << "Population size = " << new_population.size() << std::endl;
+	this->population = new_population;
+	
+}
+
+/*
+	Checks is Chromosome a dominate Chromosome b
+
+	Returns:
+
+	-1: no
+	0: equal
+	1: yes
+*/
+int EXAFSGA::chromosomeDominates(Chromosome& a, Chromosome& b) {
+
+	bool at_least_one_better = false;
+
+	if (a.exafs_score <= b.exafs_score) {
+		if (a.exafs_score < b.exafs_score) {
+			at_least_one_better = true;
+		}
+	} else {
+		return -1;
+	}
+
+	if (a.potential_energy <= b.potential_energy) {
+		if (a.potential_energy < b.potential_energy) {
+			at_least_one_better = true;
+		}
+	} else {
+		return -1;
+	}
+
+	return at_least_one_better ? 1 : 0;
 }
