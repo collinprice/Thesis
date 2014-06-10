@@ -1,0 +1,20 @@
+\section{Restering Genetic Algorithm}
+
+The RGA is a variation of the Recentering-Restarting Genetic Algorithm (RRGA)~\cite{hughes2013recentering}~\cite{hughes2013edit} which has success in avoiding local minima. The RRGA is used to avoid fixating on local optima. RRGA does a series of GA runs which involves restarts and adjustments to the starting population. The RRGA selects a center, which is a possible candidate solution to the problem, and at the end of each basic GA run the center is compared to the best individual in the population. If the best individual is better than the current center it is replaced with the best individual and the whole process is repeated.
+
+The RGA works similarly to the RRGA but there is no center for the population. Instead a basic GA is run until the population begins to converge. After a specified convergence percentage is reached, new individuals are added to the population. For example, if there are 100 individuals and the convergence rate is 5\% then after all the duplicates are removed there will only be 5 individuals remaining. In restarting, shown in Algorithm~\ref{alg:restartingPopulation}, duplicate individuals were replaced with new individuals that have not yet entered the population. The implementation of restarting used in this work is described more fully in Section TBA.
+
+\begin{algorithm}
+\caption{Restarting the population}
+\label{alg:restartingPopulation}
+\begin{algorithmic}
+
+\IF{population has converged to minimum diversity}
+  \STATE remove all duplicate individuals;
+  \WHILE{population not full}
+    \STATE insert random draw from generated individuals into population;
+  \ENDWHILE
+\ENDIF
+
+\end{algorithmic}
+\end{algorithm}
