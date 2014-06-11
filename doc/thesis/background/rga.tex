@@ -4,7 +4,7 @@ The RGA is a variation of the Recentering-Restarting Genetic Algorithm (RRGA)~\c
 
 The RGA works similarly to the RRGA but there is no center for the population. Instead a basic GA is run until the population begins to converge. After a specified convergence percentage is reached, new individuals are added to the population. For example, if there are 100 individuals and the convergence rate is 5\% then after all the duplicates are removed there will only be 5 individuals remaining. In restarting, shown in Algorithm~\ref{alg:restartingPopulation}, duplicate individuals were replaced with new individuals that have not yet entered the population. The implementation of restarting used in this work is described more fully in Section TBA.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{Restarting the population}
 \label{alg:restartingPopulation}
 \begin{algorithmic}

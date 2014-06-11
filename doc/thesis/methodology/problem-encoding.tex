@@ -1,0 +1,24 @@
+\section{Problem Encoding}
+
+A molecule consists of a number of atoms. Each of these atoms has its own 3-dimensional position within the molecule with respect to the other atoms.
+
+\subsection{Representation}
+The chromosome representation consists of a list of 3-dimensional coordinates in space, where each position is assigned to a specific atom in the atomic structure. The actual position of each atom is not relevant because the goal is to determine the relative distances between the atoms. A subset of an individual can be seen in Table~\ref{table:sampleChromosome}. The units of measurement for each atom position are measured in Angstroms (\AA).
+
+\begin{table}
+\caption{Sample Chromosome Representation}
+\label{table:sampleChromosome}
+\centering
+\normalsize
+\begin{tabular}{ | l | l | l |}
+  \hline
+    X & Y & Z \\ \hline
+    14.451 & -13.346 & 1.133 \\ \hline
+    15.336 & -13.488 & 2.014 \\ \hline
+    13.005 & -13.364 & 1.452 \\ \hline
+    0.019 & 0.011 & 0.045 \\ \hline
+    ... & ... & ... \\ \hline
+\end{tabular}
+\end{table}
+
+The individuals for the PSO and DE had to be modified to better suit these algorithms. Figure \ref{fig:postOpExplain} demonstrates how the individuals were converted from a list of 3-dimensional positions to a single list of floating point values. In order to evaluate the fitness the list was translated back to a list of 3-dimensional positions.

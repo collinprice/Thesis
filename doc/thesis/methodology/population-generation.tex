@@ -1,0 +1,13 @@
+\section{Population Generation}
+
+A population of different individuals needed to be created in order to begin refining the OEC atomic structure using an evolutionary algorithm. The initial OEC atomic structure came from the crystallographic photosystem II (PSII) structure~\cite{umena2011crystal}. It is available in the Protein Data Bank (PDB)~\cite{databank} as PDB ID 3ARC. During the initial stages of experimentation the populations were created by randomly adjusting the atoms within our initial structure. To create a new individual each atom within the atomic structure would be random moved by 0.05-0.5\AA. This form of population generation was quickly discarded because many of these individuals were either chemically infeasible or generated invalid EXAFS spectras. 
+
+\subsection{Molecular Dynamics Simulation}
+
+An alternative method of population generation was needed to generate individuals that were usable in the experiments. To ensure that the atomic structure was as stable as possible, the structure was put into a molecular dynamics simulation. While in this simulation the molecule is allowed to act as if it were in the real world. The atoms were allowed to move freely in space until the overall temperature of the system was reasonably low. This acted as the baseline atomic structure for all tests. NAMD~\cite{namd} was used to run the molecular dynamics simulations.
+
+Once the atom structure was stable the temperature within the system was increased. The increased temperature causes the atoms to oscillate their positions but still remain chemically feasible. During this process stapshots of the molecules atomic structure were recorded. The simulation was allowed to run for 10\ 000 steps and 10\ 000 snapshots of the atomic structure were recorded. Each of these snapshots create a feasible individual for the experiments.
+
+Since 10\ 000 individuals is more than enough individuals to seed the populations the best individuals were picked. The generated atomic structures were run through IFEFFIT and compared to the target EXAFS spectra. The top 3\% (roughly 300) were used to generate the initial populations in the evolutionary algorithms.
+
+***The atomic structures that were generated contained 1269 chemical elements. For the purposes of OEC structure refinement only 79 specific atoms were required for EXAFS analysis. The genetic algorithm only used the 79 atoms that required refinement.*** \textbf{This doesn't belong here.}
