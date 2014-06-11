@@ -1,8 +1,11 @@
 \section{Problem Encoding}
 
-A molecule consists of a number of atoms. Each of these atoms has its own 3-dimensional position within the molecule with respect to the other atoms.
+A molecule consists of a number of atoms. Each of these atoms has its own 3-dimensional position within the molecule. For the structure refinement problem the individual 3-dimensional position values are not important. The important information about this problem is how the atoms are positioned with respect to each other.
 
 \subsection{Representation}
+
+\textbf{***TBA: Might change from list of 3-dimensional coordinates to linear list of numbers.***}
+
 The chromosome representation consists of a list of 3-dimensional coordinates in space, where each position is assigned to a specific atom in the atomic structure. The actual position of each atom is not relevant because the goal is to determine the relative distances between the atoms. A subset of an individual can be seen in Table~\ref{table:sampleChromosome}. The units of measurement for each atom position are measured in Angstroms (\AA).
 
 \begin{table}
