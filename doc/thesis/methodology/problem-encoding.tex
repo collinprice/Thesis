@@ -1,27 +1,39 @@
 \section{Problem Encoding}
 
-A molecule consists of a number of atoms. Each of these atoms has its own 3-dimensional position within the molecule. For the structure refinement problem the individual 3-dimensional position values are not important. The important information about this problem is how the atoms are positioned with respect to each other.
+A molecule consists of a number of atoms. Each of these atoms has its own 3-dimensional position within the molecule. For the structure refinement problem the individual 3-dimensional position values are not important. The important information about this problem is how the atoms are positioned with respect to each other. Two different forms of representation were used in this work. For each of these representations the number values are shown in Angstroms (\AA).
 
-\subsection{Representation}
+The initial run of experiments used a representation that maintained the initial atomic positions of each atom. The 3-dimensional coordinates were treated as a list of coordinates as shown in~\ref{fig:representation1}. Using this representation meant that during any form of crossover the tuple of X, Y and Z values would stay together.
 
-\textbf{***TBA: Might change from list of 3-dimensional coordinates to linear list of numbers.***}
+\begin{figure}
+	\centering
+	\begin{tabular}{ | l | l | l | }
+		\hline
+		X & Y & Z \\ \hline
+		14.451 & -13.346 & 1.133 \\ \hline
+		15.336 & -13.488 & 2.014 \\ \hline
+		13.005 & -13.364 & 1.452 \\ \hline
+		0.019 & 0.011 & 0.045 \\ \hline
+		... & ... & ... \\ \hline
+	\end{tabular}
+	\caption{Representation 1}
+	\label{fig:representation1}
+\end{figure}
 
-The chromosome representation consists of a list of 3-dimensional coordinates in space, where each position is assigned to a specific atom in the atomic structure. The actual position of each atom is not relevant because the goal is to determine the relative distances between the atoms. A subset of an individual can be seen in Table~\ref{table:sampleChromosome}. The units of measurement for each atom position are measured in Angstroms (\AA).
+The other representation used was a list of values. The initial list of 3-dimentional coordinates was converted to a single list of decimal points as shown in~\ref{fig:representation2}. Algorithms such as particle swarm optimization and differential evolution called for a more flexible representation. For fitness evaluation the list of number was converted back to a list of 3-dimentional coordinates by taking segments of three numbers to create a 3-dimentional position.
 
-\begin{table}
-\caption{Sample Chromosome Representation}
-\label{table:sampleChromosome}
-\centering
-\normalsize
-\begin{tabular}{ | l | l | l |}
-  \hline
-    X & Y & Z \\ \hline
-    14.451 & -13.346 & 1.133 \\ \hline
-    15.336 & -13.488 & 2.014 \\ \hline
-    13.005 & -13.364 & 1.452 \\ \hline
-    0.019 & 0.011 & 0.045 \\ \hline
-    ... & ... & ... \\ \hline
-\end{tabular}
-\end{table}
-
-The individuals for the PSO and DE had to be modified to better suit these algorithms. Figure \ref{fig:postOpExplain} demonstrates how the individuals were converted from a list of 3-dimensional positions to a single list of floating point values. In order to evaluate the fitness the list was translated back to a list of 3-dimensional positions.
+\begin{figure}
+	\centering
+	\begin{tabular}{ | l | }
+		\hline
+		14.451 \\ \hline
+		-13.346 \\ \hline
+		1.133 \\ \hline
+		15.336 \\ \hline
+		-13.488 \\ \hline
+		2.014 \\ \hline
+		13.005 \\ \hline
+		... \\ \hline
+	\end{tabular}
+	\caption{Representation 2}
+	\label{fig:representation2}
+\end{figure}

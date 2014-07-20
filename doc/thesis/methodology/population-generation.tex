@@ -6,8 +6,6 @@ A population of different individuals needed to be created in order to begin ref
 
 An alternative method of population generation was needed to generate individuals that were usable in the experiments. To ensure that the atomic structure was as stable as possible, the structure was put into a molecular dynamics simulation. While in this simulation the molecule is allowed to act as if it were in the real world. The atoms were allowed to move freely in space until the overall temperature of the system was reasonably low. This acted as the baseline atomic structure for all tests. NAMD~\cite{namd} was used to run the molecular dynamics simulations.
 
-\textbf{Should I reference NAMD config file?}
-
 Once the atom structure was stable the temperature within the system was increased. The increased temperature causes the atoms to oscillate their positions but still remain chemically feasible. During this process stapshots of the molecules atomic structure were recorded. The simulation was allowed to run for 10\ 000 steps and 10\ 000 snapshots of the atomic structure were recorded. Each of these snapshots create a feasible individual for the experiments.
 
 Since 10\ 000 individuals is more than enough individuals to seed the populations the best individuals were picked. The generated atomic structures were run through IFEFFIT and compared to the target EXAFS spectra. The top 3\% (roughly 300) were used to generate the initial populations in the evolutionary algorithms.

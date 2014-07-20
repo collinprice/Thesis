@@ -19,7 +19,7 @@ Finding a representation is only the first step in creating a genetic algorithm.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[bb=0 0 559 481,scale=0.5]{figures/GA.jpeg}
+	\includegraphics[bb=0 0 310 207,scale=0.5]{figures/GA.jpeg}
 	\caption{Population Individual Modification}
 	\label{fig:gaFlowchart}
 \end{figure}
@@ -27,8 +27,6 @@ Finding a representation is only the first step in creating a genetic algorithm.
 \subsection{Genetic Operators}
 
 Each of the following operators represent a piece of a genetic algorithm. They facilitate the evolutionary process in an effort to find better candidate solutions. Each of these operators has a unique purpose in the search algorthm but there are many different types of ways these goals can be carried out. Only a few of the different methods will be described in this work.
-
-\textit{Evaluation Function}: This operator determines the fitness of an individual. Each individual is evaluated and given a fitness score to represent how well the individual performed on the problem. This operation is problem specific and can be very difficult to determine how a problem should be evaluated.
 
 \textit{Selection Operator}: This operator is very important to the \textit{Crossover} and \textit{Mutation} operators. The idea behind this operator is to put selectionary pressure on the population during the evolutionary process. Individuals with a better fitness score should be allowed a better chance of breeding to create the next population. During the selection process two individuals are chosen breeding or reproduction. There are several selection methods but in this only \textit{k-Tournament selection} will be explained.
 
