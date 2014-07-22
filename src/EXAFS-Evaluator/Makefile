@@ -18,6 +18,7 @@ CPP_SRC = \
 	dcdhelper.cpp \
 	clustering.cpp \
 	exafsde.cpp \
+	exafsmoode.cpp \
 	particle.cpp \
 	exafspso.cpp
 

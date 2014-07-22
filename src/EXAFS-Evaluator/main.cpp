@@ -1,6 +1,7 @@
 #include "genfig/genfig.h"
 #include "exafsga.h"
 #include "exafsde.h"
+#include "exafsmoode.h"
 #include "exafspso.h"
 #include "dcdhelper.h"
 #include "clustering.h"
@@ -197,6 +198,74 @@ int main(int argc, char **argv) {
 
 	VMDHelper* vmd_helper = new VMDHelper(temp_folder, temp_pdb, fitness_config.getString("amber-topology-file"), fitness_config.getString("namd2-path"), fitness_config.getString("vmd-path"));
 	EXAFSEvaluator* exafs_evaluator = new EXAFSEvaluator(ifeffit_helper, pdb_helper, vmd_helper);
+
+	if (ga_config.getString("pop-type").compare("index") == 0) {
+		std::cout << "Index Population Type" << std::endl;
+
+		std::vector<int> indexes = dcdGetIndexLessThan(ga_config.getString("index-file"), ga_config.getDouble("index-max"));
+		std::vector< std::vector<PDBAtom> > initial_population;
+
+		std::vector< std::vector<PDBAtom> > initial_dcd_population = DCDHelper::getXYZsByIndex(ga_config.getString("dcd-file"), indexes);
+		std::cout << "DCD Population = " << initial_dcd_population.size() << std::endl;
+		for (std::vector< std::vector<PDBAtom> >::iterator i = initial_dcd_population.begin(); i != initial_dcd_population.end(); ++i) {
+
+			pdb_helper->updateEXAFSAtomsFromXYZ(*i);
+			initial_population.push_back( pdb_helper->getEXAFSAtoms() );
+		}
+
+		std::vector< std::vector< std::vector<PDBAtom> > > initial_populations;
+
+		for (int i = 0; i < ga_config.getInt("runs"); ++i) {
+			
+			// Get subset of population.
+			std::random_shuffle(initial_population.begin(), initial_population.end());
+			std::vector< std::vector<PDBAtom> > subset_pop = std::vector< std::vector<PDBAtom> >(initial_population.begin(), initial_population.begin()+ga_config.getInt("population-size"));
+
+			initial_populations.push_back(subset_pop);
+		}
+
+		DCDHelper dcd_helper = DCDHelper(ga_config.getString("dcd-file"));
+		pdb_helper->updateAllNonEXAFSAtomsFromXYZ(dcd_helper.getXYZAtFrame(0));
+
+		std::cout << ga_config.getString("algo-type") << ": Begin" << std::endl;
+		if (ga_config.getString("algo-type").compare("ga") == 0) {
+
+			EXAFSGA ga(exafs_evaluator, ga_config.getDouble("mutation"), ga_config.getDouble("crossover"), ga_config.getBool("elitism"), ga_config.getInt("max-generations"), ga_config.getString("results"));
+			ga.begin(initial_populations);
+
+		} else if (ga_config.getString("algo-type").compare("de") == 0) {
+
+			EXAFSDE de(exafs_evaluator, ga_config.getDouble("f"), ga_config.getDouble("cr"), ga_config.getInt("max-generations"), ga_config.getString("results"));
+			de.begin(initial_populations);
+
+		} else if (ga_config.getString("algo-type").compare("moo_de") == 0) {
+
+			EXAFSMOODE de(exafs_evaluator, ga_config.getDouble("f"), ga_config.getDouble("cr"), ga_config.getInt("max-generations"), ga_config.getString("results"));
+			de.begin(initial_populations);
+
+		} else if (ga_config.getString("algo-type").compare("pso") == 0) {
+
+			EXAFSPSO pso(exafs_evaluator, ga_config.getDouble("inertia"), ga_config.getDouble("social"), ga_config.getDouble("cognitive"), ga_config.getDouble("velocity-range"), ga_config.getInt("max-generations"), ga_config.getString("results"));
+			pso.begin(initial_populations);
+
+		} else if (ga_config.getString("algo-type").compare("ga_recenter") == 0) {
+
+			EXAFSGA ga(exafs_evaluator, ga_config.getDouble("mutation"), ga_config.getDouble("crossover"), ga_config.getBool("elitism"), ga_config.getInt("max-generations"), ga_config.getString("results"));
+			ga.begin_recentering(initial_populations, ga_config.getInt("population-size"), ga_config.getDouble("convergence-rate"), ga_config.getInt("recentering"));
+
+		} else if (ga_config.getString("algo-type").compare("de_recenter") == 0) {
+
+			EXAFSDE de(exafs_evaluator, ga_config.getDouble("f"), ga_config.getDouble("cr"), ga_config.getInt("max-generations"), ga_config.getString("results"));
+			de.begin_recentering(initial_populations, ga_config.getInt("population-size"), ga_config.getDouble("convergence-rate"), ga_config.getInt("recentering"));
+		
+		} else if (ga_config.getString("algo-type").compare("moo_de_recenter") == 0) {
+
+			EXAFSMOODE de(exafs_evaluator, ga_config.getDouble("f"), ga_config.getDouble("cr"), ga_config.getInt("max-generations"), ga_config.getString("results"));
+			de.begin_recentering(initial_populations, ga_config.getInt("population-size"), ga_config.getDouble("convergence-rate"), ga_config.getInt("recentering"));
+		}
+
+		return 0;
+	}
 
 	if (ga_config.getString("eval-type").compare("solo") == 0) {
 		std::cout << "Solo" << std::endl;
@@ -437,6 +506,36 @@ int main(int argc, char **argv) {
 
 	} else if (ga_config.getString("eval-type").compare("index_de_recenter") == 0) {
 
+		// std::cout << "Index_DE_Recenter" << std::endl;
+
+		// std::vector<int> indexes = dcdGetIndexLessThan(ga_config.getString("index-file"), ga_config.getDouble("index-max"));
+		// std::vector< std::vector<PDBAtom> > initial_population;
+
+		// EXAFSDE de(exafs_evaluator, ga_config.getDouble("f"), ga_config.getDouble("cr"), ga_config.getInt("max-generations"), ga_config.getString("results"));
+
+		// std::vector< std::vector<PDBAtom> > initial_dcd_population = DCDHelper::getXYZsByIndex(ga_config.getString("dcd-file"), indexes);
+		// std::cout << "DCD Population = " << initial_dcd_population.size() << std::endl;
+		// for (std::vector< std::vector<PDBAtom> >::iterator i = initial_dcd_population.begin(); i != initial_dcd_population.end(); ++i) {
+
+		// 	pdb_helper->updateEXAFSAtomsFromXYZ(*i);
+		// 	initial_population.push_back( pdb_helper->getEXAFSAtoms() );
+		// }
+
+		// std::cout << "DE: Begin" << std::endl;
+
+		// std::vector< std::vector< std::vector<PDBAtom> > > initial_populations;
+
+		// for (int i = 0; i < ga_config.getInt("runs"); ++i) {
+			
+		// 	// Get subset of population.
+		// 	std::random_shuffle(initial_population.begin(), initial_population.end());
+		// 	std::vector< std::vector<PDBAtom> > subset_pop = std::vector< std::vector<PDBAtom> >(initial_population.begin(), initial_population.begin()+ga_config.getInt("recentering-population"));
+
+		// 	initial_populations.push_back(subset_pop);
+		// }
+		
+		// de.begin_recentering(initial_populations, ga_config.getInt("population-size"), ga_config.getDouble("convergence-rate"), ga_config.getInt("recentering"));
+
 		std::cout << "Index_DE_Recenter" << std::endl;
 
 		std::vector<int> indexes = dcdGetIndexLessThan(ga_config.getString("index-file"), ga_config.getDouble("index-max"));
@@ -465,7 +564,39 @@ int main(int argc, char **argv) {
 			initial_populations.push_back(subset_pop);
 		}
 		
-		de.begin_recentering(initial_populations, ga_config.getInt("population-size"), ga_config.getDouble("keep-percentage"), ga_config.getInt("recentering"));
+		de.begin_recentering(initial_populations, ga_config.getInt("population-size"), ga_config.getDouble("convergence-rate"), ga_config.getInt("recentering"));
+
+	} else if (ga_config.getString("eval-type").compare("index_moo_de_recenter") == 0) {
+
+		std::cout << "Index_MOO_DE_Recenter" << std::endl;
+
+		std::vector<int> indexes = dcdGetIndexLessThan(ga_config.getString("index-file"), ga_config.getDouble("index-max"));
+		std::vector< std::vector<PDBAtom> > initial_population;
+
+		EXAFSMOODE de(exafs_evaluator, ga_config.getDouble("f"), ga_config.getDouble("cr"), ga_config.getInt("max-generations"), ga_config.getString("results"));
+
+		std::vector< std::vector<PDBAtom> > initial_dcd_population = DCDHelper::getXYZsByIndex(ga_config.getString("dcd-file"), indexes);
+		std::cout << "DCD Population = " << initial_dcd_population.size() << std::endl;
+		for (std::vector< std::vector<PDBAtom> >::iterator i = initial_dcd_population.begin(); i != initial_dcd_population.end(); ++i) {
+
+			pdb_helper->updateEXAFSAtomsFromXYZ(*i);
+			initial_population.push_back( pdb_helper->getEXAFSAtoms() );
+		}
+
+		std::cout << "DE: Begin" << std::endl;
+
+		std::vector< std::vector< std::vector<PDBAtom> > > initial_populations;
+
+		for (int i = 0; i < ga_config.getInt("runs"); ++i) {
+			
+			// Get subset of population.
+			std::random_shuffle(initial_population.begin(), initial_population.end());
+			std::vector< std::vector<PDBAtom> > subset_pop = std::vector< std::vector<PDBAtom> >(initial_population.begin(), initial_population.begin()+ga_config.getInt("recentering-population"));
+
+			initial_populations.push_back(subset_pop);
+		}
+		
+		de.begin_recentering(initial_populations, ga_config.getInt("population-size"), ga_config.getDouble("convergence-rate"), ga_config.getInt("recentering"));
 
 	} else if (ga_config.getString("eval-type").compare("index_pso") == 0) {
 
