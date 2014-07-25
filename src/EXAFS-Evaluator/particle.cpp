@@ -5,6 +5,7 @@ Particle::Particle() : Chromosome() {
 
 	this->best_exafs_score = 0;
 	this->best_potential_energy = 0;
+	this->rank = -1;
 }
 
 Particle::Particle(double range, std::vector<PDBAtom> atoms) : Chromosome(atoms) {

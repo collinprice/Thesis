@@ -20,7 +20,11 @@ CPP_SRC = \
 	exafsde.cpp \
 	exafsmoode.cpp \
 	particle.cpp \
-	exafspso.cpp
+	exafspso.cpp \
+	moopso.cpp \
+	mooparticle.cpp \
+	particlearchive.cpp \
+	basicparticle.cpp
 
 CPP_SRC_OBJS = $(CPP_SRC:.cpp=.o)
 
