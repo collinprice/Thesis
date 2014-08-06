@@ -1,8 +1,20 @@
 \section{Genetic Algorithm}
+\label{sec:ga}
 
-A genetic algorithm (GA) is a search heuristic that is based on Darwin's theory of natural evolution. Darwin theorized that over a period of time a population of individuals would naturally mate and create offspring that were better than themselves. He suggests that not all individuals are created equally and that eventually the weaker individuals would die off. This same principle can be applied to a search algorithm. A GA contains a population of individuals that are evolved to find improved candidate solutions.
+A genetic algorithm (GA) is a search heuristic that mimic natural selection. In a GA individuals go through a \textit{selection} process and are bred(\textit{crossed}) with other individuals to create new individuals. Individuals in a GA are commonly refered to as \textit{chromosomes}. Figure~\ref{fig:gaFlowchart} depicts how evolution occurs in a GA.
 
-The individuals of a GA represent possible candidate solutions to the problem. Individuals are refered to as chromosomes. Typically a chromosome is represented as an array where each index of the array represents a property of the candidate solution. There are no restrictions to the encoding of a chromosome but each property of the chromosome must be independant from the others. The simplest example of a representation is a binary array of 1's and 0's, as shown in Figure~\ref{fig:sampleChromosome}.
+\begin{figure}[H]
+  \centering
+  \includegraphics[bb=0 0 307 362,scale=0.5]{figures/GA.jpeg}
+  \caption{GA Evolution}
+  \label{fig:gaFlowchart}
+\end{figure}
+
+During each generation a new population is created using the previous generation's population. Initially the best individuals from the previous population might be copied directly into the new population using an operator called \textit{elitism}. To obtain the remaining individuals needed to fill the new population a \textit{selection} process occurs. Two individuals are chosen using a \textit{selection} method and then one of three options can occur: \textit{crossover}, \textit{mutation}, or \textit{replication}. Crossover mixes two individuals together to create two new individuals, mutation randomly modifies each individual individually, and replication copies the individuals. The two individuals are then placed in the new population and the process is repeated until the new population is the same size as the previous population. Figure~\ref{fig:gaFlowchart} depicts how evolution occurs in a GA. See Subsection~\ref{subsec:ga-operators} for more details on the operators discussed.
+
+\subsection{Chromosome}
+
+The individuals of a GA represent possible candidate solutions to the problem. Typically a chromosome is represented as an array where each index of the array represents a property of the candidate solution. There are no restrictions to the encoding of a chromosome but each property of the chromosome must be independant from the others. The simplest example of a representation is a binary array of 1's and 0's, as shown in Figure~\ref{fig:sampleChromosome}. In the sample chromosomes provided the 1's and 0's might represent whether a feature is enabled or disabled, 1 being enabled and 0 being disabled, in the candidate solution.
 
 \begin{figure}[H]
   \label{fig:sampleChromosome}
@@ -15,24 +27,16 @@ The individuals of a GA represent possible candidate solutions to the problem. I
   \caption{Simple Chromosome Represention}
 \end{figure}
 
-Finding a representation is only the first step in creating a genetic algorithm. The next step is to define your set of operators. A GA consists of multiple operators that assist in the evolution of the population. Figure~\ref{fig:gaFlowchart} depicts the flowchart of a genetic algorithm and where each genetic operation is performed.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[bb=0 0 310 207,scale=0.5]{figures/GA.jpeg}
-	\caption{Population Individual Modification}
-	\label{fig:gaFlowchart}
-\end{figure}
-
 \subsection{Genetic Operators}
+\label{subsec:ga-operators}
 
-Each of the following operators represent a piece of a genetic algorithm. They facilitate the evolutionary process in an effort to find better candidate solutions. Each of these operators has a unique purpose in the search algorthm but there are many different types of ways these goals can be carried out. Only a few of the different methods will be described in this work.
+Each of the following operators represent a piece of a genetic algorithm. They facilitate the evolutionary process in the effort to find better candidate solutions. Each of these operators has a unique purpose in the search algorthm but there are many different ways in which these goals can be carried out. Only a few of the different methods will be described in this work.
 
-\textit{Selection Operator}: This operator is very important to the \textit{Crossover} and \textit{Mutation} operators. The idea behind this operator is to put selectionary pressure on the population during the evolutionary process. Individuals with a better fitness score should be allowed a better chance of breeding to create the next population. During the selection process two individuals are chosen breeding or reproduction. There are several selection methods but in this only \textit{k-Tournament selection} will be explained.
+\textit{Selection Operator}: This operator is very important to the \textit{Crossover} and \textit{Mutation} operators. The idea behind this operator is to put selection pressure on the population during the evolutionary process. Individuals with a better fitness score should be allowed a better chance of breeding to create the next population. During the selection process two individuals are chosen for breeding or reproduction. There are several varieties of selection methods but only \textit{k-Tournament selection} will be explained as this is the method used in the algorithm in \textbf{(chapter goes here)}.
 
-The \textit{k}-Tournament selection method works by randomly selecting \textit{k} individuals from the population, where \textit{k} is less than the number of individuals in the population, and selecting the individual that has the best fitness score from the \textit{k} individuals. The value of \textit{k} should be relatively small compared to the size of the population. If the value of \textit{k} is too large it would defeat the purpose of this selection method. For example, if there is a population size of 100 the value of \textit{k} should be around 2-5.
+The \textit{k}-Tournament selection method works by randomly selecting \textit{k} individuals from the population, where \textit{k} is less than the number of individuals in the population, and selecting the individual that has the best fitness score from the \textit{k} individuals. The value of \textit{k} should be relatively small compared to the size of the population. If the value of \textit{k} is too large it would defeat the purpose of this selection method. For example, if there is a population size of 100 a suitable value of \textit{k} is around 2-5.
 
-\textit{Crossover Operator}: This operator is essential to evolving the individuals of the population. Crossover is how two individuals breed to create two new individuals. With respect to the evolutionary process, crossover exploits the current information that is contained within the population in order to find improved individuals. The most widely used type of crossover is N-point crossover.
+\textit{Crossover Operator}: This operator is essential to evolving the individuals of the population. Crossover is the mechanism by which two individuals breed to create two new individuals. With respect to the evolutionary process, crossover exploits the current information that is contained within the population in order to find improved individuals. The most widely used type of crossover is N-point crossover.
 
 N-point crossover works by randomly selecting N cutting points and swapping the information between the two individuals along those N points. Figure~\ref{fig:2PointCrossover} demonstrates how the swapping of information occurs during 2-point crossover.
 

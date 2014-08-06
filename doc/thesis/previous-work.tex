@@ -1,15 +1,15 @@
 \chapter{Previous Research}
 
-Before we can begin explaining the techniques we used in the next chapter it is necessary that we explain what research has already been done in this field.
+Before we can begin explaining the techniques we used in the next chapter it is necessary that we explain related research in this field.
 
 \section{Quantum Mechanics/Molecular Mechanics}
 
-In ~\cite{sproviero2008model} Sproviero, Eduardo M and Gasc{\'o}n, Jos{\'e} A and McEvoy, James P and Brudvig, Gary W and Batista, and Victor S used DFT-QM/MM and R-QM/MM techniques to find close approximations of the experimental EXAFS spectra. The EXAFS spectra used in their calculations was at a poorer resolution compared to the spectra used in the experiments in this work.
+In previous work~\cite{sproviero2008model} the authors used DFT-QM/MM and R-QM/MM techniques to find close approximations of the experimental EXAFS spectrum of OEC in S$_{1}$. The EXAFS spectrum used in their calculations was at a poorer resolution compared to the spectra used in the experiments in our work.
 
-Density functional theory quantum mechanics/molecular mechanics (DFT-QM/MM) uses the atoms spatially dependent electron density \textbf{(CITE?)} to determine the position of each atom. Since DFT largely uses function approximations this approach is very limited.
+Density functional theory quantum mechanics/molecular mechanics (DFT-QM/MM)~\ref{parr1989density} uses the atoms spatially dependent electron density to determine the position of each atom. Since DFT largely uses function approximations this approach is very limited.
 
 To increase their accuracy the researchers used a refined quantum mechanics/molecular mechanics (R-QM/MM) technique. This approach iteratively adjusted the molecular structure of the molecule and attempted to minimize a scoring function defined in terms of the sum of squared deviations between the experimental and calculated EXAFS spectra. A quadratic penalty was applied to each atom to ensure that their positions did not deviate too far from their original position in order to keep the energy of the system at a minimum.
 
-The researches speculate that even though the R-QM/MM technique was able to generate an EXAFS spectra closer to the experimental spectra their solution was only a local solution because it was based on their original DFT-QM/MM solution.
+The researchers speculated that even though the R-QM/MM technique was able to generate an EXAFS spectra closer to the experimental spectra their solution was only a local solution because it was based on their original DFT-QM/MM solution.
 
-In ~\cite{luber2011s1} Luber, Sandra and Rivalta, Ivan and Umena, Yasufumi and Kawakami, Keisuke and Shen, Jian-Ren and Kamiya, Nobuo and Brudvig, Gary W and Batista, and Victor S repeated their original experiments performed in ~\cite{sproviero2008model} with updated X-ray diffraction (XRD) data that had a resolution of 1.9\AA. They has success rerunning the DFT-QM/MM experiment followed by the R-QM/MM experiment but still had the same speculations about remaining in a local solution.
+Later in ~\cite{luber2011s1} the same research group repeated their original experiments performed in ~\cite{sproviero2008model} with updated X-ray diffraction (XRD) data that had a resolution of 1.9\AA. They has success rerunning the DFT-QM/MM experiment followed by the R-QM/MM experiment but still had the same speculations about remaining in a local solution.
