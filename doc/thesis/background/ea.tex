@@ -17,6 +17,7 @@ Figure~\ref{fig:evolutionaryFlowchart} demonstrates how the basic EA operates. I
 The population is a key piece to an EA. Each individual in the population represents a possible candidate solution to the problem that we are attemping to solve. The representation of the individual is usually unique to the problem. Generating the initial population can either be done randomly or by some procedural method. The goal of generating the initial population is to create a diverse\textbf{(CITE)} enough population to find improved solutions.
 
 \subsection{Evaluation Function}
+\label{subsec:fitness-function}
 
 This operator determines the fitness of an individual. Each individual is evaluated and given a fitness score to represent how well the individual performed on the problem. This operation is problem specific and it can be very difficult to determine how a problem should be evaluated. The evaluation function is important for differentiating individuals. A poor evaluation function can make each of the individuals appear to be similar when they actually have small key differences. 
 
