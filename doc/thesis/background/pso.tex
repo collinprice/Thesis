@@ -1,2 +1,29 @@
 \section{Particle Swarm Optimization}
 \label{sec:pso}
+
+Particle swarm optimization (PSO)~\cite{kennedy2010particle}~\cite{poli2007particle} is a population based search metaheuristic designed to iteratively optimize a problem. PSO is well suited for problems containing a nonlinear and non-differentialable continuous search space. The candidate solutions found within a PSO are known as \textit{particles}. Each of these particles represents a candidate solutions position within the search space. The particles positions are updated to move around the search space based on a mathematical formula. The process of how a particle's position is updated is detailed in Subsection~\ref{subsec:pso-position}. During the \textit{evolution} of the population each particle is updated once.
+
+\subsection{Particle}
+
+Each particle represents a candidate solution to the problem. An individual particle contains both a position ($p$), and a velocity ($v$). The position and velocity are each a vector of real numbers where the size of the vector depends on the problem. The position represents a possible solution to the problem.
+
+Each particle also contains an archive of its personal best position (\textit{pBest}). After a particle's position is updated based on the mathematical formula described in Subsection~\ref{subsec:pso-position}, it's fitness score (See Subsection~\ref{subsec:fitness-function}) is updated. The new fitness score is compared with the fitness score of the current best position's fitness score. If the new position's fitness score is better than the current best position's fitness score, the new position becomes the current best position.
+
+\subsection{Global Best Position}
+
+The global best position (\textit{gBest}) is the particle position that has produced the best fitness score. The \textit{gBest} is updated at the end of each iteration of the population.
+
+\subsection{Particle Update}
+\label{subsec:pso-position}
+
+Each \textit{particle's} position vector is updated based on their current velocity vector. The velocity vector of each particle position is updated each generation based on the formula show in Equation~\ref{eq:pso-velocity-update}, where $r_p, r_g \sim\ U(0,1)$, and $\omega$, $\phi$ and $\varphi$ are user defined. $\omega$ (inertia) controls the efficiency of the particle moving through the search space. $\phi$ (social) and $\varphi$ (cognitive) control the magnitude of the force pulling the particle towards the \textit{pBest} and \textit{gBest}. The particle's position vector is updated based on the particle's new velocity vector (See Equation~\ref{eq:pso-position-update}).
+
+\begin{equation}
+	\label{eq:pso-velocity-update}
+	v = \omega{v} + \phi{r_p}(pBest-p) + \varphi{r_g}(gBest-p)
+\end{equation}
+
+\begin{equation}
+	\label{eq:pso-position-update}
+	p = p + v
+\end{equation}
