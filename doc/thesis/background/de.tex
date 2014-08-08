@@ -27,9 +27,18 @@ The mutation operator is used to create new individuals from the existing indivi
 		\FOR{each agent $X$ in the population}
 			\STATE{pick three agents $a$, $b$, $c$ randomly from the population}
 			\STATE{pick random index $R \in \{1, \ldots, n\}$}
-			\FOR{each position $y_i$ in $[y_1, \ldots, y_n]$}
-				\STATE{...}
+			\STATE{copy agent $X_i$ to $y$}
+			\FOR{each position index $y_j$ in $[y_1, \ldots, y_n]$}
+				\STATE{$r_j = U(0,1)$}
+				\IF{$r_j < CR$ or $R == j$}
+					\STATE{$y_j = a_j + F(b_j - c_j)$}
+				\ELSE
+					\STATE{$y_j = {X_i}_j$}
+				\ENDIF
 			\ENDFOR
+			\IF{$f(y) < f(X_i)$}
+				\STATE{$X_i = y$}
+			\ENDIF
 		\ENDFOR
 
 	\end{algorithmic}

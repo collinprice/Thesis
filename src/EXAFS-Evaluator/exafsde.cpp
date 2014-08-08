@@ -223,7 +223,7 @@ Chromosome EXAFSDE::mutate(int i, int r1, int r2, int r3) {
 	// Decide which atoms to replace.
 	for (int j = 0; j < chromosome_length; ++j) {
 		
-		if (this->unifRand() <= this->cr || j == Irand) {
+		if (this->unifRand() < this->cr || j == Irand) {
 			final_atoms.push_back(modified_atoms[j]);
 		} else {
 			final_atoms.push_back(selectedChromosome.atoms[j]);
