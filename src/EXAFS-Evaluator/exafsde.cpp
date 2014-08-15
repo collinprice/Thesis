@@ -148,7 +148,7 @@ void EXAFSDE::evaluatePopulation() {
 			this->evaluate(this->population[i]);
 			this->population[i].is_evaluated = true;
 		}
-		std::cout << "\t Child: " << i << ", " << this->population[i].exafs_score << ", " << this->population[i].potential_energy << std::endl;
+		std::cout << "\t Child: " << i << ", " << this->population[i].exafs_score << std::endl;
 	}
 }
 
@@ -169,8 +169,6 @@ void EXAFSDE::evaluateRMSD( Chromosome& child ) {
 void EXAFSDE::evaluatePotentialEnergy( Chromosome& child ) {
 
 	this->exafs_evaluator->updateAtoms(child.atoms);
-
-	child.potential_energy = this->exafs_evaluator->calculatePotentialEnergy();
 }
 
 void EXAFSDE::evolve() {
@@ -238,10 +236,10 @@ Chromosome EXAFSDE::mutate(int i, int r1, int r2, int r3) {
 	this->evaluate(selectedChromosome);
 
 	if (originalChromosome.exafs_score < selectedChromosome.exafs_score) {
-		std::cout << "\t Child: " << i << ", Original: " << originalChromosome.exafs_score << ", " << originalChromosome.potential_energy << std::endl;
+		std::cout << "\t Child: " << i << ", Original: " << originalChromosome.exafs_score << std::endl;
 		return originalChromosome;
 	} else {
-		std::cout << "\t Child: " << i << ", Modified: " << selectedChromosome.exafs_score << ", " << selectedChromosome.potential_energy << std::endl;
+		std::cout << "\t Child: " << i << ", Modified: " << selectedChromosome.exafs_score << std::endl;
 		return selectedChromosome;
 	}
 }
@@ -305,7 +303,7 @@ void EXAFSDE::recordStats() {
 
 	this->evaluatePotentialEnergy(best_chromosome);
 
-	this->output_stream << best_score << "," << (average_exafs_score/(int)this->population.size()) << "," << best_chromosome.potential_energy << std::endl;
+	this->output_stream << best_score << "," << (average_exafs_score/(int)this->population.size()) << std::endl;
 }
 
 void EXAFSDE::finalStats() {

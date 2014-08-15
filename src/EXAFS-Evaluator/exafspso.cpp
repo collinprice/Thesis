@@ -117,8 +117,6 @@ void EXAFSPSO::evaluate( Particle& child ) {
 	
 	child.exafs_score = this->exafs_evaluator->calculateRMSD();
 	child.exafs_data = this->exafs_evaluator->getEXAFSData();
-
-	child.potential_energy = this->exafs_evaluator->calculatePotentialEnergy();
 }
 
 Particle EXAFSPSO::best_particle() {
@@ -179,7 +177,7 @@ void EXAFSPSO::recordStats() {
 		}
 	}
 
-	this->output_stream << best_score << "," << (average_exafs_score/(int)this->population.size()) << "," << best_chromosome.potential_energy << std::endl;
+	this->output_stream << best_score << "," << (average_exafs_score/(int)this->population.size()) << std::endl;
 }
 
 void EXAFSPSO::finalStats() {
