@@ -100,6 +100,74 @@ std::vector<int> dcdGetIndexLessThan(std::string filename, double limit) {
 	return indexes;
 }
 
+std::vector<PDBAtom> readXyzFile(std::string filename) {
+	
+	std::ifstream file(filename.c_str());
+	std::vector<PDBAtom> atoms;
+
+	if (file.is_open()) {
+
+		std::string line;
+		int number_of_atoms;
+
+		// Read number of atoms.
+		std::getline(file, line);
+		number_of_atoms = atoi(line.c_str());
+
+		// Skip comment line.
+		std::getline(file, line);
+
+		for (int i = 0; i < number_of_atoms; ++i) {
+			
+			std::string name;
+			std::string x;
+			std::string y;
+			std::string z;
+
+			std::getline(file, line);
+
+			std::istringstream iss(line);
+
+			iss >> name;
+			iss >> x;
+			iss >> y;
+			iss >> z;
+
+			atoms.push_back(PDBAtom(name, atof(x.c_str()), atof(y.c_str()), atof(z.c_str())));
+		}
+	}
+	
+	return atoms;
+}
+
+std::vector< std::vector<PDBAtom> > readXyzFromDirectory(std::string directory) {
+
+	std::vector< std::vector<PDBAtom> > xyz_list;
+	std::vector<std::string> files;
+
+	DIR *dir;
+	struct dirent *ent;
+	if ((dir = opendir (directory.c_str())) != NULL) {
+
+		unsigned char isFolder = 0x4;
+		std::ostringstream oss;
+		while ((ent = readdir (dir)) != NULL) {
+
+			// Skip directories
+			if (ent->d_type == isFolder) continue;
+
+			oss << directory << "/" << ent->d_name;
+			xyz_list.push_back(readXyzFile(oss.str()));
+
+			oss.clear();
+			oss.str("");
+		}
+		closedir (dir);
+	}
+
+	return xyz_list;
+}
+
 /*function... might want it in some class?*/
 int getdir (std::string dir, std::vector<std::string> &files)
 {
@@ -200,22 +268,59 @@ int main(int argc, char **argv) {
 	VMDHelper* vmd_helper = new VMDHelper(temp_folder, temp_pdb, fitness_config.getString("amber-topology-file"), fitness_config.getString("namd2-path"), fitness_config.getString("vmd-path"));
 	EXAFSEvaluator* exafs_evaluator = new EXAFSEvaluator(ifeffit_helper, pdb_helper, vmd_helper);
 
-	if (ga_config.getString("pop-type").compare("index") == 0) {
-		std::cout << "Index Population Type" << std::endl;
+	if (ga_config.getString("mode").compare("runs") == 0) {
 
-		std::vector<int> indexes = dcdGetIndexLessThan(ga_config.getString("index-file"), ga_config.getDouble("index-max"));
+		// Generate population
 		std::vector< std::vector<PDBAtom> > initial_population;
+		if (ga_config.getString("pop-type").compare("index") == 0) {
+			std::cout << "Index Population Type" << std::endl;
 
-		std::vector< std::vector<PDBAtom> > initial_dcd_population = DCDHelper::getXYZsByIndex(ga_config.getString("dcd-file"), indexes);
-		std::cout << "DCD Population = " << initial_dcd_population.size() << std::endl;
-		for (std::vector< std::vector<PDBAtom> >::iterator i = initial_dcd_population.begin(); i != initial_dcd_population.end(); ++i) {
+			std::vector<int> indexes = dcdGetIndexLessThan(ga_config.getString("index-file"), ga_config.getDouble("index-max"));
 
-			pdb_helper->updateEXAFSAtomsFromXYZ(*i);
-			initial_population.push_back( pdb_helper->getEXAFSAtoms() );
+			std::vector< std::vector<PDBAtom> > initial_dcd_population = DCDHelper::getXYZsByIndex(ga_config.getString("dcd-file"), indexes);
+			std::cout << "DCD Population = " << initial_dcd_population.size() << std::endl;
+			for (std::vector< std::vector<PDBAtom> >::iterator i = initial_dcd_population.begin(); i != initial_dcd_population.end(); ++i) {
+
+				pdb_helper->updateEXAFSAtomsFromXYZ(*i);
+				initial_population.push_back( pdb_helper->getEXAFSAtoms() );
+			}
+
+			// Update PDBHelper atomic coordinates.
+			DCDHelper dcd_helper = DCDHelper(ga_config.getString("dcd-file"));
+			pdb_helper->updateAllNonEXAFSAtomsFromXYZ(dcd_helper.getXYZAtFrame(0));
+
+			if (ga_config.getBool("pop-clean")) {
+				system(("rm -rf " + ga_config.getString("dcd-file")).c_str());
+			}
+		} else if (ga_config.getString("pop-type").compare("xyz") == 0) {
+			std::cout << "XYZ Population Type" << std::endl;
+
+			std::vector< std::vector<PDBAtom> > initial_xyz_population = readXyzFromDirectory(ga_config.getString("xyz-dir"));
+
+			for (std::vector< std::vector<PDBAtom> >::iterator i = initial_xyz_population.begin(); i != initial_xyz_population.end(); ++i) {
+				pdb_helper->updateEXAFSAtomsFromXYZ(*i);
+				initial_population.push_back( pdb_helper->getEXAFSAtoms() );
+			}
+
+			// Update PDBHelper atomic coordinates.
+			pdb_helper->updateAllNonEXAFSAtomsFromXYZ(initial_xyz_population.at(0));
+
+			if (ga_config.getBool("pop-clean")) {
+				system(("rm -rf " + ga_config.getString("xyz-dir")).c_str());
+			}
+		} else {
+			std::cout << "Missing population type." << std::endl;
+			return 0;
 		}
 
-		std::vector< std::vector< std::vector<PDBAtom> > > initial_populations;
+		std::cout << "Found " << initial_population.size() << " individuals." << std::endl;
+		if (initial_population.size() == 0) {
+			std::cout << "Unable to generate initial population. Exiting..." << std::endl;
+			return 0;
+		}
 
+		// Generate multiple populations from initial set of individuals.
+		std::vector< std::vector< std::vector<PDBAtom> > > initial_populations;
 		for (int i = 0; i < ga_config.getInt("runs"); ++i) {
 			
 			// Get subset of population.
@@ -224,9 +329,6 @@ int main(int argc, char **argv) {
 
 			initial_populations.push_back(subset_pop);
 		}
-
-		DCDHelper dcd_helper = DCDHelper(ga_config.getString("dcd-file"));
-		pdb_helper->updateAllNonEXAFSAtomsFromXYZ(dcd_helper.getXYZAtFrame(0));
 
 		std::cout << ga_config.getString("algo-type") << ": Begin" << std::endl;
 		if (ga_config.getString("algo-type").compare("ga") == 0) {
@@ -269,10 +371,11 @@ int main(int argc, char **argv) {
 			EXAFSMOODE de(exafs_evaluator, ga_config.getDouble("f"), ga_config.getDouble("cr"), ga_config.getInt("max-generations"), ga_config.getString("results"));
 			de.begin_recentering(initial_populations, ga_config.getInt("population-size"), ga_config.getDouble("convergence-rate"), ga_config.getInt("recentering"));
 		}
-
-		return 0;
 	}
 
+	
+
+/*
 	if (ga_config.getString("eval-type").compare("solo") == 0) {
 		std::cout << "Solo" << std::endl;
 		std::cout << "Initial pdb file" << std::endl;
@@ -685,6 +788,6 @@ int main(int argc, char **argv) {
 	}
 
 	// system(("rm -rf " + temp_folder).c_str());
-
+*/
 	return 0;
 }
