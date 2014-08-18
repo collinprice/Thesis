@@ -3,7 +3,7 @@ CXX = g++
 
 CXXFLAGS = -c -std=c++0x -pthread -g -Wall -Wextra -pedantic #-DDEBUG=1
 CCFLAGS = -c
-LDFLAGS = -lpthread
+LDFLAGS = -lpthread -lrt
 
 CPP_SRC = \
 	main.cpp \
