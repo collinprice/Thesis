@@ -19,6 +19,7 @@
 #include <errno.h>
 #include <sys/stat.h>
 #include <sstream>
+#include <sys/time.h>
 
 double unifRand() {
 		return rand() / double(RAND_MAX);
@@ -253,10 +254,27 @@ int main(int argc, char **argv) {
 	// Create directory for scratch stuff.
 	std::string temp_folder = fitness_config.getString("folder-name") + "/" + seed;
 
+	int temp_folder_fail_counter = 0;
 	std::cout << "Attempting to create temp directory: " << temp_folder << std::endl;
 	if (mkdir(temp_folder.c_str(), 0755) != 0){
+
+		std::string original_folder_name = temp_folder;
+		timespec ts;
+		std::stringstream ss;
 		do {
-			temp_folder = temp_folder + "d";
+			if (temp_folder_fail_counter == 10) {
+				std::cout << "Failed to create temp directories. Exiting." << std::endl;
+				return 0;
+			}
+			
+			ss.clear();
+			ss.str("");
+
+			// Get precise time
+			clock_gettime(CLOCK_REALTIME, &ts);
+
+			ss << original_folder_name << ts.tv_nsec;
+			temp_folder = ss.str();
 			std::cout << "Attempting to create temp directory: " << temp_folder << std::endl;
 		} while(mkdir(temp_folder.c_str(), 0755) != 0);
 	}
