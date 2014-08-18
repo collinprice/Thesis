@@ -265,8 +265,10 @@ int main(int argc, char **argv) {
 			if (temp_folder_fail_counter == 10) {
 				std::cout << "Failed to create temp directories. Exiting." << std::endl;
 				return 0;
+			} else {
+				++temp_folder_fail_counter;
 			}
-			
+
 			ss.clear();
 			ss.str("");
 
