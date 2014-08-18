@@ -253,9 +253,11 @@ int main(int argc, char **argv) {
 	// Create directory for scratch stuff.
 	std::string temp_folder = fitness_config.getString("folder-name") + "/" + seed;
 
+	std::cout << "Attempting to create temp directory: " << temp_folder << std::endl;
 	if (mkdir(temp_folder.c_str(), 0755) != 0){
 		do {
 			temp_folder = temp_folder + "d";
+			std::cout << "Attempting to create temp directory: " << temp_folder << std::endl;
 		} while(mkdir(temp_folder.c_str(), 0755) != 0);
 	}
 
