@@ -1,0 +1,61 @@
+\section{Genetic Algorithm: Viability}
+
+\subsection{Purpose}
+
+The purpose of this study is to determine the viabiltiy of using an evolutionary algorithm to solve the structure refinement problem (Section~\ref{sec:problem-definition}). Previous studies~\cite{sproviero2008model}~\cite{luber2011s1} have shown that iterative algorithms work well in finding candidate solutions to the problem.
+
+\subsection{Setup}
+
+During the initial stages of experimentation the initial populations were created by randomly adjusting the atoms within this initial structure. To create a new individual each atom within the atomic structure would be randomly moved by 0.05-0.5\AA. This form of population generation was quickly discarded because many of these individuals were either chemically infeasible or generated erroneous EXAFS spectra. 
+
+- what population type was used.
+- representation
+- fitness function
+
+\subsection{System Parameters}
+
+Two evolutionary algorithms were used in this run: GA, and RGA. The system parameters for the GA can be seen in Table~\ref{table:viability-ga}, and the system parameters for the RGA can be seen in Table~\ref{table:viability-rga}.
+
+- mutation operator
+- selection
+- crossover
+
+\begin{table}
+	\label{table:viability-ga}
+	\centering
+	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | }
+		\hline
+		Experiment Set & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+		Crossover Rate & 80 & 80 & 70 & 80 & 70 & 80 \\ \hline
+		Mutation Rate & 20 & 10 & 30 & 10 & 30 & 20 \\ \hline
+		Elitism & False & False & False & True & True & True \\ \hline
+		Generations & 30 & 30 & 30 & 30 & 30 & 30 \\ \hline
+		Population Size & 50 & 50 & 50 & 50 & 50 & 50 \\ \hline
+		Tourament Size & 3 & 3 & 3 & 3 & 3 & 3 \\ \hline
+	\end{tabular}
+	\caption{System parameters for the basic GA runs}
+\end{table}
+
+\begin{table}
+	\label{table:viability-rga}
+	\centering
+	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | }
+		\hline
+		Experiment Set & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+		Crossover Rate & 80 & 80 & 80 & 80 & 70 & 70 \\ \hline
+		Mutation Rate & 20 & 20 & 20 & 20 & 30 & 30 \\ \hline
+		Elitism & True & True & True & True & True & True \\ \hline
+		Generations & 67 & 81 & 107 & 124 & 67 & 81 \\ \hline
+		Population Size & 50 & 50 & 50 & 50 & 50 & 50 \\ \hline
+		Tourament Size & 3 & 3 & 3 & 3 & 3 & 3 \\ \hline
+		Convergence Rate & 10 & 5 & 10 & 5 & 5 & 10 \\ \hline
+		Number of Restarts & 3 & 3 & 5 & 5 & 5 & 5 \\ \hline
+	\end{tabular}
+	\caption{System parameters for the RGA runs}
+\end{table}
+
+\subsection{Analysis}
+
+- numbers of generations
+- rga sees more individuals
+- examples of rga

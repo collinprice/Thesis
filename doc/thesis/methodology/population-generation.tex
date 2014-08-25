@@ -1,6 +1,41 @@
 \section{Population Generation}
 
-An initial population of different individuals needed to be created in order to begin refining the OEC atomic structure using an evolutionary algorithm. The initial OEC atomic structure came from the crystallographic photosystem II (PSII) structure~\cite{umena2011crystal}. It is available in the Protein Data Bank (PDB)~\cite{databank} as PDB ID 3ARC. During the initial stages of experimentation the initial populations were created by randomly adjusting the atoms within this initial structure. To create a new individual each atom within the atomic structure would be randomly moved by 0.05-0.5\AA. This form of population generation was quickly discarded because many of these individuals were either chemically infeasible or generated erroneous EXAFS spectra. 
+An initial population of different individuals needed to be created in order to begin refining the OEC atomic structure using an evolutionary algorithm. The initial OEC atomic structure came from the crystallographic photosystem II (PSII) structure~\cite{umena2011crystal}. It is available in the Protein Data Bank (PDB)~\cite{databank} as PDB ID 3ARC. Two forms of population generation were used during the experiments conducted in this work: random, and molecular dynamics simulation. The atomic structure obtained from the PDB contained 1269 chemical elements. For the purposes of OEC structure refinement only 79 specific atoms were required for EXAFS analysis.
+
+% The atomic structures that were generated contained 1269 chemical elements. For the purposes of OEC structure refinement only 79 specific atoms were required for EXAFS analysis. The genetic algorithm only used the 79 atoms that required refinement.
+
+\subsection{Random}
+
+A population can be generated randomly based on a starting molecule. To create a random candidate individual each atomic position within the atomic structure is randomly moved by a user defined range. This means that if the user defined range is 0.05\AA\ each atomic position is randomly shifted $\pm$0.05\AA. Using Representation 2 as defined in Subsection~\ref{subsec:encoding-2} as an example, Figure~\ref{fig:random-shift} demonstrates how each atomic position is randomly shifted by 0.05\AA.
+
+\begin{figure}
+	\centering
+	\begin{tabular}{ | l | }
+		\hline
+		14.451 \\ \hline
+		-13.346 \\ \hline
+		1.133 \\ \hline
+		15.336 \\ \hline
+		-13.488 \\ \hline
+		2.014 \\ \hline
+		13.005 \\ \hline
+		... \\ \hline
+	\end{tabular}
+	\qquad$\implies$\qquad
+	\begin{tabular}{ | l | }
+		\hline
+		14.494 \\ \hline
+		-13.370 \\ \hline
+		1.132 \\ \hline
+		15.295 \\ \hline
+		-13.518 \\ \hline
+		2.009 \\ \hline
+		13.018 \\ \hline
+		... \\ \hline
+	\end{tabular}
+	\caption{Randomly shifting atomic positions by 0.05\AA}
+	\label{fig:random-shift}
+\end{figure}
 
 \subsection{Molecular Dynamics Simulation}
 
@@ -9,5 +44,3 @@ An alternative method of population generation was needed to generate individual
 Once the atom structure was stable the temperature within the system was increased. The increased temperature causes the atoms to oscillate their positions but still remain chemically feasible. During this process stapshots of the molecules atomic structure were recorded. The simulation was allowed to run for 10\ 000 steps and 10\ 000 snapshots of the atomic structure were recorded. Each of these snapshots creates a feasible individual for the experiments.
 
 Since 10\ 000 individuals is more than enough individuals to seed the populations the best individuals were picked. The generated atomic structures were run through IFEFFIT~\cite{ifeffit} and compared to the target EXAFS spectra. The top 3\% (roughly 300) individuals were used to generate the initial populations in the evolutionary algorithms.
-
-The atomic structures that were generated contained 1269 chemical elements. For the purposes of OEC structure refinement only 79 specific atoms were required for EXAFS analysis. The genetic algorithm only used the 79 atoms that required refinement.

@@ -1,0 +1,46 @@
+\section{Genetic Algorithm: Post-Optimization}
+
+\subsection{Purpose}
+
+- answers were close so we tried local search technique
+- suggested based on previous work maybe?
+
+\subsection{Setup}
+
+- how populations were generated
+- representation differences
+- explain Initial Movement Radius
+- fitness function
+
+\subsection{System Parameters}
+
+\begin{table}
+	\label{table:post-op-pso}
+	\centering
+	\begin{tabular}{ | >{\bfseries}c | c | c | c | }
+		\hline
+		Experiment Set & 1 & 2 & 3 \\ \hline
+		Initial Movement Radius & 0.05 & 0.05 & 0.25 \\ \hline
+		Generations & 100 & 30 & 30 \\ \hline
+		Population Size & 50 & 50 & 50 \\ \hline
+	\end{tabular}
+	\caption{System parameters for the Post-Optimization PSO runs}
+\end{table}
+
+\begin{table}
+	\label{table:post-op-de}
+	\centering
+	\begin{tabular}{ | >{\bfseries}c | c | c | }
+		\hline
+		Experiment Set & 1 & 2 \\ \hline
+		Initial Movement Radius & 0.05 & 0.25 \\ \hline
+		Generations & 30 & 30 \\ \hline
+		Population Size & 50 & 50 \\ \hline
+	\end{tabular}
+	\caption{System parameters for the Post-Optimization DE runs}
+\end{table}
+
+\subsection{Analysis}
+
+- reasons DE might not have worked
+- benefits of post op
