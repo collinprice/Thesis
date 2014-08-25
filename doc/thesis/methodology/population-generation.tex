@@ -5,8 +5,9 @@ An initial population of different individuals needed to be created in order to 
 % The atomic structures that were generated contained 1269 chemical elements. For the purposes of OEC structure refinement only 79 specific atoms were required for EXAFS analysis. The genetic algorithm only used the 79 atoms that required refinement.
 
 \subsection{Random}
+\label{subsec:random-population}
 
-A population can be generated randomly based on a starting molecule. To create a random candidate individual each atomic position within the atomic structure is randomly moved by a user defined range. This means that if the user defined range is 0.05\AA\ each atomic position is randomly shifted $\pm$0.05\AA. Using Representation 2 as defined in Subsection~\ref{subsec:encoding-2} as an example, Figure~\ref{fig:random-shift} demonstrates how each atomic position is randomly shifted by 0.05\AA.
+A population can be generated randomly based on a starting molecule. To create a random candidate individual each atomic position within the atomic structure is randomly moved by a \textit{user defined range}. This means that if the \textit{user defined range} is 0.05\AA\ each atomic position is randomly shifted $\pm$0.05\AA. Using Representation 2 as defined in Subsection~\ref{subsec:encoding-2} as an example, Figure~\ref{fig:random-shift} demonstrates how each atomic position is randomly shifted by 0.05\AA.
 
 \begin{figure}
 	\centering
@@ -38,6 +39,7 @@ A population can be generated randomly based on a starting molecule. To create a
 \end{figure}
 
 \subsection{Molecular Dynamics Simulation}
+\label{subsec:molecular-population}
 
 An alternative method of population generation was needed to generate individuals that were usable in the experiments. To ensure that the atomic structure was as stable as possible, the structure was put into a molecular dynamics simulation. While in this simulation the molecule is allowed to act as if it were in the real world. The atoms were allowed to move freely in space until the overall temperature of the system was reasonably low. This acted as the baseline atomic structure for all tests. NAMD~\cite{namd} was used to run the molecular dynamics simulations.
 
