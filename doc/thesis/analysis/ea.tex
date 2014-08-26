@@ -4,10 +4,19 @@
 
 \begin{table}
 	\centering
-	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | c | c | c | c | c | c | }
+	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | }
 		\hline
-		Exp. Set & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\ \hline
-		RMSD &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+		Exp. Set & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+		Best RMSD & 0.7735 & 0.6840 & 0.7498 & \textbf{0.6058} & 0.6568 & 0.6429 \\ \hline
+		Average RMSD & 0.9121 & 0.9046 & 0.9090 & 0.7743 & 0.7643 & 0.7731 \\ \hline
+	\end{tabular}
+	\\
+	\vspace{3 mm}
+	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | }
+		\hline
+		Exp. Set & 7 & 8 & 9 & 10 & 11 & 12 \\ \hline
+		Best RMSD & 0.7392 & 0.6881 & 0.7306 & 0.6440 & 0.6398 & 0.6504 \\ \hline
+		Average RMSD & 0.8724 & 0.8876 & 0.8836 & 0.7563 & 0.7441 & \textbf{0.7369} \\ \hline
 	\end{tabular}
 	\caption{Results for the PSO runs}
 	\label{table:ea-pso-results}
@@ -18,7 +27,8 @@
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | }
 		\hline
 		Experiment Set & 1 & 2 & 3 & 4 \\ \hline
-		RMSD &  &  &  &  \\ \hline
+		Best RMSD & 0.9793 & \textbf{0.9405} & 1.0357 & 0.9646 \\ \hline
+		Average Best RMSD & 1.1055 & \textbf{1.0554} & 1.1456 & 1.0635 \\ \hline
 	\end{tabular}
 	\caption{Results for the DE runs}
 	\label{table:ea-de-results}
