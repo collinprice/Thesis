@@ -2,13 +2,20 @@
 
 \subsection{Analysis}
 
+Table~\ref{table:basic-ga-results} and Table~\ref{table:rga-results} provide a summary of the results from the basic GA, and RGA experiments respectively. Comparing the results shows that the RGA experiments were able to find a better candidate solution than the basic GA experiments.
+
+A closer look at the data revealed that the basic GA experiments were converging early on local optima. The RGA experiments initially converged on similar optima but were able to find new optima after each restarting phase.
+
+% Table~\ref{table:sampleRuns} contains a summary of the GA and RGA experiments. Immediately it is clear that the RGA outperforms the GA. A closer look revealed that the basic GA experiments were converging early on local optima. The RGA experiments initially converged on similar optima but were able to find new optima after each restarting phase. The RGA performed better than the GA but required more than double the amount of generations. Figure~\ref{fig:bestRunRestarting} provides an example of the generational data for the best run of RGA.
+
+% The average RMSD score from the RGA was able to outperform both benchmark RMSD scores but only by a small margin. Fortunately, because the goal is to find a single individual, the best candidate solution from the RGA was able to far exceed the benchmark scores with RMSD of 1.0877. Figure~\ref{fig:bestRunEXAFS} shows the comparison of the EXAFS spectra.
+
 - numbers of generations
 - rga sees more individuals
 - examples of rga
 
 
 \begin{table}
-	\label{table:basic-ga-results}
 	\centering
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | }
 		\hline
@@ -17,16 +24,63 @@
 		Average Best RMSD & 1.3448 & 1.3784 & 1.2792 & 1.3315 & \textbf{1.2626} & 1.3336 \\ \hline
 	\end{tabular}
 	\caption{Basic GA Results}
+	\label{table:basic-ga-results}
 \end{table}
 
 \begin{table}
-	\label{table:rga-results}
 	\centering
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | }
 		\hline
 		Experiment Set & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+		Average Number of Generations & 67 & 81 & 107 & 124 & 67 & 81 \\ \hline
 		Best RMSD & 1.1297 & 1.1545 & 1.1132 & 1.0913 & \textbf{1.046} & 1.0953 \\ \hline
 		Average Best RMSD & 1.2281 & 1.2150 & 1.2095 & 1.2189 & \textbf{1.2031} & 1.2171 \\ \hline
 	\end{tabular}
 	\caption{RGA Results}
+	\label{table:rga-results}
 \end{table}
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				width=14cm,
+				height=6cm,
+				grid=both,
+				title={Best RGA Run},
+				legend entries={Best,Average},
+				xlabel={Generations},
+				ylabel={RMSD}
+			]
+
+			\addplot[mark=x] table [col sep=comma,y index=1, x index=0] {data/rga-sample-run.csv};
+			\addplot[mark=*] table [col sep=comma,y index=2, x index=0] {data/rga-sample-run.csv};
+
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Example of a Restarting Genetic Algorithm}
+	\label{fig:bestRunRestarting}
+\end{figure}
+
+\begin{figure*}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=14cm,
+			height=6cm,
+			grid=both,
+			title={EXAFS Spectra in k space},
+			legend entries={Experimental,Calculated},
+			legend pos=south east,
+			xlabel={$k \mathbin{/} A\textsuperscript{-1}$},
+			ylabel={$EXAFS \chi k\textsuperscript{3}$}
+		]
+
+		\addplot[mark=x] table [col sep=comma,y index=1, x index=0] {data/rga-best-exafs-comparison.csv};
+		\addplot[mark=*,mark size=1] table [col sep=comma,y index=2, x index=0] {data/rga-best-exafs-comparison.csv};
+
+		\end{axis}
+	\end{tikzpicture}
+	\caption{OEC EXAFS Spectra Comparison}
+	\label{fig:bestRunEXAFS}
+\end{figure*}

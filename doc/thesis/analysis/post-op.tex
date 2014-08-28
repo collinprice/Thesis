@@ -6,7 +6,6 @@
 - benefits of post op
 
 \begin{table}
-	\label{table:post-op-pso-results}
 	\centering
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | }
 		\hline
@@ -14,10 +13,10 @@
 		Best RMSD &  & 0.9001 & 1.2445 \\ \hline
 	\end{tabular}
 	\caption{Results of PSO Post-Optimization}
+	\label{table:post-op-pso-results}
 \end{table}
 
 \begin{table}
-	\label{table:post-op-de-results}
 	\centering
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | }
 		\hline
@@ -25,4 +24,28 @@
 		Best RMSD & 1.1386 &1.7267  \\ \hline
 	\end{tabular}
 	\caption{Results of DE Post-Optimization}
+	\label{table:post-op-de-results}
 \end{table}
+
+\begin{figure*}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			width=14cm,
+			height=6cm,
+			grid=both,
+			title={EXAFS Spectra in k space},
+			legend entries={Experimental,Calculated},
+			legend pos=south east,
+			xlabel={$k \mathbin{/} A\textsuperscript{-1}$},
+			ylabel={$EXAFS \chi k\textsuperscript{3}$}
+		]
+
+		\addplot[mark=x] table [col sep=comma,y index=1, x index=0] {data/post-op-pso-exafs-comparison.csv};
+		\addplot[mark=*,mark size=1] table [col sep=comma,y index=2, x index=0] {data/post-op-pso-exafs-comparison.csv};
+
+		\end{axis}
+	\end{tikzpicture}
+	\caption{OEC EXAFS Spectra Comparison}
+	\label{fig:bestRunEXAFS}
+\end{figure*}

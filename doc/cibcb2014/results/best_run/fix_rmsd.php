@@ -1,7 +1,7 @@
 <?php
 
 $file = "results.csv";
-$n = 181;
+$n = 180;
 
 $content = file_get_contents($file);
 $rows = explode("\n",$content);
@@ -19,4 +19,4 @@ foreach($rows as $row) {
         $new_content .= "$cols[0],$cols[1],$cols[2]\n";
 }
 
-file_put_contents("results-fixed.csv",$new_content);
+file_put_contents("results-fixed-2.csv",$new_content);

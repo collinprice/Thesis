@@ -2,7 +2,7 @@
 
 \subsection{Purpose}
 
-% The purpose of this study is to determine how well DE, and PSO perform on the structure refinement problem. In Section~\ref{sec:ga-post-op} DE, and PSO were used as a post-optimization of the results found in Section~\ref{sec:ga-viability}. In this study DE, and PSO will be run with the same individuals used in the initial populations in Section~\ref{sec:ga-viability}.
+The purpose of this study is to attempt to reduce the search space of the structure refinement problem. Table~\ref{table:atom-breakdown} outlines the number of atoms within the OEC. If we could reduce the number of atoms needed to move during the evolutionary process it would reduce the search space. This study will show how a GA performs on the structure refinement problem when certain chemical elements are kept rigid. A rigid chemical element means that the chemical element will not be evolved during the run. The position of the rigid chemical elements will be the same in each individual in the population. 
 
 \begin{table}
 	\centering
@@ -22,6 +22,25 @@
 
 \subsection{System Parameters}
 
+A basic GA was used in this experiment. The system parameters used during the experiment are shown in Table~\ref{table:subset-parameters}. Table~\ref{table:subset-setup} outlines the different experiments that were run. Each experiment contains a different combination of rigid and flexible chemical elements but each experiment used the same GA system parameters. The fitness function used for GA is defined in Subsection~\ref{sec:fitness-exafs}.
+
+\begin{table}
+	\centering
+	\begin{tabular}{ l r }
+		\hline
+		Runs & 10 \\
+		Population size & 50 \\
+		Crossover rate & 0.7 \\
+		Mutation rate & 0.3 \\
+		Elitism & True \\
+		Number of restart attempts & 5 \\
+		Max convergence percentage before restarting & 5\% \\
+		\hline
+	\end{tabular}
+	\caption{GA Subset Parameters}
+	\label{table:subset-parameters}
+\end{table}
+
 \begin{table}
 	\centering
 	\begin{tabular}{ | >{\bfseries}p{2cm} | p{1cm} | p{1cm} | p{1cm} | p{1cm} | p{1cm} | p{1cm} | p{1cm} | p{1cm} | p{1cm} | }
@@ -33,71 +52,3 @@
 	\caption{Experiments with different subsets}
 	\label{table:subset-setup}
 \end{table}
-
-% Two evolutionary algorithms were used in this experiment: DE, and PSO. The system parameters for the DE can be seen in Table~\ref{table:ea-de}, and the system parameters for the PSO can be seen in Table~\ref{table:ea-pso}. The fitness function used for the DE, and PSO is defined in Subsection~\ref{sec:fitness-exafs}. The \textit{velocity parameter} found in Table~\ref{table:ea-pso} represents the random range that was used to generate the initial \textit{velocity vector} of each individual. For example, a \textit{velocity parameter} of 0.01 means the velocity was generated using the possible values $\pm$0.01.
-
-% Representation 1 (See Subsection~\ref{subsec:encoding-1}) was chosen as the individual represetation for both the DE, and PSO. Since each index within the individual is a 3-dimensional coordinate during the \textit{evolution} of each individual vector arithmetic was performed at each index.
-
-% \begin{table}
-% 	\centering
-% 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | c | c | c | c | c | c | }
-% 		\hline
-% 		Exp. Set & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\ \hline
-% 		Pop. Size & 50 & 50 & 50 & 50 & 50 & 50 & 100 & 100 & 100 & 100 & 100 & 100 \\ \hline
-% 		Gens. & 100 & 100 & 100 & 250 & 250 & 250 & 100 & 100 & 100 & 250 & 250 & 250 \\ \hline
-% 		Velocity & 0.01 & 0.05 & 0.1 & 0.01 & 0.05 & 0.1 & 0.01 & 0.05 & 0.1 & 0.01 & 0.05 & 0.1 \\ \hline
-% 	\end{tabular}
-% 	\caption{System parameters for the PSO runs}
-% 	\label{table:ea-pso}
-% \end{table}
-
-% \begin{table}
-% 	\centering
-% 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | }
-% 		\hline
-% 		Experiment Set & 1 & 2 & 3 & 4 \\ \hline
-% 		Population Size & 50 & 50 & 100 & 100 \\ \hline
-% 		Generations & 100 & 200 & 100 & 200 \\ \hline
-% 	\end{tabular}
-% 	\caption{System parameters for the DE runs}
-% 	\label{table:ea-de}
-% \end{table}
-
-% \begin{table}
-% \caption{GA Subset Parameters}
-% \label{table:subsetParameters}
-% \centering
-% \normalsize
-% \begin{tabular}{ l r }
-%   \hline
-%     Runs & 10 \\
-%     Population size & 50 \\
-%     Crossover rate & 0.7 \\
-%     Mutation rate & 0.3 \\
-%     Elitism & True \\
-%     Number of restart attempts & 5 \\
-%     Max convergence percentage before restarting & 5\% \\
-%   \hline
-% \end{tabular}
-% \end{table}
-
-% \begin{table}
-%   \caption{Experiments with different subsets}
-%   \label{table:subsetResults}
-%   \centering
-%   \normalsize
-%   \begin{tabular}{ | l | l | l | }
-%     \hline
-%     Atoms & Best & Average \\ \hline \hline
-%     Mn, Ca, C, O, N, H & 1.1998 & 1.2580 \\ \hline
-%     Mn, Ca, C, O, N & 1.1697 & 1.2621 \\ \hline
-%     Mn, Ca, C & 2.4413 & N/A \\ \hline
-%     Mn, Ca, O & 1.2531 & N/A \\ \hline
-%     Mn, Ca, N & 2.4881 & N/A \\ \hline
-%     Mn, Ca, C, O & 1.1648 & N/A \\ \hline
-%     Mn, Ca, C, N & 2.5143 & 2.5649 \\ \hline
-%     Mn, Ca, O, N & N/A & N/A \\ \hline
-%     Mn, Ca & 2.4916 & 2.5088 \\ \hline
-%   \end{tabular}
-% \end{table}
-
