@@ -2,18 +2,21 @@
 
 \subsection{Analysis}
 
-Table~\ref{table:basic-ga-results} and Table~\ref{table:rga-results} provide a summary of the results from the basic GA, and RGA experiments respectively. Comparing the results shows that the RGA experiments were able to find a better candidate solution than the basic GA experiments.
+Table~\ref{table:basic-ga-results} and Table~\ref{table:rga-results} provide a summary of the results from the basic GA, and RGA experiments respectively. Comparing the results shows that the RGA experiments were able to find a better candidate solution than the basic GA experiments. 
 
-A closer look at the data revealed that the basic GA experiments were converging early on local optima. The RGA experiments initially converged on similar optima but were able to find new optima after each restarting phase.
+A closer look at the data revealed that the basic GA experiments were converging early on local optima. The RGA experiments initially converged on similar optima but were able to find new optima after each restarting phase. Figure~\ref{fig:rga-generational-data} shows what a typical RGA run looks like at each generation. One would notice that there are several \textit{spikes} in the graph where the average fitness jumps. These \textit{spikes} represents a \textit{restart} in the population. During each \textit{restart} the average fitness of the population is disrupted but the fitness quickly improved showing an overall trend downward.
 
-% Table~\ref{table:sampleRuns} contains a summary of the GA and RGA experiments. Immediately it is clear that the RGA outperforms the GA. A closer look revealed that the basic GA experiments were converging early on local optima. The RGA experiments initially converged on similar optima but were able to find new optima after each restarting phase. The RGA performed better than the GA but required more than double the amount of generations. Figure~\ref{fig:bestRunRestarting} provides an example of the generational data for the best run of RGA.
+The number of generations in each RGA run varied based on when the population converged. Table~\ref{table:rga-results} contains the average number of generations each run had for each experiment.
+
+At first it may seem biased that the RGA was able to find a better candidate solution than the GA because it was allowed to see more unique individuals and ran for more generations but the GA had soem pitfalls when it was allowed the same privileges. Increasing the size of the GA's populations had little affect on its ability to find improved candidate solutions. Increasing the number of generations for the GA's also did not affect the solutions. The GA runs would converge quickly and become stuck in a local optima.
+
+The GA experiments favoured having \textit{elitism} enabled.
+
+The experiments that produced the best candidate solutions for both the GA, and RGA were experiments that ran with a crossover rate of 70\% and a mutation rate of 30\% (WHY???).
+
+The best candidate solution found by the RGA can be seen in Figure~\ref{fig:rga-best-exafs}. The \textit{humps} on the calculated EXAFS spectrum appear to be getting close to the experimental EXAFS spectrum except in a few instances. Where $k$ is between 7.5 and 10 the experimental EXAFS spectrum is more chaotic and the calculated EXAFS spectrum is having a tougher time conforming. The chaotic nature of the data may be due to the margin of error in collecting the experimental EXAFS spectrum. A future technique may be to smooth out the experimental EXAFS spectrum in order to get a more accurate RMSD comparison. Another structure refinement technique could be to reduce the range on $k$ for comparison. Comparing the RMSD between $k = [1,7.5]$ may produce improved results because the fitness function would contains less erroneous data points.
 
 % The average RMSD score from the RGA was able to outperform both benchmark RMSD scores but only by a small margin. Fortunately, because the goal is to find a single individual, the best candidate solution from the RGA was able to far exceed the benchmark scores with RMSD of 1.0877. Figure~\ref{fig:bestRunEXAFS} shows the comparison of the EXAFS spectra.
-
-- numbers of generations
-- rga sees more individuals
-- examples of rga
-
 
 \begin{table}
 	\centering
@@ -50,7 +53,7 @@ A closer look at the data revealed that the basic GA experiments were converging
 				title={Best RGA Run},
 				legend entries={Best,Average},
 				xlabel={Generations},
-				ylabel={RMSD}
+				ylabel={Fitness (RMSD)}
 			]
 
 			\addplot[mark=x] table [col sep=comma,y index=1, x index=0] {data/rga-sample-run.csv};
@@ -58,8 +61,8 @@ A closer look at the data revealed that the basic GA experiments were converging
 
 		\end{axis}
 	\end{tikzpicture}
-	\caption{Example of a Restarting Genetic Algorithm}
-	\label{fig:bestRunRestarting}
+	\caption{Example Run of a Restarting Genetic Algorithm}
+	\label{fig:rga-generational-data}
 \end{figure}
 
 \begin{figure*}
@@ -69,9 +72,9 @@ A closer look at the data revealed that the basic GA experiments were converging
 			width=14cm,
 			height=6cm,
 			grid=both,
-			title={EXAFS Spectra in k space},
+			title={EXAFS Spectra Comparison in k space},
 			legend entries={Experimental,Calculated},
-			legend pos=south east,
+			legend pos=south west,
 			xlabel={$k \mathbin{/} A\textsuperscript{-1}$},
 			ylabel={$EXAFS \chi k\textsuperscript{3}$}
 		]
@@ -81,6 +84,6 @@ A closer look at the data revealed that the basic GA experiments were converging
 
 		\end{axis}
 	\end{tikzpicture}
-	\caption{OEC EXAFS Spectra Comparison}
-	\label{fig:bestRunEXAFS}
+	\caption{Best OEC EXAFS Spectra Comparison from RGA}
+	\label{fig:rga-best-exafs}
 \end{figure*}

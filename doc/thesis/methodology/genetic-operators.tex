@@ -6,6 +6,7 @@
 The basic one-point crossover operator was chosen for the experiments (Described in Subsection~\ref{subsec:ga-operators}). One point crossover is generally less destructive to the individuals than other forms of crossover. %Other crossover operators that caused greater exploitation of the individuals had a negative affect on the overall fitness score. A crossover operator that causes minimal disruption to the individual was able to find better candidate solutions.
 
 \subsection{Mutation}
+\label{subsec:mutation}
 
 For the mutation operator a single atomic coordinate will be moved. A random atomic coordinate is selected from the individual and its position is moved randomly by 0.05\AA\  using Euclidean distance. The resulting position will be 0.05\AA\ away from its original position. In order to determine how much distance the atomic position should be moved, an analysis was needed to learn more about how changing atomic positions affects the calculated EXAFS spectra.
 
