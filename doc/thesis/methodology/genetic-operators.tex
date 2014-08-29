@@ -3,14 +3,14 @@
 
 \subsection{Crossover}
 
-The basic one-point crossover operator was chosen for the experiments (Described in Subsection~\ref{subsec:ga-operators}). One point crossover is generally less destructive to the individuals than other forms of crossover. %Other crossover operators that caused greater exploitation of the individuals had a negative affect on the overall fitness score. A crossover operator that causes minimal disruption to the individual was able to find better candidate solutions.
+The basic one-point crossover operator was chosen for the experiments, as described in Subsection~\ref{subsec:ga-operators}. One point crossover is generally less destructive to the individuals than other forms of crossover. %Other crossover operators that caused greater exploitation of the individuals had a negative affect on the overall fitness score. A crossover operator that causes minimal disruption to the individual was able to find better candidate solutions.
 
 \subsection{Mutation}
 \label{subsec:mutation}
 
 For the mutation operator a single atomic coordinate will be moved. A random atomic coordinate is selected from the individual and its position is moved randomly by 0.05\AA\  using Euclidean distance. The resulting position will be 0.05\AA\ away from its original position. In order to determine how much distance the atomic position should be moved, an analysis was needed to learn more about how changing atomic positions affects the calculated EXAFS spectra.
 
-The analysis consisted of moving each atom, individually, in a variety of directions and calculating its RMSD score. Each atom was moved in a total of six directions ($\pm$X, $\pm$Y, and $\pm$Z), at a variety of distances (0.001\AA, 0.005\AA, 0.01\AA, 0.025\AA, 0.05\AA, 0.1\AA, 0.5\AA, 1\AA, and 5\AA). This was done to determine how much movement was required of an atom to make a significant change to the RMSD score. Table~\ref{table:minMove} shows results of how much movement is required to produce a 1\% and 5\% change to their RMSD scores. Since there is more than one instance of each chemical element in OEC, the distance chosen was the first distance that produced the minimum change because the goal was to find the absolute minimum for each chemical element.
+The analysis consisted of moving each atom, individually, in a variety of directions and calculating its RMSD score. Each atom was moved in a total of six directions ($\pm$X, $\pm$Y, and $\pm$Z), at a variety of distances (0.001\AA, 0.005\AA, 0.01\AA, 0.025\AA, 0.05\AA, 0.1\AA, 0.5\AA, 1\AA, and 5\AA). This was done to determine how much movement was required of an atom to make a significant change to the RMSD score. Table~\ref{table:minMove} shows the results of how much movement is required to produce a 1\% and 5\% change to their RMSD scores. Since there is more than one instance of each chemical element in OEC, the distance chosen was the first distance that produced the minimum change because the goal was to find the absolute minimum for each chemical element.
 
 \begin{table}
 	\centering
@@ -28,7 +28,7 @@ The analysis consisted of moving each atom, individually, in a variety of direct
 	\label{table:minMove}
 \end{table}
 
-The value of 0.05\AA\ was chosen for the experiments as a middle ground that could be applied to each chemical element. It should be noted that the value of 0.05\AA\ is particular to OEC. A similar analysis could be done to determine the minimum move distance for each element in another chemical complex.
+The value of 0.05\AA\ was chosen for the experiments as a middle ground that could be applied to each chemical element. It should be noted that the value of 0.05\AA\ is particular to OEC. A similar analysis could be performed to determine the minimum move distance for each element in another chemical complex.
 
 \subsection{Selection}
 

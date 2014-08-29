@@ -1,11 +1,11 @@
 \section{Genetic Algorithm}
 \label{sec:ga}
 
-A genetic algorithm (GA) is a search heuristic that mimic natural selection. In a GA individuals go through a \textit{selection} process and are bred(\textit{crossed}) with other individuals to create new individuals. Individuals in a GA are commonly refered to as \textit{chromosomes}. Figure~\ref{fig:gaFlowchart} depicts how evolution occurs in a GA.
+A genetic algorithm (GA) is a search heuristic that mimics natural selection. In a GA individuals go through a \textit{selection} process and are bred(\textit{crossed}) with other individuals to create new individuals. Individuals in a GA are commonly refered to as \textit{chromosomes}. Figure~\ref{fig:gaFlowchart} depicts how evolution occurs in a GA.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[bb=0 0 307 362,scale=0.5]{figures/GA.jpeg}
+  \includegraphics[bb=0 0 288 390,scale=0.5]{figures/GA.jpeg}
   \caption{GA Evolution}
   \label{fig:gaFlowchart}
 \end{figure}
@@ -14,7 +14,7 @@ During each generation a new population is created using the previous generation
 
 \subsection{Chromosome}
 
-The individuals of a GA represent possible candidate solutions to the problem. Typically a chromosome is represented as an array where each index of the array represents a property of the candidate solution. There are no restrictions to the encoding of a chromosome but each property of the chromosome must be independant from the others. The simplest example of a representation is a binary array of 1's and 0's, as shown in Figure~\ref{fig:sampleChromosome}. In the sample chromosomes provided the 1's and 0's might represent whether a feature is enabled or disabled, 1 being enabled and 0 being disabled, in the candidate solution.
+The individuals of a GA represent possible candidate solutions to the problem. Typically a chromosome is represented as an array where each index of the array represents a property of the candidate solution. There are no restrictions to the encoding of a chromosome but each property of the chromosome must be independent from the others. The simplest example of a representation is a binary array of 1's and 0's, as shown in Figure~\ref{fig:sampleChromosome}. In the sample chromosomes provided the 1's and 0's might represent whether a feature is enabled or disabled, 1 being enabled and 0 being disabled, in the candidate solution.
 
 \begin{figure}[H]
   \label{fig:sampleChromosome}
@@ -30,11 +30,11 @@ The individuals of a GA represent possible candidate solutions to the problem. T
 \subsection{Genetic Operators}
 \label{subsec:ga-operators}
 
-Each of the following operators represent a piece of a genetic algorithm. They facilitate the evolutionary process in the effort to find better candidate solutions. Each of these operators has a unique purpose in the search algorthm but there are many different ways in which these goals can be carried out. Only a few of the different methods will be described in this work.
+Each of the following operators represent a piece of a genetic algorithm. They facilitate the evolutionary process in the effort to find better candidate solutions. Each of these operators has a unique purpose in the search algorithm but there are many different ways in which these goals can be carried out. Only a few of the different methods will be described in this work.
 
-\textit{Selection Operator}: This operator is very important to the \textit{Crossover} and \textit{Mutation} operators. The idea behind this operator is to put selection pressure on the population during the evolutionary process. Individuals with a better fitness score should be allowed a better chance of breeding to create the next population. During the selection process two individuals are chosen for breeding or reproduction. There are several varieties of selection methods but only \textit{k-Tournament selection} will be explained as this is the method used in the algorithm in \textbf{(chapter goes here)}.
+\textit{Selection Operator}: This operator is very important to the \textit{Crossover} and \textit{Mutation} operators. The idea behind this operator is to put selection pressure on the population during the evolutionary process. Individuals with a better fitness score should be allowed a better chance of breeding to create the next population. During the selection process two individuals are chosen for breeding or reproduction. There are several varieties of selection methods but only \textit{k-Tournament selection} will be explained as this is the only method used in this work.
 
-The \textit{k}-Tournament selection method works by randomly selecting \textit{k} individuals from the population, where \textit{k} is less than the number of individuals in the population, and selecting the individual that has the best fitness score from the \textit{k} individuals. The value of \textit{k} should be relatively small compared to the size of the population. If the value of \textit{k} is too large it would defeat the purpose of this selection method. For example, if there is a population size of 100 a suitable value of \textit{k} is around 2-5.
+The \textit{k}-Tournament selection method works by randomly selecting \textit{k} individuals from the population, where \textit{k} is less than the number of individuals in the population, and selecting the individual that has the best fitness score from the \textit{k} individuals. The value of \textit{k} should be relatively small compared to the size of the population. If the value of \textit{k} is too large it would defeat the purpose of this selection method. For example, if there is a population size of 100 then a suitable value of \textit{k} is around 2-5.
 
 \textit{Crossover Operator}: This operator is essential to evolving the individuals of the population. Crossover is the mechanism by which two individuals breed to create two new individuals. With respect to the evolutionary process, crossover exploits the current information that is contained within the population in order to find improved individuals. The most widely used type of crossover is N-point crossover.
 
@@ -61,7 +61,7 @@ N-point crossover works by randomly selecting N cutting points and swapping the 
   \label{fig:2PointCrossover}
 \end{figure}
 
-\textit{Mutation Operator}: The mutation operator is used to introduce random changes to the individuals during evolution. Mutations to individuals are a way to explore the search space. Depending on how the initial population was created there may not be the necessary information in the population to find the optimal solution with crossover alone. Mutations allow for new information to possibly be introduced into the population. A common type of mutation is single-point mutation where a single index in your individual is modified. Figure~\ref{fig:mutation} demonstrates single-point mutation.
+\textit{Mutation Operator}: The mutation operator is used to introduce random changes to the individuals during evolution. Mutations to individuals are a way to explore the search space. Depending on how the initial population was created there may not be the necessary information in the population to find the optimal solution with crossover alone. Mutations allow for new information to possibly be introduced into the population. A common type of mutation is single-point mutation where a single index in a given individual is modified. Figure~\ref{fig:mutation} demonstrates single-point mutation.
 
 \begin{figure}[H]
   \centering
@@ -84,4 +84,4 @@ N-point crossover works by randomly selecting N cutting points and swapping the 
   \label{fig:mutation}
 \end{figure}
 
-\textit{Elitism Operator}: During each generation of the genetic algorithm a new population is created using the individuals from the population in the previous generation. The new population is bred from the previous individuals with the hopes of creating better individuals. Sometimes this is not the case and the population can end up losing valuable information from individuals that were not chosen during the selection process. To prevent this from happening the elitism operator was create. The elitism operator works by seeding the next generations population with the individuals with the best fitness score. Typically only the top 1\% of individuals are copied into the next generation.
+\textit{Elitism Operator}: During each generation of the genetic algorithm a new population is created using the individuals from the population in the previous generation. The new population is bred from the previous individuals with the hopes of creating better individuals. Sometimes this is not the case and the population can end up losing valuable information from individuals that were not chosen during the selection process. To prevent this from happening the elitism operator was created. The elitism operator works by seeding the next generation's population with the individuals with the best fitness score. Typically only the top 1\% of individuals are copied into the next generation.
