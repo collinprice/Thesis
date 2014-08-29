@@ -7,7 +7,7 @@ The purpose of this study is to improve upon the results found in the study disc
 
 \subsection{Population}
 
-The initial population for the DE, and PSO were generated using the random generation technique described in Subsection~\ref{subsec:random-population}. The seed candidate solution for the random generation was the best found candidate solution from the RGA experiments. The random generation technique was used in this experiment because it is suspected as the best technique to find the local optima in this situation.
+The initial population for the DE, and PSO were generated using the random generation technique described in Subsection~\ref{subsec:random-population}. The seed candidate solution for the random generation was the best found candidate solution from the RGA experiments, which had an RMSD of 1.046. The random generation technique was used in this experiment because it is suspected as the best technique to find the local optima in this situation.
 
 % - answers were close so we tried local search technique
 % - suggested based on previous work maybe?
@@ -33,12 +33,12 @@ An alternative individual representation was used for this experiment. DE, and P
 
 \begin{table}
 	\centering
-	\begin{tabular}{ | >{\bfseries}c | c | c | c | }
+	\begin{tabular}{ | >{\bfseries}c | c | c | }
 		\hline
-		Experiment Set & 1 & 2 & 3 \\ \hline
-		Initial Movement Radius & 0.05 & 0.05 & 0.25 \\ \hline
-		Generations & 100 & 30 & 30 \\ \hline
-		Population Size & 50 & 50 & 50 \\ \hline
+		Experiment Set & 1 & 2 \\ \hline
+		Initial Movement Radius & 0.05 & 0.25 \\ \hline
+		Generations & 30 & 30 \\ \hline
+		Population Size & 50 & 50 \\ \hline
 	\end{tabular}
 	\caption{System parameters for the Post-Optimization PSO runs}
 	\label{table:post-op-pso}
