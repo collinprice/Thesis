@@ -4,11 +4,11 @@
 #include <vector>
 #include <fstream>
 
-class EXAFSGA {
+class MOOGA {
 	public:
 
-		EXAFSGA(EXAFSEvaluator* exafs_evaluator, double mutation_rate, double crossover_rate, bool elitism, int max_generations, std::string results_file);
-		~EXAFSGA();
+		MOOGA(EXAFSEvaluator* exafs_evaluator, double mutation_rate, double crossover_rate, bool elitism, int max_generations, std::string results_file);
+		~MOOGA();
 		void begin(std::vector< std::vector< std::vector<PDBAtom> > > initial_populations);
 		void begin_recentering(std::vector< std::vector< std::vector<PDBAtom> > > initial_populations, int population_size, double convergence_rate, int max_iterations);
 
@@ -47,4 +47,7 @@ class EXAFSGA {
 
 		bool convergence();
 		bool convergence(double rate);
+
+		void rankPopulation();
+		int chromosomeDominates(Chromosome& a, Chromosome& b);
 };

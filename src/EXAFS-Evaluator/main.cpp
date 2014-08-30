@@ -3,6 +3,7 @@
 #include "exafsde.h"
 #include "exafsmoode.h"
 #include "exafspso.h"
+#include "mooga.h"
 #include "moopso.h"
 #include "dcdhelper.h"
 #include "clustering.h"
@@ -378,7 +379,7 @@ int main(int argc, char **argv) {
 			MOOPSO pso(exafs_evaluator, ga_config.getDouble("inertia"), ga_config.getDouble("social"), ga_config.getDouble("cognitive"), ga_config.getDouble("velocity-range"), ga_config.getInt("max-generations"), ga_config.getString("results"));
 			pso.begin(initial_populations);
 
-		} else if (ga_config.getString("algo-type").compare("ga_recenter") == 0) {
+		} else if (ga_config.getString("algo-type").compare("rga") == 0) {
 
 			EXAFSGA ga(exafs_evaluator, ga_config.getDouble("mutation"), ga_config.getDouble("crossover"), ga_config.getBool("elitism"), ga_config.getInt("max-generations"), ga_config.getString("results"));
 			ga.begin_recentering(initial_populations, ga_config.getInt("population-size"), ga_config.getDouble("convergence-rate"), ga_config.getInt("recentering"));

@@ -15,6 +15,7 @@ CPP_SRC = \
 	exafsevaluator.cpp \
 	chromosome.cpp \
 	exafsga.cpp \
+	mooga.cpp \
 	dcdhelper.cpp \
 	clustering.cpp \
 	exafsde.cpp \
