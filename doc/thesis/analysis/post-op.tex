@@ -1,9 +1,7 @@
 \section{Genetic Algorithm: Post-Optimization}
 \label{sec:post-op-analysis}
 
-\subsection{Analysis}
-
-Table~\ref{table:post-op-de-results} and Table~\ref{table:post-op-pso-results} provide a summary of the results from the DE, and PSO experiments respectively. Each experiment was run a total of 30 times to obtain the average. The two algorithms were performed using individuals generated using two different \textit{initial movement radius}. Using the larger \textit{initial movement radius} of $\pm$0.25\AA\ had a negative impact on the DE, and PSO candidate solutions. The large \textit{initial movement radius} caused the experiments to move from the initial local optima, that was found using the RGA, and move into sub-optimal solutions. As we decreased the \textit{initial movement radius} the results started to improve. Using the smaller \textit{initial movement radius} of $\pm$0.05\AA\ provided the best results.
+Table~\ref{table:post-op-de-results} and Table~\ref{table:post-op-pso-results} provide a summary of the results from the DE, and PSO experiments respectively. Each experiment in the results table was run 30 times to ensure statistical significance. 
 
 \begin{table}
 	\centering
@@ -31,9 +29,11 @@ Table~\ref{table:post-op-de-results} and Table~\ref{table:post-op-pso-results} p
 	\label{table:post-op-pso-results}
 \end{table}
 
-The results from the DE experiments were never able to improve upon the seed candidate solution. Decreasing the \textit{initial movement radius} improved the results from the DE but it was not enough to local improved candidate solutions.
+The two algorithms were performed using individuals generated using two different \textit{initial movement radii}. Using the larger \textit{initial movement radius} of $\pm$0.25\AA\ had a negative impact on the DE, and PSO candidate solutions. The large \textit{initial movement radius} caused the experiments to move from the initial local optima, that was found using the RGA, into sub-optimal solutions. As we decreased the \textit{initial movement radius} the results started to improve. Using the smaller \textit{initial movement radius} of $\pm$0.05\AA\ provided the best results.
 
-In contrast, the results from the PSO experiments were very successful. Using the \textit{initial movement radius} of $\pm$0.05\AA\ the PSO was able to greatly improve upon the seed candidate solution. Both the DE, and PSO were run for 30 generations. The DE experiments had reached a convergence but the PSO data was still on a downward slope. The PSO was run for 200 generations and it ended up locating even better solutions. Figure~\ref{fig:post-op-pso-best-exafs} shows the best EXAFS spectra after optimization from the PSO. The RMSD score of the candidate solution was significantly reduced which shows that PSO works very well as a post-optimization strategy. 
+The results from the DE experiments were never able to improve upon the seed candidate solution. Decreasing the \textit{initial movement radius} improved the results for the DE but it was still unable to produce results that improved upon the seed candidate solution.
+
+In contrast, the results from the PSO experiments were very successful. Using the \textit{initial movement radius} of $\pm$0.05\AA\ the PSO was able to greatly improve upon the seed candidate solution. Figure~\ref{fig:post-op-pso-best-exafs} shows the best EXAFS spectra after optimization from the PSO. The RMSD score of the candidate solution was significantly reduced which shows that PSO works very well as a post-optimization strategy.
 
 \begin{figure*}
 	\centering
@@ -57,3 +57,5 @@ In contrast, the results from the PSO experiments were very successful. Using th
 	\caption{OEC EXAFS Spectra Comparison}
 	\label{fig:post-op-pso-best-exafs}
 \end{figure*}
+
+Mann-Whitney U tests were performed on the results of the DE, and PSO experiment sets and the results from the RGA experiment sets in Section~\ref{sec:ga-analysis}. The results of the PSO experiments were statistically better than the results of the DE experiments. The improved results found using the reduced \textit{initial movement radius} were statistically consistent. Comparing the PSO experiment results with the RGA experiment results showed that the PSO performed statistically better than the RGA. Its worth noting that although the DE experiments could not improve upon the seed candidate solution the results of the DE compared to the RGA were statistically better.

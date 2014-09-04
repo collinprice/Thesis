@@ -1,14 +1,20 @@
-\section{Evolutionary Algorithms}
+\section{Alternative Algorithms}
 
 \subsection{Purpose}
 
-The purpose of this study is to determine how well DE, and PSO perform on the structure refinement problem. In Section~\ref{sec:ga-post-op} DE, and PSO were used as a post-optimization of the results found in Section~\ref{sec:ga-viability}. In this study DE, and PSO will be run with the same individuals used in the initial populations in Section~\ref{sec:ga-viability}.
+The purpose of this study is to determine how well DE, and PSO perform on the structure refinement problem. In Section~\ref{sec:ga-post-op} DE, and PSO were used as a post-optimization of the results found in Section~\ref{sec:ga-viability}. In this study DE, and PSO will be more directly compared with the algorithms used in Section~\ref{sec:ga-experiment}.
+
+\subsection{Population}
+
+The initial population for both the DE, and PSO will be created from a random sampling of the 300 candidate solutions that were generated using the molecular dynamics simulation discussed in Subsection~\ref{subsec:molecular-population}.
 
 \subsection{System Parameters}
 
-Two evolutionary algorithms were used in this experiment: DE, and PSO. The system parameters for the DE can be seen in Table~\ref{table:ea-de}, and the system parameters for the PSO can be seen in Table~\ref{table:ea-pso}. The fitness function used for the DE, and PSO is defined in Subsection~\ref{sec:fitness-exafs}. The \textit{velocity parameter} found in Table~\ref{table:ea-pso} represents the random range that was used to generate the initial \textit{velocity vector} of each individual. For example, a \textit{velocity parameter} of 0.01 means the velocity was generated using the possible values $\pm$0.01.
+Two algorithms were used in this experiment: DE, and PSO. The system parameters for the DE can be seen in Table~\ref{table:ea-de}, and the system parameters for the PSO can be seen in Table~\ref{table:ea-pso}. The fitness function used for the DE, and PSO is defined in Subsection~\ref{sec:fitness-exafs}.
 
-Representation 1 (See Subsection~\ref{subsec:encoding-1}) was chosen as the individual represetation for both the DE, and PSO. Since each index within the individual is a 3-dimensional coordinate during the \textit{evolution} of each individual vector arithmetic was performed at each index.
+Representation 1 (See Subsection~\ref{subsec:encoding-1}) was chosen as the individual representation for both the DE, and PSO. Since each index within the individual is a 3-dimensional coordinate, these values are updated using standard vector arithmetic at each index.
+
+The \textit{velocity parameter} found in Table~\ref{table:ea-pso} represents the random range that was used to generate the initial \textit{velocity vector} of each particle in the PSO. For example, a \textit{velocity parameter} of 0.01 means that each velocity vector was generated using random values between -0.01 and 0.01.
 
 \begin{table}
 	\centering
