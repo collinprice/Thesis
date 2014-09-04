@@ -14,7 +14,7 @@ During each generation a new population is created using the previous generation
 
 \subsection{Chromosome}
 
-The individuals of a GA represent possible candidate solutions to the problem. Typically a chromosome is represented as an array where each index of the array represents a property of the candidate solution. There are no restrictions to the encoding of a chromosome but each property of the chromosome must be independent from the others. The simplest example of a representation is a binary array of 1's and 0's, as shown in Figure~\ref{fig:sampleChromosome}. In the sample chromosomes provided the 1's and 0's might represent whether a feature is enabled or disabled, 1 being enabled and 0 being disabled, in the candidate solution.
+The individuals of a GA represent possible candidate solutions to the problem. Typically a chromosome is represented as an array where each index of the array represents a property of the candidate solution. There are no restrictions to the encoding of a chromosome. There can be many ways of encoding the solutions to a problem in a chromosome and these can have a direct result on the success of the experiment. Multiple encodings should be attempted for best results. The simplest example of a representation is a binary array of 1's and 0's, as shown in Figure~\ref{fig:sampleChromosome}. In the sample chromosomes provided the 1's and 0's might represent whether a feature is enabled or disabled, 1 being enabled and 0 being disabled, in the candidate solution.
 
 \begin{figure}[H]
   \label{fig:sampleChromosome}

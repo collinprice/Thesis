@@ -12,11 +12,19 @@ In order to make the atomic structure refinement work using only a subset of the
 
 \begin{table}
 	\centering
-	\begin{tabular}{ | >{\bfseries}p{1.9cm} | c | c | c | c | c | c | c | c | c | }
+	\begin{tabular}{ | >{\bfseries}p{1.9cm} | c | c | c | c | c | }
 		\hline
-		Exp. Set & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
-		Best RMSD & 1.2031 & 1.1730 & 2.4481 & 1.2566 & 2.4951 & \textbf{1.1681} & 2.5213 & N/A & 2.4986 \\ \hline
-		Average RMSD & 1.2615 & 1.2656 & N/A & N/A & N/A & N/A & 2.5720 & N/A & 2.5158 \\ \hline
+		Exp. Set & 1 & 2 & 3 & 4 & 5 \\ \hline
+		Best RMSD & 1.2031 & 1.1730 & 2.4481 & 1.2566 & 2.4951 \\ \hline
+		Average RMSD & 1.2615 & 1.2656 & N/A & N/A & N/A \\ \hline
+	\end{tabular}
+	\\
+	\vspace{3 mm}
+	\begin{tabular}{ | >{\bfseries}p{1.9cm} | c | c | c | c | }
+		\hline
+		Exp. Set & 6 & 7 & 8 & 9 \\ \hline
+		Best RMSD & \textbf{1.1681} & 2.5213 & N/A & 2.4986 \\ \hline
+		Average RMSD & N/A & 2.5720 & N/A & 2.5158 \\ \hline
 	\end{tabular}
 	\caption{Experiments with different subsets}
 	\label{table:subset-results}
