@@ -7,8 +7,8 @@ Table~\ref{table:ea-de-results} and Table~\ref{table:ea-pso-results} provide a s
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | }
 		\hline
 		Experiment Set & 1 & 2 & 3 & 4 \\ \hline
-		Best RMSD & 0.9793 & 0.9405 & 1.0357 & 0.9646 \\ \hline
-		Average Best RMSD & 1.1120 & 1.0540 & 1.1453 & 1.0624 \\ \hline
+		Best RMSD & 0.9793 & \textbf{0.9405} & 1.0357 & 0.9646 \\ \hline
+		Average Best RMSD & 1.1120 & \textbf{1.0540} & 1.1453 & 1.0624 \\ \hline
 	\end{tabular}
 	\caption{Results for the DE runs}
 	\label{table:ea-de-results}
@@ -68,3 +68,22 @@ Figure~\ref{fig:pso-best} demonstrates one of the best candidate solutions. It c
 \end{figure*}
 
 The results found in this section indicate that algorithms that operate on a continuous space perform better than those that use a more discrete search space. We suspect that this may be true only for smaller search spaces. The complex analyzed in this work is relatively small with only 79 atoms required for EXAFS spectra comparison. If one was attempting to optimize the EXAFS spectrum and the force fields involved, the search space would grow to 1269 atoms. This is an exponential increase is degrees of freedom. In this case a genetic algorithm may be better suited.
+
+Table~\ref{fig:summary-rmsd} provides a comparison of the results found in a previous study~\cite{luber2011s1} to the results found in this work. Each of the algorithms used was able to find a better candidate solution for OEC in S$_{1}$. The major difference between the candidate solutions found in the previous study~\cite{luber2011s1} and this work is that their candidate solutions have also had their force fields optimized. We suspect that the previous researchers goals of optimizing both the force fields and EXAFS spectrum is what caused their candidate solutions to become stuck in a local optima. Force field calculations do play an important role in creating a stable candidate solution but these alterations to the atomic structure may be better suited as a post-optimization.
+
+\begin{table}
+	\centering
+	\begin{tabular}{ | l | l | l | }
+		\hline
+		Algorithm & Best RMSD \\ \hline
+		DFT-QM/MM~\cite{luber2011s1} & 1.2679 \\ \hline
+		R-QM/MM~\cite{luber2011s1} & 1.2437 \\ \hline
+		GA & 1.0533 \\ \hline
+		RGA & 0.9649 \\ \hline
+		Post-Optimized PSO & 0.7977 \\ \hline
+		DE & 0.9405 \\ \hline
+		PSO & \textbf{0.6109} \\ \hline
+	\end{tabular}
+	\caption{Summary of Best Candidate Solutions}
+	\label{fig:summary-rmsd}
+\end{table}
