@@ -1,16 +1,24 @@
-\section{Evolutionary Algorithms}
+\section{Alternative Algorithms}
 
-\subsection{Analysis}
+Table~\ref{table:ea-de-results} and Table~\ref{table:ea-pso-results} provide a summary of the results from the DE, and PSO experiments respectively. Each experiment in the results table was run 30 times to ensure statistical significance.
 
-After viewing the results from the DE, and PSO experiments in Section~\ref{sec:post-op-analysis} these algorithms were suspected to perform well on the structure refinement problem. Table~\ref{table:ea-de-results} shows a summary from the DE experiments and Table~\ref{table:ea-pso-results} provide a summary of the results from the PSO experiments. Each experiment was run a total of 30 times to obtain the average.
+\begin{table}
+	\centering
+	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | }
+		\hline
+		Experiment Set & 1 & 2 & 3 & 4 \\ \hline
+		Best RMSD & 0.9793 & 0.9405 & 1.0357 & 0.9646 \\ \hline
+		Average Best RMSD & 1.1120 & 1.0540 & 1.1453 & 1.0624 \\ \hline
+	\end{tabular}
+	\caption{Results for the DE runs}
+	\label{table:ea-de-results}
+\end{table}
 
 \begin{table}
 	\centering
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | }
 		\hline
 		Exp. Set & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
-		% Best RMSD & 0.7735 & 0.6840 & 0.7498 & \textbf{0.6058} & 0.6568 & 0.6429 \\ \hline
-		% Average RMSD & 0.9121 & 0.9046 & 0.9090 & 0.7743 & 0.7643 & 0.7731 \\ \hline
 		Best RMSD & 0.7735 & 0.6840 & 0.7498 & \textbf{0.6109} & 0.6653 & 0.6621 \\ \hline
 		Average Best RMSD & 0.9136 & 0.9004 & 0.9049 & 0.8025 & 0.7907 & 0.7933 \\ \hline
 	\end{tabular}
@@ -19,8 +27,6 @@ After viewing the results from the DE, and PSO experiments in Section~\ref{sec:p
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | }
 		\hline
 		Exp. Set & 7 & 8 & 9 & 10 & 11 & 12 \\ \hline
-		% Best RMSD & 0.7392 & 0.6881 & 0.7306 & 0.6440 & 0.6398 & 0.6504 \\ \hline
-		% Average RMSD & 0.8724 & 0.8876 & 0.8836 & 0.7563 & 0.7441 & \textbf{0.7369} \\ \hline
 		Best RMSD & 0.7392 & 0.6881 & 0.7306 & 0.6546 & 0.6571 & 0.6688 \\ \hline
 		Average Best RMSD & 0.8775 & 0.8856 & 0.8836 & 0.7750 & \textbf{0.7714} & 0.7594 \\ \hline
 	\end{tabular}
@@ -28,23 +34,19 @@ After viewing the results from the DE, and PSO experiments in Section~\ref{sec:p
 	\label{table:ea-pso-results}
 \end{table}
 
-\begin{table}
-	\centering
-	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | }
-		\hline
-		Experiment Set & 1 & 2 & 3 & 4 \\ \hline
-		% Best RMSD & 0.9793 & \textbf{0.9405} & 1.0357 & 0.9646 \\ \hline
-		% Average Best RMSD & 1.1055 & \textbf{1.0554} & 1.1456 & 1.0635 \\ \hline
-		Best RMSD & 0.9793 & 0.9405 & 1.0357 & 0.9646 \\ \hline
-		Average Best RMSD & 1.1120 & 1.0540 & 1.1453 & 1.0624 \\ \hline
-	\end{tabular}
-	\caption{Results for the DE runs}
-	\label{table:ea-de-results}
-\end{table}
 
-Comparing the results of the DE, and PSO with the results of the GA, and RGA one would notice that the search algorithms that operated on a continuous space performed better than the discrete algorithms.
+% After the success of the PSO exper viewing the results from the DE, and PSO experiments in Section~\ref{sec:post-op-analysis} these algorithms were suspected to perform well on the structure refinement problem.
 
-The DE, and PSO experiments were initially run using a variety of different system parameters. The results shown in Table~\ref{table:ea-de-results} and Table~\ref{table:ea-pso-results} used the following tuning parameters. The PSO algorithm has three tunable user defined parameters: inertia, social and cognitive. Based on the work performed in the research paper~\cite{eberhart2000comparing} the parameters social and cognitive was set to 1.496180, while inertia was set to 0.729844. The DE algorithm has two tunable user defined parameters: differential weight, and crossover probability. Several different combinations of values for differential weight, and crossover probability were used but the parameters that produced the best results were from a research paper from Hvass Laboratories~\cite{pedersen2010good} where differential weight was set to 0.4717, and crossover probability was set to 0.8803.
+% Comparing the results of the DE, and PSO with the results of the GA, and RGA one would notice that the search algorithms that operated on a continuous space performed better than the discrete algorithms.
+
+The DE, and PSO experiments performed very well on the structure refinement problem. These algorithms were able to succeed in finding better candidate solutions to the problem than the results from the RGA in Section~\ref{sec:ga-analysis} and the PSO in Section~\ref{sec:post-op-analysis}.
+
+Mann-Whitney U tests were performed on the results of the DE, and PSO experiment sets. The results from testing only the PSO experiment set revealed that there were two clear statistical groupings. The two groups consisted of the experiments with a generation count of 100, and the experiments with a generation count of 200. The results within these two groups had no statistical difference but the group with a higher generation count performed statistically better than the other group. Modifying the initial velocity speeds had little statistical affect on the solutions. The results of the DE showed the same outcomes. Two statistical groups formed from the experiments that had the same number of generations. The experiments with the greater number of generations performed statistically better than the other group.
+
+The two experiment sets shared exactly the same statistical conclusions. The population sizes had no affect on the results of the experiments. The experiments with a population size of 50 performed statistically the same as the ones with a population size of 100. This characteristic could be caused by the method at which the populations are initialized. The molecular dynamic simulation causes the individual atoms to oscillate back and forth. The individuals used in the initial populations may have been similar enough that there was some overlap in the search space. Having two statistical groups forming around the number of generations only makes sense. The group with the greater generation count was allowed more time to explore the search space.
+
+
+
 
 \begin{figure*}
 	\centering

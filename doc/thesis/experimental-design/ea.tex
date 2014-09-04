@@ -16,13 +16,15 @@ Representation 1 (See Subsection~\ref{subsec:encoding-1}) was chosen as the indi
 
 The \textit{velocity parameter} found in Table~\ref{table:ea-pso} represents the random range that was used to generate the initial \textit{velocity vector} of each particle in the PSO. For example, a \textit{velocity parameter} of 0.01 means that each velocity vector was generated using random values between -0.01 and 0.01.
 
+The DE, and PSO experiments were initially run using a variety of different tuning parameters. The PSO algorithm has three tunable user defined parameters: \textit{inertia}, \textit{social} and \textit{cognitive}. Based on the work performed by Eberhart, and Shi~\cite{eberhart2000comparing}, the \textit{social} and \textit{cognitive} parameters were set to 1.496180 and \textit{inertia} was set to 0.729844. The DE algorithm has two tunable user defined parameters: \textit{differential weight}, and \textit{crossover probability}. Several different combinations of values for \textit{differential weight}, and \textit{crossover probability} were used but the parameters that produced the best results were from a research paper by Hvass Laboratories~\cite{pedersen2010good}. \textit{Differential weight} was set to 0.4717, and \textit{crossover probability} was set to 0.8803.
+
 \begin{table}
 	\centering
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | }
 		\hline
 		Exp. Set & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
 		Pop. Size & 50 & 50 & 50 & 50 & 50 & 50 \\ \hline
-		Gens. & 100 & 100 & 100 & 250 & 250 & 250 \\ \hline
+		Gens. & 100 & 100 & 100 & 200 & 200 & 200 \\ \hline
 		Velocity & 0.01 & 0.05 & 0.1 & 0.01 & 0.05 & 0.1 \\ \hline
 	\end{tabular}
 	\\
@@ -31,7 +33,7 @@ The \textit{velocity parameter} found in Table~\ref{table:ea-pso} represents the
 		\hline
 		Exp. Set & 7 & 8 & 9 & 10 & 11 & 12 \\ \hline
 		Pop. Size & 100 & 100 & 100 & 100 & 100 & 100 \\ \hline
-		Gens. & 100 & 100 & 100 & 250 & 250 & 250 \\ \hline
+		Gens. & 100 & 100 & 100 & 200 & 200 & 200 \\ \hline
 		Velocity & 0.01 & 0.05 & 0.1 & 0.01 & 0.05 & 0.1 \\ \hline
 	\end{tabular}
 	\caption{System parameters for the PSO runs}
