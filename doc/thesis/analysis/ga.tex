@@ -8,8 +8,6 @@ Table~\ref{table:basic-ga-results} and Table~\ref{table:rga-results} provide a s
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | }
 		\hline
 		Experiment Set & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
-		% Best RMSD & 1.2471 & 1.3315 & 1.1610 & 1.1880 & \textbf{1.1173} & 1.2287 \\ \hline
-		% Average Best RMSD & 1.3448 & 1.3784 & 1.2792 & 1.3315 & \textbf{1.2626} & 1.3336 \\ \hline
 		Best RMSD & 1.2471 & 1.1880 & 1.1173 & 1.2349 & \textbf{1.0533} & 1.2287 \\ \hline
 		Averge Best RMSD & 1.3518 & 1.3610 & \textbf{1.2942} & 1.3658 & 1.3044 & 1.3294 \\ \hline
 	\end{tabular}
@@ -22,7 +20,6 @@ Table~\ref{table:basic-ga-results} and Table~\ref{table:rga-results} provide a s
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | c | c | }
 		\hline
 		Experiment Set & 1 & 2 & 3 & 4 \\ \hline
-		% Average Number of Generations & 67 & 81 & 107 & 124 & 67 & 81 \\ \hline
 		Avg. Num. Generations & 61 & 73 & 86 & 106 \\ \hline
 		Best RMSD & 1.1297 & 1.1174 & 1.0388 & \textbf{0.9649} \\ \hline
 		Average Best RMSD & 1.2532 & 1.2468 & 1.2252 & 1.2149 \\ \hline
@@ -32,7 +29,6 @@ Table~\ref{table:basic-ga-results} and Table~\ref{table:rga-results} provide a s
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | c | c | c | c | }
 		\hline
 		Experiment Set & 5 & 6 & 7 & 8 \\ \hline
-		% Average Number of Generations & 67 & 81 & 107 & 124 & 67 & 81 \\ \hline
 		Avg. Num. Generations & 72 & 83 & 100 & 133 \\ \hline
 		Best RMSD & 1.1170 & 1.0012 & 1.0353 & 0.9992 \\ \hline
 		Average Best RMSD & 1.2229 & 1.2119 & \textbf{1.1808} & 1.1856 \\ \hline
@@ -41,7 +37,7 @@ Table~\ref{table:basic-ga-results} and Table~\ref{table:rga-results} provide a s
 	\label{table:rga-results}
 \end{table}
 
-Mann-Whitney U tests were performed on the results of the basic GA, and RGA experiment sets. The results of the basic GA experiments showed very little statistical significance. Experiment 3, and 5 show the best statistical performance over the other experiments which coincides with these experiments having the best fitness and average fitness scores. The results of the RGA experiments revealed that experiment 8 was able to perform statistically better than the other experiments. Experiments 3, 4, 5, 6, and 8 show little statistical difference and experiments 1, and 2 performed the worst. A comparison of the basic GA, and RGA experiments showed that the RGA performed statistically better than the basic GA.
+Mann-Whitney U tests were performed on the results of the basic GA, and RGA experiment sets. The results of the basic GA experiments showed very little statistical significance. Experiment 3, and 5 show the best statistical performance over the other experiments which coincides with these experiments having the best fitness and average fitness scores. The results of the RGA experiments revealed that experiment 8 was able to perform statistically better than the other experiments. Experiments 3, 4, 5, 6, and 7 show little statistical difference and experiments 1, and 2 performed the worst. A comparison of the basic GA, and RGA experiments showed that the RGA performed statistically better than the basic GA.
 
 A closer look at the data revealed that the basic GA experiments were converging early on local optima. The RGA experiments initially converged on similar optima but were able to find new optima after each restarting phase. Figure~\ref{fig:rga-generational-data} shows what a typical RGA run looks like at each generation. One would notice that there are several \textit{spikes} in the graph where the average fitness jumps. These \textit{spikes} represents a \textit{restart} in the population. During each \textit{restart} the average fitness of the population is disrupted but the fitness quickly improved showing an overall trend downward.
 

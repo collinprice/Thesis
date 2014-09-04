@@ -1,13 +1,14 @@
 \section{Force Fields}
 
-The atoms within a molecule are consistently interacting with each other. Atoms can directly and indirectly interact with neighbouring atoms. Atoms directly interact with neighbouring atoms with a bond or indirectly through van der Waals forces. Calculating the forces involved within the molecule would require a large amount of computing power to attain a high degree of accuracy. Instead simplier, classical formulas are used to calculate the energy within the system. There are several different formulas for calculating classical force fields. This work will utilize Assisted Model Building with Energy Refinement (AMBER)~\cite{cornell1995second} force fields for the energy calculations. AMBER force fields are widely used with proteins and related systems~\cite{ponder2003force}. Equation~\ref{eq:amberFormula} shows the formula used when calculating the energy of a system using AMBER force fields.
+The atoms within a molecule are consistently interacting with each other. Atoms can directly and indirectly interact with neighbouring atoms. Atoms directly interact with neighbouring atoms with a bond or indirectly through van der Waals forces. Calculating the forces involved within the molecule would require a large amount of computing power to attain a high degree of accuracy. Instead simplier, classical formulas are used to calculate the energy within the system. There are several different formulas for calculating classical force fields. This work will utilize Assisted Model Building with Energy Refinement (AMBER)~\cite{cornell1995second} force fields for the energy calculations. AMBER force fields are widely used with proteins and related systems~\cite{ponder2003force}.
 
-\begin{equation}
-	\begin{split}
-		\label{eq:amberFormula}
-		V(r^N) &= \quad \sum_\text{bonds} k_b (l-l_0)^2 \\
-		&\quad + \sum_\text{angles} k_a (\theta - \theta_0)^2 \\
-		&\quad + \sum_\text{torsions} \sum_n \frac{1}{2} V_n [1+\cos(n \omega- \gamma)] \\
-		&\quad + \sum_{j=1} ^{N-1} \sum_{i=j+1} ^N f_{ij}\biggl\{\epsilon_{ij}\biggl[\left(\frac{r_{0ij}}{r_{ij}} \right)^{12} - 2\left(\frac{r_{0ij}}{r_{ij}} \right)^{6} \biggr]+ \frac{q_iq_j}{4\pi \epsilon_0 r_{ij}}\biggr\}
-	\end{split}
-\end{equation}
+% Equation~\ref{eq:amberFormula} shows the formula used when calculating the energy of a system using AMBER force fields.
+% \begin{equation}
+% 	\begin{split}
+% 		\label{eq:amberFormula}
+% 		V(r^N) &= \quad \sum_\text{bonds} k_b (l-l_0)^2 \\
+% 		&\quad + \sum_\text{angles} k_a (\theta - \theta_0)^2 \\
+% 		&\quad + \sum_\text{torsions} \sum_n \frac{1}{2} V_n [1+\cos(n \omega- \gamma)] \\
+% 		&\quad + \sum_{j=1} ^{N-1} \sum_{i=j+1} ^N f_{ij}\biggl\{\epsilon_{ij}\biggl[\left(\frac{r_{0ij}}{r_{ij}} \right)^{12} - 2\left(\frac{r_{0ij}}{r_{ij}} \right)^{6} \biggr]+ \frac{q_iq_j}{4\pi \epsilon_0 r_{ij}}\biggr\}
+% 	\end{split}
+% \end{equation}
