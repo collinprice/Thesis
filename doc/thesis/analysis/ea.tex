@@ -42,7 +42,29 @@ The two experiment sets shared exactly the same statistical conclusions. The pop
 
 Mann-Whitney U tests were also performed on the results of the DE, and PSO experiment sets, and also the experiment sets from the RGA in Section~\ref{sec:ga-analysis}. The tests showed that PSO performed statistically better than DE, and RGA performed statistically worse than DE, and PSO. These results were actually not that surprising considering the results from the analysis done in Section~\ref{sec:post-op-analysis} showed that PSO worked well on the structure refinement problem.
 
-Figure~\ref{fig:pso-best} demonstrates one of the best candidate solutions. It can be seen that the candidate solution has produced an EXAFS spectrum that is a close approximation of the experimental EXAFS spectrum. The remaining differences in the EXAFS spectra many be due to errors in the experimental EXAFS spectrum.
+Figure~\ref{fig:pso-best} demonstrates one of the best candidate solutions. It can be seen that the candidate solution has produced an EXAFS spectrum that is a close approximation of the experimental EXAFS spectrum. The remaining differences in the EXAFS spectra many be due to errors in the experimental EXAFS spectrum. Figure~\ref{fig:generational-data-pso-de} shows the performce of the best performing experiments for PSO and DE. Both algorithms show a steep downward trend within the first 20 generations but the PSO is able to progress at a faster rate.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				width=14cm,
+				height=6cm,
+				grid=both,
+				title={Generation Performance},
+				legend entries={PSO,DE},
+				xlabel={Generation},
+				ylabel={Fitness (RMSD)}
+			]
+
+			\addplot[mark=x] table [col sep=comma,y index=1, x index=0] {data/best-experiment-averaged/pso.csv};
+			\addplot[mark=-] table [col sep=comma,y index=1, x index=0] {data/best-experiment-averaged/de.csv};
+
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Performance of PSO Experiment 11 and DE Experiment 2}
+	\label{fig:generational-data-pso-de}
+\end{figure}
 
 \begin{figure*}
 	\centering

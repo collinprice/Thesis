@@ -37,13 +37,13 @@ Table~\ref{table:basic-ga-results} and Table~\ref{table:rga-results} provide a s
 	\label{table:rga-results}
 \end{table}
 
-Mann-Whitney U tests were performed on the results of the basic GA, and RGA experiment sets. The results of the basic GA experiments showed very little statistical significance. Experiment 3, and 5 show the best statistical performance over the other experiments which coincides with these experiments having the best fitness and average fitness scores. The results of the RGA experiments revealed that experiment 8 was able to perform statistically better than the other experiments. Experiments 3, 4, 5, 6, and 7 show little statistical difference and experiments 1, and 2 performed the worst. A comparison of the basic GA, and RGA experiments showed that the RGA performed statistically better than the basic GA.
+The Mann-Whitney U test~\cite{mcknight2010mann} is a nonparametric test to determine if two groups are equivalent without assuming the groups have a normal distribution. Mann-Whitney U tests were performed on the results of the basic GA, and RGA experiment sets. The results of the basic GA experiments showed very little statistical significance. Experiment 3, and 5 show the best statistical performance over the other experiments which coincides with these experiments having the best fitness and average fitness scores. The results of the RGA experiments revealed that experiment 8 was able to perform statistically better than the other experiments. Experiments 3, 4, 5, 6, and 7 show little statistical difference and experiments 1, and 2 performed the worst. A comparison of the basic GA, and RGA experiments showed that the RGA performed statistically better than the basic GA.
 
 A closer look at the data revealed that the basic GA experiments were converging early on local optima. The RGA experiments initially converged on similar optima but were able to find new optima after each restarting phase. Figure~\ref{fig:rga-generational-data} shows what a typical RGA run looks like at each generation. One would notice that there are several \textit{spikes} in the graph where the average fitness jumps. These \textit{spikes} represents a \textit{restart} in the population. During each \textit{restart} the average fitness of the population is disrupted but the fitness quickly improved showing an overall trend downward.
 
 The number of generations in each RGA run varied based on when the population converged. Table~\ref{table:rga-results} contains the average number of generations each run had for each experiment.
 
-At first it may seem biased that the RGA was able to find a better candidate solution than the GA because it was allowed to see more unique individuals and ran for more generations but the GA had some pitfalls when it was allowed the same privileges. Increasing the size of the GA's populations had little affect on its ability to find improved candidate solutions. Increasing the number of generations for the GA's also did not affect the solutions. The GA runs would converge quickly and become stuck in a local optima.
+At first it may seem biased that the RGA was able to find a better candidate solution than the GA because it was allowed to see more unique individuals and ran for more generations but the GA had some pitfalls when it was allowed the same privileges. Increasing the size of the GA's populations had little affect on its ability to find improved candidate solutions. Increasing the number of generations for the GA's also did not affect the solutions. The GA runs would typically converge quickly and become stuck in a local optima. Figure~\ref{fig:ga-generational-data-avg} shows the average best fitness for GA experiment 8.
 
 The experiments that produced the best candidate solutions for both the GA, and RGA were experiments contained a crossover rate of 70\% and a mutation rate of 30\% compared to the other experiments that contained a crossover rate of 80\% and a mutation rate of 20\%. Since the higher mutation rate performed better than the higher crossover rate this may indicate that the algorithms favoured receiving new information, through exploration, than exploiting the information already contained within the population. Using a higher mutation rate may also indicate that the problem is better suited to be solved using a less discrete search method such as PSO.
 
@@ -58,7 +58,7 @@ The best candidate solution found by the RGA can be seen in Figure~\ref{fig:rga-
 				grid=both,
 				title={Best RGA Run},
 				legend entries={Best,Average},
-				xlabel={Generations},
+				xlabel={Generation},
 				ylabel={Fitness (RMSD)}
 			]
 
@@ -69,6 +69,27 @@ The best candidate solution found by the RGA can be seen in Figure~\ref{fig:rga-
 	\end{tikzpicture}
 	\caption{Example Run of a Restarting Genetic Algorithm}
 	\label{fig:rga-generational-data}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				width=14cm,
+				height=6cm,
+				grid=both,
+				title={GA Performance},
+				legend entries={Average Best},
+				xlabel={Generation},
+				ylabel={Fitness (RMSD)}
+			]
+
+			\addplot[mark=x] table [col sep=comma,y index=1, x index=0] {data/best-experiment-averaged/ga.csv};
+
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Performance of GA Experiment 3}
+	\label{fig:ga-generational-data-avg}
 \end{figure}
 
 \begin{figure*}
