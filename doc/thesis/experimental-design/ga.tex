@@ -9,11 +9,11 @@ The purpose of this study is to determine how well a genetic algorithm performs 
 
 During the initial stages of testing a random population of candidate solutions was generated using the technique described in Subsection~\ref{subsec:random-population}. The candidate solutions that were generated using the random method had either high fitness scores, or were chemically infeasible and an EXAFS spectrum could not be generated. Candidate solutions that were able to generate EXAFS spectra were repeatedly generated until there were enough to fill the GA population but the experiments were unable to produce a candidate solution that had an EXAFS spectrum that improved upon the starting candidate.
 
-The initial population for the basic GA, and RGA was created from a random sampling of the 300 candidate solutions that were generated using the molecular dynamics simulation discussed in Subsection~\ref{subsec:molecular-population}. During the restarting process of the RGA new candidate solutions were randomly selected from the remaining candidate solutions within the 300.
+This led to a change in the way the initial population was created. The initial population for the basic GA, and RGA was created from a random sampling of the 300 candidate solutions that were generated using the molecular dynamics simulation discussed in Subsection~\ref{subsec:molecular-population}. During the restarting process of the RGA new candidate solutions were randomly selected from the remaining candidate solutions within the 300.
 
 \subsection{System Parameters}
 
-Two evolutionary algorithms were used in this experiment: GA, and RGA. The system parameters for the GA can be seen in Table~\ref{table:viability-ga}, and the system parameters for the RGA can be seen in Table~\ref{table:viability-rga}. The fitness function used for the GA, and RGA is defined in Subsection~\ref{sec:fitness-exafs}.
+Two evolutionary algorithms were used in this experiment: GA, and RGA. The system parameters for the GA can be seen in Table~\ref{table:viability-ga}, and the system parameters for the RGA can be seen in Table~\ref{table:viability-rga}. These parameters were empirically determined. The fitness function used for the GA, and RGA is defined in Subsection~\ref{sec:fitness-exafs}.
 
 The number of generations could not be specified for the RGA experiments because of the restarting process. Details of the genetic operators are outlined in Section~\ref{sec:ga-operators}. Representation 1 (Subsection~\ref{subsec:encoding-1}) was chosen for the individuals as a direct mapping to the problem. 
 

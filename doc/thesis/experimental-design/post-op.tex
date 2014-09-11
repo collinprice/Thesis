@@ -3,11 +3,11 @@
 
 \subsection{Purpose}
 
-The purpose of this study is to improve upon the results found in the study discussed in Section~\ref{sec:ga-experiment}. The results of the GA viability experiment suggested that the candidate solutions found could be improved upon. Two evolutionary algorithms, differential evolution, and particle swarm optimization, were chosen to perform a local search of the search space to locate improved candidate solutions. These algorithms were selected based on their success with continuous space problems.
+The purpose of this study is to improve upon the results found in the study discussed in Section~\ref{sec:ga-experiment}. The results of the GA experiments (see Section~\ref{sec:ga-analysis}) suggested that the candidate solutions found could be improved upon. Two evolutionary algorithms, differential evolution, and particle swarm optimization, were chosen to perform a local search of the search space to locate improved candidate solutions. These algorithms were selected based on their success with continuous space problems.
 
 \subsection{Population}
 
-The initial population for the DE, and PSO were generated using the random generation technique described in Subsection~\ref{subsec:random-population}. The seed candidate solution for the random generation was the best found candidate solution from the RGA experiments, which had an RMSD of 1.046. The random generation technique was used in this experiment because it is suspected as the best technique to find the local optima in this situation.
+The initial population for the DE, and PSO were generated using the random generation technique described in Subsection~\ref{subsec:random-population}. The seed candidate solution for the random generation was the best found candidate solution from the RGA experiments, which had an RMSD of 1.046. The random generation technique was used in this experiment because it is suspected as the best technique to find the local optimum in this situation.
 
 % - answers were close so we tried local search technique
 % - suggested based on previous work maybe?
@@ -16,7 +16,7 @@ The initial population for the DE, and PSO were generated using the random gener
 
 Two algorithms were used in this experiment: DE, and PSO. The system parameters for the DE can be seen in Table~\ref{table:post-op-de}, and the system parameters for the PSO can be seen in Table~\ref{table:post-op-pso}. The \textit{initial movement radius} shown in the system parameters tables defines the \textit{user defined range} that was used to generate the initial population. The fitness function used for the DE, and PSO is defined in Subsection~\ref{sec:fitness-exafs}.
 
-An alternative individual representation was used for this experiment. DE, and PSO are algorithms that are better suited for problems that can be represented as a vector of real numbers. The individual representation that was used in the GA viability experiment was translated into a vector of real numbers (See Subsection~\ref{subsec:encoding-2}).
+An alternative individual representation was used for this experiment. DE, and PSO are algorithms that are better suited for problems that can be represented as a vector of real numbers. The individual representation that was used in the GA viability experiment was translated into a vector of real numbers (see Subsection~\ref{subsec:encoding-2}).
 
 \begin{table}
 	\centering
