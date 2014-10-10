@@ -1,9 +1,9 @@
 \section{Genetic Algorithm}
 \label{sec:ea}
 
-A genetic algorithm (GA) is a population-based metaheuristic optimization algorithm that is based on Darwin's theory of natural evolution. Darwin theorized that over a period of time a population of individuals would naturally mate and create offspring that were better than themselves. He suggested that not all individuals are created equally and that eventually the weaker individuals would die off. This same principle can be applied to a search algorithm as a heuristic. A GA contains a population of individuals that are evolved to find improved candidate solutions.
+A genetic algorithm (GA) is a population-based metaheuristic optimization algorithm that is based on Darwin's theory of natural evolution. Darwin theorized that over a period of time a population of individuals would naturally mate and create offspring that were better than themselves. He suggested that not all individuals are created equally and that eventually the weaker individuals would die off. Leaving the strong to survive and reproduce. This same principle can be applied to a search algorithm as a heuristic. A GA contains a population of individuals that are evolved to find improved candidate solutions.
 
-Figure~\ref{fig:evolutionaryFlowchart} demonstrates how the basic GA operates. Initially a \textit{population} of candidate solutions is generated. The individuals are evaluated based on an \textit{evaluation function} and are checked against the \textit{stopping criterion}. If the \textit{stopping criterion} has not been reached the population goes through an \textit{evolutionary period} where a new population of candidate individuals are created from the last population. This iterative process, also called a \textit{generation}, is repeated until the \textit{stopping criterion} is reached. The following subsections will explain each of these parts.
+Figure~\ref{fig:evolutionaryFlowchart} demonstrates how the basic GA operates. Initially a \textit{population} of random candidate solutions is generated. The individuals are evaluated based on an \textit{evaluation function} and are checked against the \textit{stopping criterion}. If the \textit{stopping criterion} has not been reached the population goes through an \textit{evolutionary period} where a new population of candidate individuals are created from the last population. This iterative process, also called a \textit{generation}, is repeated until the \textit{stopping criterion} is reached. The following subsections will explain each of these parts.
 
 \begin{figure}[H]
 	\centering
@@ -28,22 +28,22 @@ During each generation a new population is created using the previous generation
 \subsection{Evaluation Function}
 \label{subsec:fitness-function}
 
-This operator determines the fitness of an individual. Each individual is evaluated and given a fitness score to represent how well the individual performed on the problem. This operation is problem specific and it can be very difficult to determine how a problem should be evaluated. The evaluation function is important for differentiating individuals. A poor evaluation function can make each of the individuals appear to be similar when they actually have small key differences. 
+This operator determines the fitness of an individual. Each individual is evaluated and given a fitness score to represent how well the individual performed on the problem. This operation is problem specific, and sometimes it can be very difficult to determine how a problem should be evaluated. The evaluation function is important for differentiating individuals. A poor evaluation function can make each of the individuals appear to be similar when they actually have small key differences. 
 
 \subsection{Stopping Criterion}
 
-Stopping criteria are used to determine when the GA should stop evolving. There are generally three ways stopping criteria can be reached: a maximum number of iterations is reached, the population has converged on the same solution, or the solution has been found.
+Stopping criteria are used to determine when the GA should stop evolving. There are generally three ways stopping criteria can be reached: a maximum number of iterations is reached, the population has converged on the same solution, or an acceptably high quality solution has been found.
 
 \subsection{Genetic Operators}
 \label{subsec:ga-operators}
 
-Each of the following operators represent a piece of a genetic algorithm. They facilitate the evolutionary process in the effort to find better candidate solutions. Each of these operators has a unique purpose in the search algorithm but there are many different ways in which these goals can be carried out. Only a few of the different methods will be described in this work.
+Each of the following operators represent a piece of a genetic algorithm. They facilitate the evolutionary process in the effort to find better candidate solutions. Only a few of the different methods will be described.
 
-\textit{Selection Operator}: The idea behind this operator is to put selection pressure on the population during the evolutionary process. Individuals with a better fitness score should be allowed a better chance of continuing on to the next population. During the selection process two individuals are chosen using a selection method and then are either bred together, mutated, or replicated and placed in the next population. There are several varieties of selection methods but only \textit{k-Tournament selection} will be explained as this is the only method used in this work.
+\textit{Selection Operator}: The idea behind this operator is to put selection pressure on the population during the evolutionary process. Individuals with a better fitness score should be allowed a better chance of continuing on to the next population. During the selection process two individuals are chosen using a selection method and then are either bred together, mutated, or replicated and placed in the next population. There are several varieties of selection methods but only tournament selection} will be explained as this is the method used here.
 
-The \textit{k}-Tournament selection method works by randomly selecting \textit{k} individuals from the population, where \textit{k} is less than the number of individuals in the population, and selecting the individual that has the best fitness score from the \textit{k} individuals. The value of \textit{k} should be relatively small compared to the size of the population. If the value of \textit{k} is too large it would defeat the purpose of this selection method. For example, if there is a population size of 100 then a suitable value of \textit{k} is around 2-5.
+Tournament selection works by randomly selecting \textit{k} individuals from the population, where \textit{k} is usually between 2 to 7, and selecting the individual that has the best fitness score from the \textit{k} individuals. The value of \textit{k} should be relatively small compared to the size of the population. If the value of \textit{k} is too large it would defeat the purpose of this selection method.
 
-\textit{Crossover Operator}: This operator is essential to evolving the individuals of the population. Crossover is the mechanism by which two individuals breed to create two new individuals. With respect to the evolutionary process, crossover exploits the current information that is contained within the population in order to find improved individuals. The most widely used type of crossover is N-point crossover.
+\textit{Crossover Operator}: This operator is essential to evolving the individuals of the population. Crossover is the mechanism by which two individuals breed to create two new individuals. With respect to the evolutionary process, crossover exploits the current information that is contained within the population in order to find improved individuals.
 
 N-point crossover works by randomly selecting N cutting points and swapping the information between the two individuals along those N points. Figure~\ref{fig:2PointCrossover} demonstrates how the swapping of information occurs during 2-point crossover.
 
