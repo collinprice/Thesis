@@ -14,9 +14,9 @@ Figure~\ref{fig:evolutionaryFlowchart} demonstrates how the basic GA operates. I
 
 \subsection{Population}
 
-The population is a key piece to a GA. Each individual in the population represents a possible candidate solution to the problem that we are attemping to solve. The representation of the individual is usually unique to the problem. Generating the initial population can either be done randomly or by some procedural method. The goal of generating the initial population is to create a diverse enough population to find improved solutions.
+The population is a key piece to a GA. Each individual in the population represents a possible candidate solution to the problem that we are attemping to solve. The representation of the individual is usually unique to the problem. Generating the initial population can either be done randomly or by some procedural method. The goal of generating the initial population is to create a diverse enough population from which to evolve solutions.
 
-During each generation a new population is created using the previous generation's population. Initially the best individuals from the previous population might be copied directly into the new population using an operator called \textit{elitism}. To obtain the remaining individuals needed to fill the new population a \textit{selection} process occurs. Two individuals are chosen using a \textit{selection} method and then one of three options can occur: \textit{crossover}, \textit{mutation}, or \textit{replication}. Crossover mixes two individuals together to create two new individuals, mutation randomly modifies each individual separately, and replication copies the individuals. The two individuals are then placed in the new population and the process is repeated until the new population is the same size as the previous population. Figure~\ref{fig:gaFlowchart} depicts how evolution occurs in a GA. See Subsection~\ref{subsec:ga-operators} for more details on the operators discussed.
+During each generation a new population is created using the previous generation's population. Initially the best individuals from the previous population might be copied directly into the new population using an operator called \textit{elitism}. To obtain the remaining individuals needed to fill the new population a \textit{selection} process occurs. Two individuals are chosen using a \textit{selection} method and then one of three options can occur: \textit{crossover}, \textit{mutation}, or \textit{replication}. Crossover mixes two individuals together to create two new individuals, mutation randomly modifies each individual separately, and replication copies the individuals. These individuals are then placed in the new population and the process is repeated until the new population is the same size as the previous population. Figure~\ref{fig:gaFlowchart} depicts how evolution occurs in a GA. See Subsection~\ref{subsec:ga-operators} for more details on the operators discussed.
 
 \begin{figure}[H]
 	\centering
@@ -37,38 +37,38 @@ Stopping criteria are used to determine when the GA should stop evolving. There 
 \subsection{Genetic Operators}
 \label{subsec:ga-operators}
 
-Each of the following operators represent a piece of a genetic algorithm. They facilitate the evolutionary process in the effort to find better candidate solutions. Only a few of the different methods will be described.
+Each of the following operators is a component of a genetic algorithm. They facilitate the evolutionary process in the effort to find better candidate solutions. Only a few of the different methods will be described.
 
-\textit{Selection Operator}: The idea behind this operator is to put selection pressure on the population during the evolutionary process. Individuals with a better fitness score should be allowed a better chance of continuing on to the next population. During the selection process two individuals are chosen using a selection method and then are either bred together, mutated, or replicated and placed in the next population. There are several varieties of selection methods but only tournament selection} will be explained as this is the method used here.
+\textit{Selection Operator}: The idea behind this operator is to put selection pressure on the population during the evolutionary process. Individuals with a better fitness score should be allowed a better chance of continuing on to the next population. During the selection process two individuals are chosen using a selection method and then are either bred together, mutated, or replicated and placed in the next population. There are several varieties of selection methods but only tournament selection will be explained as this is the method used here.
 
 Tournament selection works by randomly selecting \textit{k} individuals from the population, where \textit{k} is usually between 2 to 7, and selecting the individual that has the best fitness score from the \textit{k} individuals. The value of \textit{k} should be relatively small compared to the size of the population. If the value of \textit{k} is too large it would defeat the purpose of this selection method.
 
 \textit{Crossover Operator}: This operator is essential to evolving the individuals of the population. Crossover is the mechanism by which two individuals breed to create two new individuals. With respect to the evolutionary process, crossover exploits the current information that is contained within the population in order to find improved individuals.
 
-N-point crossover works by randomly selecting N cutting points and swapping the information between the two individuals along those N points. Figure~\ref{fig:2PointCrossover} demonstrates how the swapping of information occurs during 2-point crossover.
+For example, One-point crossover could be used. This crossover method works by splitting the two individuals apart based on a randomly selected pivot point and swapping the pieces. In Figure~\ref{fig:1PointCrossover}, the pivot point was selected between index 2 and 3. The information after the pivot point is swapped between the parents to create the children. Each child will contain a peice of information from both parents.
 
 \begin{figure}[H]
   \centering
-  \begin{tabu}{ | p{1.5cm} | l | l |[2pt] l | l | l |[2pt] l | l | l | }
+  \begin{tabu}{ | p{1.5cm} | l | l | l |[2pt] l | l | l | l | l | }
     \hline
     Parent 1 & \textcolor{blue}{0} & \textcolor{blue}{1} & \textcolor{blue}{1} & \textcolor{blue}{0} & \textcolor{blue}{1} & \textcolor{blue}{0} & \textcolor{blue}{1} & \textcolor{blue}{0} \\ \hline
-    Parent 2 & \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{1} & \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{1} & \textcolor{red}{0} & \textcolor{red}{0} \\ \hline
+    Parent 2 & \textcolor{red}{1} & \textcolor{red}{0} & \textcolor{red}{1} & \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{1} & \textcolor{red}{0} & \textcolor{red}{0} \\ \hline
   \end{tabu}
   \\
   \vspace{3 mm}
   \line(1,0){250}
   \\
   \vspace{3 mm}
-  \begin{tabu}{ | p{1.5cm} | l | l |[2pt] l | l | l |[2pt] l | l | l | }
+  \begin{tabu}{ | p{1.5cm} | l | l | l |[2pt] l | l | l | l | l | }
     \hline
-    Child 1 & \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{blue}{1} & \textcolor{blue}{0} & \textcolor{blue}{1} & \textcolor{red}{1} & \textcolor{red}{0} & \textcolor{red}{0} \\ \hline
-    Child 2 & \textcolor{blue}{0} & \textcolor{blue}{1} & \textcolor{red}{1} & \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{blue}{0} & \textcolor{blue}{1} & \textcolor{blue}{0} \\ \hline
+    Child 1 & \textcolor{red}{1} & \textcolor{red}{0} & \textcolor{red}{1} & \textcolor{blue}{0} & \textcolor{blue}{1} & \textcolor{blue}{0} & \textcolor{blue}{1} & \textcolor{blue}{0} \\ \hline
+    Child 2 & \textcolor{blue}{0} & \textcolor{blue}{1} & \textcolor{blue}{1} & \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{1} & \textcolor{red}{0} & \textcolor{red}{0} \\ \hline
   \end{tabu}
-  \caption{2-Point Crossover}
-  \label{fig:2PointCrossover}
+  \caption{One-Point Crossover}
+  \label{fig:1PointCrossover}
 \end{figure}
 
-\textit{Mutation Operator}: The mutation operator is used to introduce random changes to the individuals during evolution. Mutations to individuals are a way to explore the search space. Depending on how the initial population was created there may not be the necessary information in the population to find the optimal solution with crossover alone. Mutations allow for new information to possibly be introduced into the population. A common type of mutation is single-point mutation where a single index in a given individual is modified. Figure~\ref{fig:mutation} demonstrates single-point mutation.
+\textit{Mutation Operator}: The mutation operator is used to introduce random changes to the individuals during evolution. Mutations to individuals are a way to explore new areas of the search space. Depending on how the initial population was created there may not be the necessary information in the population to find the optimal solution with crossover alone. Mutations allow for new information to possibly be introduced into the population. A common type of mutation is single-point mutation where a single index in a given individual is modified. Figure~\ref{fig:mutation} demonstrates single-point mutation.
 
 \begin{figure}[H]
   \centering
@@ -91,4 +91,4 @@ N-point crossover works by randomly selecting N cutting points and swapping the 
   \label{fig:mutation}
 \end{figure}
 
-\textit{Elitism Operator}: During each generation of the genetic algorithm a new population is created using the individuals from the population in the previous generation. The new population is bred from the previous individuals with the hopes of creating better individuals. Sometimes this is not the case and the population can end up losing valuable information from individuals that were not chosen during the selection process. To prevent this from happening the elitism operator was created. The elitism operator works by seeding the next generation's population with the individuals with the best fitness score. Typically only the top 1\% of individuals are copied into the next generation.
+\textit{Elitism Operator}: During each generation of the genetic algorithm a new population is created using the individuals from the population in the previous generation. The new population is bred from the previous individuals with the hopes of creating better individuals. Sometimes this is not the case and the population can end up losing valuable information from individuals that were not chosen during the selection process. To prevent this from happening the elitism operator is used. The elitism operator works by seeding the next generation's population with the individuals with the best fitness scores from the previous generation. The top 2-5 individuals are copied into the next generation.

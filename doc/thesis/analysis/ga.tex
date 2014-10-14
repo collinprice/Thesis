@@ -1,7 +1,7 @@
 \section{Genetic Algorithms}
 \label{sec:ga-analysis}
 
-Table~\ref{table:basic-ga-results} and Table~\ref{table:rga-results} provide a summary of the results from the basic GA, and RGA experiments respectively. Each experiment in the results table was run 30 times.
+Table~\ref{table:basic-ga-results} and Table~\ref{table:rga-results} provide a summary of the results from the basic GA, and RGA experiments respectively. Full results can be found in Appendix~\ref{appendix-summary}. The bolded values represent the experiments with the best fitness scores. Each experiment in the results table was run 30 times.
 
 \begin{table}
 	\centering
@@ -37,9 +37,9 @@ Table~\ref{table:basic-ga-results} and Table~\ref{table:rga-results} provide a s
 	\label{table:rga-results}
 \end{table}
 
-The Mann-Whitney U test~\cite{mcknight2010mann} is a nonparametric test to determine if two groups are equivalent without assuming the groups have a normal distribution. Mann-Whitney U tests were performed on the results of the basic GA, and RGA experiment sets. The results of the basic GA experiments in Table~\ref{table:basic-ga-results} showed very little statistical significance. Experiments 3 and 5 show the best statistical performance over the other experiments which coincides with these experiments having the best fitness and average fitness scores. The results of the RGA experiments revealed that experiment 8 was able to perform statistically better than the other experiments. Experiments 3, 4, 5, 6, and 7 show little statistical difference and experiments 1, and 2 performed the worst. A comparison of the basic GA, and RGA experiments showed that the RGA performed statistically better than the basic GA.
+The Mann-Whitney U test~\cite{mcknight2010mann} is a nonparametric test to determine if two groups are equivalent without assuming the groups have a normal distribution. Mann-Whitney U tests were performed on the results of the basic GA, and RGA experiment sets using a confidence interval of 95\%. The results of the basic GA experiments in Table~\ref{table:basic-ga-results} showed very little statistical significance. Experiments 3 and 5 show the best statistical performance over the other experiments which coincides with these experiments having the best fitness and average fitness scores. The results of the RGA experiments revealed that experiment 8 was able to perform statistically better than the other experiments. Experiments 3, 4, 5, 6, and 7 show little statistical difference and experiments 1, and 2 performed the worst. A comparison of the basic GA, and RGA experiments showed that the RGA performed statistically better than the basic GA.
 
-A closer look at the data revealed that the basic GA experiments were converging early on local optima. The RGA experiments initially converged on similar optima but were able to find new optima after each restarting phase. Figure~\ref{fig:rga-generational-data} shows what a typical RGA run looks like at each generation. One would notice that there are several \textit{spikes} in the graph where the average fitness jumps. These \textit{spikes} represent a \textit{restart} in the population. During each \textit{restart} the average fitness of the population is disrupted but the fitness quickly improved showing an overall downward trend.
+A closer look at the data revealed that the basic GA experiments were converging early on local optima. The RGA experiments initially converged on similar optima but were able to find new optima after each restarting phase. Figure~\ref{fig:rga-generational-data} shows what a typical RGA run looks like at each generation. One would notice that there are several spikes in the graph where the average fitness jumps. These spikes represent a restart in the population. During each restart the average fitness of the population is disrupted but the fitness quickly improved showing an overall downward trend.
 
 The number of generations in each RGA run varied based on when the population converged. Table~\ref{table:rga-results} contains the average number of generations each run had for each experiment.
 

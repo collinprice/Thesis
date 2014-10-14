@@ -1,8 +1,8 @@
 \section{Alternative Algorithms}
 
-Table~\ref{table:ea-de-results} and Table~\ref{table:ea-pso-results} provide a summary of the results from the DE, and PSO experiments respectively. Each experiment in the results table was run 30 times.
+Table~\ref{table:ea-de-results} and Table~\ref{table:ea-pso-results} provide a summary of the results from the DE, and PSO experiments respectively. Full results can be found in Appendix~\ref{appendix-summary}. The bolded values represent the experiments with the best fitness scores. Each experiment in the results table was run 30 times.
 
-\begin{table}
+\begin{table}[H]
 	\centering
 	\begin{tabular}{ | >{\bfseries}c | c | c | c | c | }
 		\hline
@@ -36,7 +36,7 @@ Table~\ref{table:ea-de-results} and Table~\ref{table:ea-pso-results} provide a s
 
 The DE, and PSO experiments performed very well on the structure refinement problem. These algorithms were able to succeed in finding better candidate solutions to the problem than the results from the RGA in Section~\ref{sec:ga-analysis} and the PSO in Section~\ref{sec:post-op-analysis}.
 
-Mann-Whitney U tests were performed on the results of the DE, and PSO experiment sets. The results from testing only the PSO experiment set revealed that there were two clear statistical groupings. The two groups consisted of the experiments with a generation count of 100, and the experiments with a generation count of 200. The results within each of these two groups had no statistical difference but the group with a higher generation count performed statistically better than the other group. Modifying the initial velocity speeds had little statistical effect on the solutions. The results of the DE showed the same outcomes. Two statistical groups formed from the experiments that had the same number of generations. The experiments with the greater number of generations performed statistically better than the other group.
+Mann-Whitney U tests were performed on the results of the DE, and PSO experiment sets using a confidence interval of 95\%. The results from testing only the PSO experiment set revealed that there were two clear statistical groupings. The two groups consisted of the experiments with a generation count of 100, and the experiments with a generation count of 200. The results within each of these two groups had no statistical difference but the group with a higher generation count performed statistically better than the other group. Modifying the initial velocity speeds had little statistical effect on the solutions. The results of the DE showed the same outcomes. Two statistical groups formed from the experiments that had the same number of generations. The experiments with the greater number of generations performed statistically better than the other group.
 
 The two experiment sets shared exactly the same statistical conclusions. The population sizes had no effect on the results of the experiments. The experiments with a population size of 50 performed statistically the same as the ones with a population size of 100. This characteristic could be caused by the method by which the populations are initialized. The molecular dynamics simulation causes the individual atoms to oscillate back and forth. The individuals used in the initial populations may have been similar enough that there was some overlap in the search space. Having two statistical groups forming around the number of generations only makes sense. The group with the greater generation count was allowed more time to explore the search space.
 
@@ -52,7 +52,7 @@ Figure~\ref{fig:pso-best} demonstrates one of the best candidate solutions. It c
 				height=6cm,
 				grid=both,
 				title={Generation Performance},
-				legend entries={PSO,DE},
+				legend entries={PSO Average Fitness,DE Average Fitness},
 				xlabel={Generation},
 				ylabel={Fitness (RMSD)}
 			]

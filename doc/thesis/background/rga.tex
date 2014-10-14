@@ -11,9 +11,10 @@ The RGA works similarly to the RRGA but there is no center for the population. I
 \begin{algorithmic}
 
 \IF{population has converged to minimum diversity}
-  \STATE remove all duplicate individuals;
+  \STATE remove all duplicate individuals
   \WHILE{population not full}
-    \STATE insert random draw from generated individuals into population;
+  	\STATE generate new individual
+  	\STATE insert new individual into the population
   \ENDWHILE
 \ENDIF
 
