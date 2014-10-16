@@ -16,12 +16,14 @@ The global best position (\textit{gBest}) is the particle position that has prod
 \subsection{Particle Update}
 \label{subsec:pso-position}
 
-Each particle's position vector is updated based on their current velocity vector. The velocity vector of each particle position is updated each generation based on the formula shown in Equation~\ref{eq:pso-velocity-update}, where $r_p, r_g \sim\ U(0,1)$, and $\omega$, $\phi$ and $\varphi$ are user defined. The paramter $\omega$ (inertia) controls the efficiency of the particle moving through the search space. The parameters $\phi$ (social) and $\varphi$ (cognitive) control the magnitude of the force pulling the particle towards the \textit{pBest} and \textit{gBest}. The particle's position vector is updated based on the particle's new velocity vector (see Equation~\ref{eq:pso-position-update}).
+Each particle's position vector is updated based on their current velocity vector. The velocity vector of each particle position is updated each generation based on the formula shown in Equation~\ref{eq:pso-velocity-update}.
 
 \begin{equation}
 	\label{eq:pso-velocity-update}
 	v = \omega{v} + \phi{r_p}(pBest-p) + \varphi{r_g}(gBest-p)
 \end{equation}
+
+In this equation $r_p, r_g \sim\ U(0,1)$, and $\omega$, $\phi$ and $\varphi$ are user defined. The parameter $\omega$ (inertia) controls the efficiency of the particle moving through the search space. The parameters $\phi$ (social) and $\varphi$ (cognitive) control the magnitude of the force pulling the particle towards the \textit{pBest} and \textit{gBest}. The particle's position vector is updated based on the particle's new velocity vector as shown in Equation~\ref{eq:pso-position-update}.
 
 \begin{equation}
 	\label{eq:pso-position-update}
