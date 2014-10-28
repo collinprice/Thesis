@@ -1,0 +1,47 @@
+# This script was written to generate runs for sandcastle.
+# It is recommended that in the template folder the number of runs is 
+# set to 1 and to define the number of runs using this script.
+# This script will create a directory containing all of the experiments
+# for sandcastle. Simple cd into the directory and run "bash queue_tests.sh"
+# to start them.
+
+NAME=$1
+COUNT=$2
+
+if [ -z $NAME ]; then
+	echo "Missing name parameter."
+	exit 0
+fi
+
+if [ -z $COUNT ]; then
+	echo "Missing count parameter."
+	exit 0
+fi
+
+PWD=$(pwd)
+
+# Make run dir
+mkdir $NAME
+
+for i in $(seq 1 $COUNT); do
+mkdir $NAME/test$i
+
+# template is the directory containing EXAFS-OEC
+cp -r template $NAME/test$i
+mv $NAME/test$i/template/* $NAME/test$i
+rm -rf $NAME/test$i/template
+done
+
+#cp runs.php $NAME
+#cp find_best.php $NAME
+
+rm -f queue_tests.sh
+
+SEED='$(date "+%N")'
+
+for i in $(seq 1 $COUNT); do
+echo -e "cd $PWD/$NAME/test$i\ntime ./main -f fitness.cfg -g ga.cfg -s $(date "+%N") > log" > $NAME/test$i/run.sh
+echo -e "qsub -q matrix -N \"$NAME-test$i\" $PWD/$NAME/test$i/run.sh" >> $NAME/queue_tests.sh
+#echo -e "qsub -q d205 -N \"$NAME-test$i\" $PWD/$NAME/test$i/run.sh" >> $NAME/queue_tests.sh
+done
+

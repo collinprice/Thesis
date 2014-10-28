@@ -1,0 +1,122 @@
+# 220000 steps 
+	numsteps 10000
+
+# INPUT 
+	amber yes
+	parmfile ./prmtop-sphere
+	readexclusions no
+	ambercoor ./inpcrd-sphere
+	binvelocities rest.vel
+	bincoordinates rest.coor
+
+# PERIODIC BOUNDARY CONDITIONS
+	wrapAll on
+	wrapWater on
+	#cellbasisvector1   175.424  0 0
+	#cellbasisvector2   0  115.922 0
+	#cellbasisvector3   0 0  150.0
+#	extendedSystem rest.xsc
+	PME no
+	PMEGridSizeX 48
+	PMEGridSizeY 48
+	PMEGridSizeZ 48
+       
+
+# MD PARAMETERS
+	minimization off
+	velocityquenching off
+	maximumMove 0.09
+	rigidbonds water
+	rigidtolerance 0.00005
+	timestep 1.0
+	nonbondedFreq 2
+	molly off
+        fullElectFrequency  4
+	exclude scaled1-4
+	1-4scaling 0.83
+	scnb 2.0
+	switching on
+	switchdist 15
+	cutoff 16
+	pairlistdist 18
+	stepspercycle 20
+
+# GENERALIZED BORN
+       GBIS off
+       solventDielectric 80
+       ionConcentration 0.15
+       alphaCutoff 14
+
+# TEMPERATURE CONTROL
+	langevin off  
+	langevinTemp 300
+	langevinDamping 1.0
+#	temperature 100 
+	tcouple on
+	tCoupleTemp 300
+
+# ANNEALING
+#        reassignFreq 1
+#        reassignTemp 280
+#        reassignIncr -0.05
+#        reassignHold 0
+
+# PRESSURE CONTROL
+	useGroupPressure yes
+	useFlexibleCell yes
+	useConstantRatio no
+
+	LangevinPiston no
+	LangevinPistonTarget 1.0
+	LangevinPistonPeriod 200.0
+	LangevinPistonDecay 100.0
+	LangevinPistonTemp 300.0
+
+	BerendsenPressure no  
+	BerendsenPressureTarget 1.0
+	BerendsenPressureCompressibility 44.6e-6
+	BerendsenPressureRelaxationTime  100.0
+	BerendsenPressureFreq 4
+
+# CONSTRAINTS
+
+	constraints on
+	consref inpcrd-const.pdb
+	conskfile inpcrd-const.pdb
+	consexp 2
+	conskcol O
+#	selectConstraints off
+#	selectConstrZ on
+#	selectConstrY on
+#	selectConstrX on
+
+	extraBonds off
+	extraBondsFile extra.bond
+
+# FIXED ATOMS
+        fixedAtoms off
+        fixedAtomsForces off
+        fixedAtomsFile out.pdb
+        fixedAtomsCol O
+
+# OUTPUT 
+	DCDfreq 1000
+#	veldcdfile velocities.dcd
+#	veldcdfreq 10000
+	binaryoutput no
+	outputEnergies 20
+#	outputPressure 200
+	outputname output
+	outputTiming 1000
+	restartname rest 
+	restartfreq 200
+	firsttimestep 0
+
+# IMD
+	IMDon  on
+	IMDport 4231
+	IMDfreq 10
+
+# cexecs "killall namd2"
+# submit_job_mpi
+# /home/svassili/NAMD_2.5_Source/Linux-i686-MPI/namd2 mdin_namd
